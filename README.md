@@ -8,7 +8,7 @@ Final Project for Comp Sci 4100U Mobile Devices at UOIT.
 
 
 # Authors
-Created by: 
-Mir Afgan Talpur
-Martin Ridge Reventar
+Created by:\ 
+Mir Afgan Talpur\
+Martin Ridge Reventar\
 Jon Perry
