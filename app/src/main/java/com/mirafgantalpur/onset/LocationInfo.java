@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 
 public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubeView;
+    private static final int RECOVERY_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

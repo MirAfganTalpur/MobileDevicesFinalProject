@@ -11,17 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LocationInfo">
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".LocationInfo" />
         <activity android:name=".AddLocation" />
         <activity android:name=".Add_Location_GPS" />
-        <activity android:name=".Edit_Location"></activity>
+        <activity android:name=".Edit_Location" />
+        <activity android:name=".Login" />
+        <activity android:name=".SignUp"></activity>
     </application>
 
 </manifest>

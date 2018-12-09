@@ -5,22 +5,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
     }
 
     public void onLogin(View view)
     {
-        Intent intent = new Intent(MainActivity.this, Login.class);
+        Intent intent = new Intent(Login.this, LocationInfo.class);
         startActivity(intent);
     }
-    public void onSignUp(View view)
+
+    public void onBack(View view)
     {
-        Intent intent = new Intent(MainActivity.this, SignUp.class);
+        Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
     }
 }

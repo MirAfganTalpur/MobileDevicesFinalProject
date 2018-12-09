@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">onSet</string>
+
+    <string name="login_button_text">Login</string>
+    <string name="signup_button_text">Sign Up</string>
+
     <string name="player_error">Error initializing YouTube player: %s</string>
 
     <string name="back_button_text">Back</string>
