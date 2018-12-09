@@ -11,6 +11,6 @@ Download repository and open as a new project on Android Studio. CompileSdkVersi
 Created by:  
 Mir Afgan Talpur (100486048)\
 Martin Ridge Reventar (100623912)\
-Jon Perry ()
+Jon Perry (100423367)
 
 GitHub Link: https://github.com/MirAfganTalpur/mobile-devices-final.git
