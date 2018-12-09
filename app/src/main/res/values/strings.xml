@@ -3,4 +3,18 @@
     <string name="player_error">Error initializing YouTube player: %s</string>
 
     <string name="back_button_text">Back</string>
+    <string name="edit_button_text">Edit</string>
+
+
+    <string name="add_location_title">Add Location</string>
+
+    <string name="location_name">Location Name:</string>
+    <string name="location_address">Address:</string>
+    <string name="location_type">Location Type:</string>
+    <string name="location_features">Features:</string>
+    <string name="location_privacy">Private or Public:</string>
+    <string name="film_permissions">Filming Permissions:</string>
+    <string name="sample_video_text">Videos/Films Shot Here</string>
+    <string name="add_sample_videos">YouTube Link for Video Shot Here</string>
+
 </resources>
