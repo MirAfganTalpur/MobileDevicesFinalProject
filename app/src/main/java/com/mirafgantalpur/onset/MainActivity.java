@@ -18,9 +18,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseHelper test = new FirebaseHelper(this);
+        Log.e("test", "User Existance: " + String.valueOf(test.doesUserExist("help")));
         if (user != null) {
             Log.e("test", "user is signed in");
             FirebaseAuth.getInstance().signOut();
+            Log.e("test", "user signed out");
             setContentView(R.layout.activity_main);
 
         } else {
