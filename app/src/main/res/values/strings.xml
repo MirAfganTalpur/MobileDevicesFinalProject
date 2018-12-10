@@ -18,6 +18,14 @@
 
     <string name="add_location_title">Add Location</string>
 
+    <string name="location_name_hint">ex. CN Tower, Wonderland, etc.</string>
+    <string name="location_address_hint">ex. 42 Wallaby Way, Sydney</string>
+    <string name="location_type_hint">Coffee Shop, Bar, etc.</string>
+    <string name="location_features_hint">ex. Stage, Pool, Lake, etc.</string>
+    <string name="location_privacy_hint">Privately Owned or Public Space</string>
+    <string name="film_permissions_hint">ex. Weekends Only</string>
+    <string name="sample_video_text_hint">https://youtu.be/O9EvBdzHvqI</string>
+
     <string name="location_name">Location Name:</string>
     <string name="location_address">Address:</string>
     <string name="location_type">Location Type:</string>
@@ -25,7 +33,12 @@
     <string name="location_privacy">Private or Public:</string>
     <string name="film_permissions">Filming Permissions:</string>
     <string name="sample_video_text">Videos/Films Shot Here</string>
-    <string name="add_sample_videos">YouTube Link for Video Shot Here</string>
+    <string name="only_me_text">Only For Me?</string>
+    <string name="only_me_true_text">Yes - Personal Location Only </string>
+    <string name="only_me_false_text">No - Share with Everyone</string>
+    <string name="add_sample_videos">YouTube Link for Video Shot Here:</string>
     <string name="title_activity_location_list">LocationList</string>
+
+    <string name="submit_location_button_text">Submit</string>
 
 </resources>

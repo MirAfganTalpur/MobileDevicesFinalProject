@@ -37,7 +37,7 @@ public class SignUp extends AppCompatActivity {
         if (isEmpty(fields)) {
             error.setText("Please fill out all fields.");
         } else {
-            if (password_check!=password_entry) {
+            if (!password_check.equals(password_entry)) {
                 error.setText("Passwords do not match, please try again.");
                 password1.getText().clear();
                 password2.getText().clear();
