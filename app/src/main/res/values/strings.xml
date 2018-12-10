@@ -26,5 +26,6 @@
     <string name="film_permissions">Filming Permissions:</string>
     <string name="sample_video_text">Videos/Films Shot Here</string>
     <string name="add_sample_videos">YouTube Link for Video Shot Here</string>
+    <string name="title_activity_location_list">LocationList</string>
 
 </resources>
