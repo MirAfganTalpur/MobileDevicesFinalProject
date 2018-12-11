@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class SignUp extends AppCompatActivity {
-    private FirebaseHelper firebaseHelper;
     private FirebaseAuth mAuth;
     private TextView error;
     private EditText fullName;
@@ -37,7 +36,6 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        firebaseHelper = new FirebaseHelper(this);
         mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
     }

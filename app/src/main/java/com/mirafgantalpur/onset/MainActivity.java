@@ -9,13 +9,18 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.UUID;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseAuth.getInstance().signOut();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseHelper test = new FirebaseHelper(this);
+        Location location = new Location("namesssss", "type", "addssssssress", "city", "country",
+                "permission", "feauture", true, true, UUID.fromString("a23f6851-3d7f-4822-b218-f8e360a9868a"));
+        FirebaseHelper.updateLocation("zxc", location);
         if (user != null) {
             Log.e("test", "user is signed in");
             FirebaseAuth.getInstance().signOut();
@@ -25,17 +30,17 @@ public class MainActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.activity_main);
             Log.e("test", "user is not signed in");
+            Log.e("test", location.getUuid().toString());
         }
 
     }
 
-    public void onLogin(View view)
-    {
+    public void onLogin(View view) {
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
     }
-    public void onSignUp(View view)
-    {
+
+    public void onSignUp(View view) {
         Intent intent = new Intent(MainActivity.this, SignUp.class);
         startActivity(intent);
     }

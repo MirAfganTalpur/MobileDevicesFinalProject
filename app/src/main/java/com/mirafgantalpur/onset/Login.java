@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,8 @@ public class Login extends AppCompatActivity {
                             if (dataSnapshot.child("password").getValue().equals(password)) {
                                 error.setText("");
                                 startActivity(intent);
+                                Log.e("test",dataSnapshot.child("email").getValue().toString());
+//                                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataSnapshot.child("email").toString(), password); TODO sign user in if possible
                             } else {
                                 error.setText("Invalid password");
 
@@ -61,9 +64,5 @@ public class Login extends AppCompatActivity {
     public void onBack(View view) {
         Intent intent = new Intent(Login.this, MainActivity.class);
         startActivity(intent);
-    }
-
-    public void authenticateUserInfo() {
-        
     }
 }
