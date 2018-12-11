@@ -24,6 +24,7 @@ public final class FirebaseHelper {
     public FirebaseHelper(Context context) {
         this.context = context;
     }
+
     static void addLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
@@ -86,7 +87,7 @@ public final class FirebaseHelper {
                 });
     }
 
-    static void getAllSharedLocations (final LocationList uiReference) {
+    static void getAllSharedLocations(final LocationList uiReference) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("sharedLocations");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -108,10 +109,6 @@ public final class FirebaseHelper {
 
                     }
                 });
-    }
-
-    static void getAllSharedLocations() {
-
     }
 
 
