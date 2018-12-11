@@ -25,7 +25,7 @@
         <activity android:name=".LocationInfo" />
         <meta-data
             android:name="com.onSet.myYoutubeID"
-            android:value="AlOtOfNumBersAndLetters123" />
+            android:value="@string/google_youtube_key" />
 
         <activity android:name=".AddLocation" />
         <meta-data

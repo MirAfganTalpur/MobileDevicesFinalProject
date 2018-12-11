@@ -15,7 +15,7 @@ public class Login extends AppCompatActivity {
 
     public void onLogin(View view)
     {
-        Intent intent = new Intent(Login.this, AddLocation.class);
+        Intent intent = new Intent(Login.this, LocationInfo.class);
         startActivity(intent);
     }
 
