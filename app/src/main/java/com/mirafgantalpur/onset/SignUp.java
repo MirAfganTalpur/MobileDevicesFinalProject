@@ -46,9 +46,9 @@ public class SignUp extends AppCompatActivity {
         EditText[] fields = new EditText[5];
 
         fullName = findViewById(R.id.full_name);
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.loginUsername);
         email = findViewById(R.id.email);
-        password1 = findViewById(R.id.password);
+        password1 = findViewById(R.id.loginPassword);
         password2 = findViewById(R.id.password_check);
         error = findViewById(R.id.error);
 
