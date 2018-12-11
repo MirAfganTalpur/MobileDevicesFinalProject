@@ -24,17 +24,17 @@
         </activity>
         <activity android:name=".LocationInfo" />
         <activity android:name=".AddLocation" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".Add_Location_GPS" />
         <activity android:name=".Edit_Location" />
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
-        <activity
-            android:name=".LocationList"
-            android:label="@string/title_activity_location_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+        <activity android:name=".LocationList">
+        </activity>
     </application>
 
 </manifest>
