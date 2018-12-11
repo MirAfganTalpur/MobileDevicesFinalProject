@@ -60,10 +60,10 @@ public class SignUp extends AppCompatActivity {
         String password_check = password2.getText().toString();
 
         if (isEmpty(fields)) {
-            error.setText("Please fill out all fields.");
+            error.setText(R.string.please_fill_out_all_fields);
         } else {
             if (!password_check.equals(password_entry)) {
-                error.setText("Passwords do not match, please try again.");
+                error.setText(R.string.passwords_dont_match);
                 password1.getText().clear();
                 password2.getText().clear();
             } else {
@@ -73,7 +73,7 @@ public class SignUp extends AppCompatActivity {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
-                                    error.setText("Username is already taken. Please choose something else");
+                                    error.setText(R.string.username_taken);
                                 } else {
                                     firebaseSignUp(email.getText().toString(), password1.getText().toString(),
                                             username.getText().toString(), fullName.getText().toString());
@@ -125,15 +125,15 @@ public class SignUp extends AppCompatActivity {
                             try {
                                 throw task.getException();
                             } catch (FirebaseAuthWeakPasswordException e) {
-                                error.setText("Password too weak - must be at least six characters");
+                                error.setText(R.string.password_too_weak);
 
                             } catch (FirebaseAuthInvalidCredentialsException e) {
 
                                 if (e.getMessage().equals("The email address is badly formatted.")) {
-                                    error.setText("Email is not formatted properly");
+                                    error.setText(R.string.improper_email);
                                 }
                             } catch (FirebaseAuthUserCollisionException e) {
-                                error.setText("Email address already in use");
+                                error.setText(R.string.email_used);
                             } catch (Exception e) {
 
                             }

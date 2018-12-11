@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +33,7 @@ public class Login extends AppCompatActivity {
         final String username = this.username.getText().toString();
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(username)
+        ref.child("users").child(username.toLowerCase())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -45,11 +44,11 @@ public class Login extends AppCompatActivity {
                                 Log.e("test",dataSnapshot.child("email").getValue().toString());
 //                                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataSnapshot.child("email").toString(), password); TODO sign user in if possible
                             } else {
-                                error.setText("Invalid password");
+                                error.setText(R.string.wrong_password);
 
                             }
                         } else {
-                           error.setText("Not a valid username");
+                           error.setText(R.string.invalid_username);
                         }
                     }
 

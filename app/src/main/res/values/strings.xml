@@ -27,5 +27,13 @@
     <string name="sample_video_text">Videos/Films Shot Here</string>
     <string name="add_sample_videos">YouTube Link for Video Shot Here</string>
     <string name="title_activity_location_list">LocationList</string>
+    <string name="please_fill_out_all_fields">Please fill out all fields.</string>
+    <string name="passwords_dont_match">Passwords do not match, please try again.</string>
+    <string name="username_taken">Username is already taken. Please choose something else</string>
+    <string name="password_too_weak">Password too weak - must be at least six characters</string>
+    <string name="improper_email">Email is not formatted properly</string>
+    <string name="email_used">Email address already in use</string>
+    <string name="wrong_password">Invalid password</string>
+    <string name="invalid_username">Not a valid username</string>
 
 </resources>
