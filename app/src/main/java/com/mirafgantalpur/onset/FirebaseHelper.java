@@ -18,7 +18,6 @@ public final class FirebaseHelper {
         if (!location.isOnlyForMe()) {
             location.setAuthorUsername(username);
             ref.child("sharedLocations").updateChildren(locationInfo);
-            ref.child("users").child(username).child("sharedLocations").updateChildren(locationInfo);
         }
     }
 
@@ -31,11 +30,9 @@ public final class FirebaseHelper {
         if (location.isOnlyForMe()) {
             location.setAuthorUsername("");
             deleteLocationFromShared(location.getUuid().toString());
-            ref.child("users").child(username).child("sharedLocations").child(location.getUuid().toString()).removeValue();
         } else {
             location.setAuthorUsername(username);
             ref.child("sharedLocations").updateChildren(locationInfo);
-            ref.child("users").child(username).child("sharedLocations").updateChildren(locationInfo);
         }
     }
 
@@ -48,7 +45,6 @@ public final class FirebaseHelper {
     static void deleteLocation(String username, String uuid) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.child("users").child(username).child("locations").child(uuid).removeValue();
-        ref.child("users").child(username).child("sharedLocations").child(uuid).removeValue();
         ref.child("sharedLocations").child(uuid).removeValue();
     }
 
