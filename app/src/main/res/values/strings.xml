@@ -60,6 +60,7 @@
     <string name="spinner_keyType_label">Key Type:</string>
     <string name="spinner_key_label">Key:</string>
     <string name="locationList_addLabel">ADD</string>
+    <string name="no_username_entered">No username entered</string>
     <string-array name="keyList">
         <item>name</item>
         <item>type</item>

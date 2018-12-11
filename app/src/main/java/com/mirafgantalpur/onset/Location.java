@@ -31,7 +31,7 @@ public class Location implements Serializable {
         this.uuid = uuid;
     }
 
-    public Location (DataSnapshot info) {
+    public Location (DataSnapshot info, String uuid) {
         this.name = (String) info.child("name").getValue();
         this.type = (String) info.child("type").getValue();
         this.address = (String) info.child("address").getValue();
@@ -41,7 +41,7 @@ public class Location implements Serializable {
         this.features = (String) info.child("features").getValue();
         this.isPrivate = (Boolean) info.child("private").getValue();
         this.isOnlyForMe = (Boolean) info.child("onlyForMe").getValue();
-        this.uuid = UUID.fromString((String) info.child("uuid").getValue());
+        this.uuid = UUID.fromString(uuid);
     }
 
     public UUID getUuid() {

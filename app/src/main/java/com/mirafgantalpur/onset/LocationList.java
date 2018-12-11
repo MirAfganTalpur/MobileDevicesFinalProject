@@ -27,7 +27,8 @@ public class LocationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-
+//        FirebaseHelper.getAllUserLocations("testing", this);
+        FirebaseHelper.getAllSharedLocations(this);
         // Spinner Set up
         keySpinner = findViewById(R.id.keySpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.keyList, android.R.layout.simple_spinner_item);
@@ -39,6 +40,7 @@ public class LocationList extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 keyTypeSelected = parent.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 keyTypeSelected = null;
@@ -48,12 +50,7 @@ public class LocationList extends AppCompatActivity {
         // Using firebase: obtain an arraylist for all locations in the database..
 
 
-        // For now manually enter arraylist:
 
-        locationListView = findViewById(R.id.locationLV);
-
-        locationAdapter = new LocationAdapter(this, locationList);
-        locationListView.setAdapter(locationAdapter);
     }
 
     public void search(View view) {
@@ -64,5 +61,12 @@ public class LocationList extends AppCompatActivity {
     public void addLocation(View view) {
         Intent intent = new Intent(this, AddLocation.class);
         startActivity(intent);
+    }
+
+    public void updateUI(ArrayList<Location> locations) {
+        locationListView = findViewById(R.id.locationLV);
+
+        locationAdapter = new LocationAdapter(this, locations);
+        locationListView.setAdapter(locationAdapter);
     }
 }
