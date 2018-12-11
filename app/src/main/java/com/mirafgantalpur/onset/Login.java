@@ -33,31 +33,35 @@ public class Login extends AppCompatActivity {
         final String username = this.username.getText().toString();
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(username.toLowerCase())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            if (dataSnapshot.child("password").getValue().equals(password)) {
-                                error.setText("");
-                                startActivity(intent);
-                                Log.e("test",dataSnapshot.child("email").getValue().toString());
+        if (username.equals("")) {
+            error.setText(R.string.no_username_entered);
+        } else {
+            ref.child("users").child(username.toLowerCase())
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                if (dataSnapshot.child("password").getValue().equals(password)) {
+                                    error.setText("");
+                                    startActivity(intent);
+                                    Log.e("test", dataSnapshot.child("email").getValue().toString());
 //                                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataSnapshot.child("email").toString(), password); TODO sign user in if possible
+                                } else {
+                                    error.setText(R.string.wrong_password);
+
+                                }
                             } else {
-                                error.setText(R.string.wrong_password);
-
+                                error.setText(R.string.invalid_username);
                             }
-                        } else {
-                           error.setText(R.string.invalid_username);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
 
+        }
     }
 
     public void onBack(View view) {
