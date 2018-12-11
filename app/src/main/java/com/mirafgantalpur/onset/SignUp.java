@@ -12,9 +12,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import android.widget.EditText;
 import android.widget.TextView;
@@ -22,6 +27,12 @@ import android.widget.TextView;
 public class SignUp extends AppCompatActivity {
     private FirebaseHelper firebaseHelper;
     private FirebaseAuth mAuth;
+    private TextView error;
+    private EditText fullName;
+    private EditText username;
+    private EditText email;
+    private EditText password1;
+    private EditText password2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +45,14 @@ public class SignUp extends AppCompatActivity {
     public void onSignUp(View view) {
         EditText[] fields = new EditText[5];
 
-        EditText full_name = findViewById(R.id.full_name);
-        EditText username = findViewById(R.id.username);
-        EditText email = findViewById(R.id.email);
-        EditText password1 = findViewById(R.id.password);
-        EditText password2 = findViewById(R.id.password_check);
-        TextView error = findViewById(R.id.error);
+        fullName = findViewById(R.id.full_name);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        password1 = findViewById(R.id.password);
+        password2 = findViewById(R.id.password_check);
+        error = findViewById(R.id.error);
 
-        fields[0] = full_name;
+        fields[0] = fullName;
         fields[1] = username;
         fields[2] = email;
         fields[3] = password1;
@@ -57,17 +68,27 @@ public class SignUp extends AppCompatActivity {
                 error.setText("Passwords do not match, please try again.");
                 password1.getText().clear();
                 password2.getText().clear();
-            } else if (firebaseHelper.doesUserExist(username.getText().toString())) {
-                error.setText("Username is already taken, please select a new username");
-                username.getText().clear();
-            } else if (firebaseHelper.doesEmailExist(email.getText().toString())) {
-                error.setText("Email is already in use, please enter a different email");
-                email.getText().clear();
             } else {
-                Intent intent = new Intent(SignUp.this, LocationInfo.class);
-                firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-                        username.getText().toString(), full_name.getText().toString());
-                startActivity(intent);
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                ref.child("users").child(this.username.getText().toString().toLowerCase())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    error.setText("Username is already taken. Please choose something else");
+                                } else {
+                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
+                                            username.getText().toString(), fullName.getText().toString());
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+
+
             }
         }
     }
@@ -88,26 +109,37 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void firebaseSignUp(final String email, final String password, final String username, final String fullName) {
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
                             Log.e("test", "created new user");
                             User user = new User(username, email.toLowerCase(), fullName);
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                             myRef.child("users").child(username.toLowerCase()).setValue(user);
+                            Intent intent = new Intent(SignUp.this, LocationInfo.class);
+                            startActivity(intent);
                         } else {
-                            // If sign in fails, display a message to the user.
                             Log.w("test", "did not create new user", task.getException());
                             Toast.makeText(SignUp.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
-                        }
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException e) {
+                                error.setText("Password too weak - must be at least six characters");
 
-                        // ...
+                            } catch (FirebaseAuthInvalidCredentialsException e) {
+
+                                if (e.getMessage().equals("The email address is badly formatted.")) {
+                                    error.setText("Email is not formatted properly");
+                                }
+                            } catch (FirebaseAuthUserCollisionException e) {
+                                error.setText("Email address already in use");
+                            } catch (Exception e) {
+
+                            }
+                        }
                     }
                 });
     }
