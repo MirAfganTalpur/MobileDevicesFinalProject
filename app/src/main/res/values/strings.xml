@@ -17,15 +17,29 @@
 
 
     <string name="add_location_title">Add Location</string>
+    <string name="edit_location_title">Edit Location</string>
+
+    <string name="location_name_hint">ex. CN Tower, Wonderland, etc.</string>
+    <string name="location_address_hint">ex. 42 Wallaby Way, Sydney</string>
+    <string name="location_phone_hint">(416) 123-4567</string>
+    <string name="location_type_hint">Coffee Shop, Bar, etc.</string>
+    <string name="location_features_hint">ex. Stage, Pool, Lake, etc.</string>
+    <string name="location_private_button">Privately Owned</string>
+    <string name="location_public_button">Public Space</string>
+    <string name="film_permissions_hint">ex. Weekends Only</string>
+    <string name="sample_video_text_hint">https://youtu.be/O9EvBdzHvqI</string>
 
     <string name="location_name">Location Name:</string>
     <string name="location_address">Address:</string>
     <string name="location_type">Location Type:</string>
     <string name="location_features">Features:</string>
-    <string name="location_privacy">Private or Public:</string>
+    <string name="location_privacy">Private or Public?</string>
     <string name="film_permissions">Filming Permissions:</string>
     <string name="sample_video_text">Videos/Films Shot Here</string>
-    <string name="add_sample_videos">YouTube Link for Video Shot Here</string>
+    <string name="only_me_text">Only For Me?</string>
+    <string name="only_me_true_text">Yes - Personal Location Only </string>
+    <string name="only_me_false_text">No - Share with Everyone</string>
+    <string name="add_sample_videos">YouTube Link for Video Shot Here:</string>
     <string name="title_activity_location_list">LocationList</string>
     <string name="please_fill_out_all_fields">Please fill out all fields.</string>
     <string name="passwords_dont_match">Passwords do not match, please try again.</string>
@@ -35,5 +49,28 @@
     <string name="email_used">Email address already in use</string>
     <string name="wrong_password">Invalid password</string>
     <string name="invalid_username">Not a valid username</string>
+
+    <string name="submit_location_button_text">Submit</string>
+
+    <string name="edit_sample_videos">Add YouTube link:</string>
+    <string name="edit_location_apply_button_text">Apply Changes</string>
+    <string name="edit_location_cancel_button_text">Cancel Changes</string>
+
+
+    <string name="spinner_keyType_label">Key Type:</string>
+    <string name="spinner_key_label">Key:</string>
+    <string name="locationList_addLabel">ADD</string>
+    <string-array name="keyList">
+        <item>name</item>
+        <item>type</item>
+        <item>Address</item>
+        <item>City</item>
+        <item>Country</item>
+        <item>Filming Permissions</item>
+        <item>Features</item>
+        <item>Private or Public</item>
+        <item>Only For Me or For Everyone</item>
+        <item>Youtube link</item>
+    </string-array>
 
 </resources>

@@ -1,6 +1,8 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -16,14 +18,21 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     private YouTubePlayerView youTubeView;
     private static final int RECOVERY_REQUEST = 1;
+    Context mContext = this;
+    String YOUTUBE_API_KEY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_info);
 
+        try {
+            YOUTUBE_API_KEY = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA).metaData.getString("com.onSet.myYoutubeID");
+        } catch (PackageManager.NameNotFoundException n) {
+            n.printStackTrace();
+        }
         youTubeView = findViewById(R.id.youtube_view);
-        youTubeView.initialize(Config.YOUTUBE_API_KEY, this);
+        youTubeView.initialize(YOUTUBE_API_KEY, this);
     }
 
     @Override
@@ -47,7 +56,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RECOVERY_REQUEST) {
-            getYouTubePlayerProvider().initialize(Config.YOUTUBE_API_KEY, this);
+            getYouTubePlayerProvider().initialize(YOUTUBE_API_KEY, this);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -49,6 +51,8 @@ public class SignUp extends AppCompatActivity {
         password1 = findViewById(R.id.loginPassword);
         password2 = findViewById(R.id.password_check);
         error = findViewById(R.id.error);
+        String failedLogin = "Login Failed.";
+        Context mContext = this;
 
         fields[0] = fullName;
         fields[1] = username;
@@ -61,32 +65,38 @@ public class SignUp extends AppCompatActivity {
 
         if (isEmpty(fields)) {
             error.setText(R.string.please_fill_out_all_fields);
+            Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
+            error.setText("Please fill out all fields.");
         } else {
             if (!password_check.equals(password_entry)) {
                 error.setText(R.string.passwords_dont_match);
-                password1.getText().clear();
-                password2.getText().clear();
-            } else {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("users").child(this.username.getText().toString().toLowerCase())
-                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    error.setText(R.string.username_taken);
-                                } else {
-                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-                                            username.getText().toString(), fullName.getText().toString());
+                if (!password_check.equals(password_entry)) {
+                    Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
+                    error.setText("Passwords do not match, please try again.");
+                    password1.getText().clear();
+                    password2.getText().clear();
+                } else {
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                    ref.child("users").child(this.username.getText().toString().toLowerCase())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        error.setText(R.string.username_taken);
+                                    } else {
+                                        firebaseSignUp(email.getText().toString(), password1.getText().toString(),
+                                                username.getText().toString(), fullName.getText().toString());
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
 
-                            }
-                        });
+                                }
+                            });
 
 
+                }
             }
         }
     }
