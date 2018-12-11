@@ -66,40 +66,36 @@ public class SignUp extends AppCompatActivity {
         if (isEmpty(fields)) {
             error.setText(R.string.please_fill_out_all_fields);
             Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
-            error.setText("Please fill out all fields.");
         } else {
             if (!password_check.equals(password_entry)) {
-                error.setText(R.string.passwords_dont_match);
-                if (!password_check.equals(password_entry)) {
-                    Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
-                    error.setText("Passwords do not match, please try again.");
-                    password1.getText().clear();
-                    password2.getText().clear();
-                } else {
-                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                    ref.child("users").child(this.username.getText().toString().toLowerCase())
-                            .addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if (dataSnapshot.exists()) {
-                                        error.setText(R.string.username_taken);
-                                    } else {
-                                        firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-                                                username.getText().toString(), fullName.getText().toString());
-                                    }
+                Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
+                password1.getText().clear();
+                password2.getText().clear();
+            } else {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                ref.child("users").child(this.username.getText().toString().toLowerCase())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    error.setText(R.string.username_taken);
+                                } else {
+                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
+                                            username.getText().toString(), fullName.getText().toString());
                                 }
+                            }
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
 
-                                }
-                            });
+                            }
+                        });
 
 
-                }
             }
         }
     }
+
 
     public void onBack(View view) {
         Intent intent = new Intent(SignUp.this, MainActivity.class);
@@ -129,7 +125,6 @@ public class SignUp extends AppCompatActivity {
                             Intent intent = new Intent(SignUp.this, LocationInfo.class);
                             startActivity(intent);
                         } else {
-                            Log.w("test", "did not create new user", task.getException());
                             Toast.makeText(SignUp.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                             try {

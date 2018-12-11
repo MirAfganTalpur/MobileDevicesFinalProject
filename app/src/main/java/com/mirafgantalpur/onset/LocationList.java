@@ -49,9 +49,6 @@ public class LocationList extends AppCompatActivity {
 
 
         // For now manually enter arraylist:
-        locationList.add(new Location("UOIT", "Campus", "2000 Simcoe St. N", "Oshawa", "Canada","Everyday","Bus Loop, Reflecting Pool, Field", true, false));
-        locationList.add(new Location("UOIT", "Campus", "2000 Simcoe St. N", "Oshawa", "Canada","Everyday","Bus Loop, Reflecting Pool, Field", true, false));
-        locationList.add(new Location("UOIT", "Campus", "2000 Simcoe St. N", "Oshawa", "Canada","Everyday","Bus Loop, Reflecting Pool, Field", true, false));
 
         locationListView = findViewById(R.id.locationLV);
 
