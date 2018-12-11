@@ -17,6 +17,7 @@
 
 
     <string name="add_location_title">Add Location</string>
+    <string name="edit_location_title">Edit Location</string>
 
     <string name="location_name_hint">ex. CN Tower, Wonderland, etc.</string>
     <string name="location_address_hint">ex. 42 Wallaby Way, Sydney</string>
@@ -43,5 +44,9 @@
     <string name="title_activity_location_list">LocationList</string>
 
     <string name="submit_location_button_text">Submit</string>
+
+    <string name="edit_sample_videos">Add YouTube link:</string>
+    <string name="edit_location_apply_button_text">Apply Changes</string>
+    <string name="edit_location_cancel_button_text">Cancel Changes</string>
 
 </resources>

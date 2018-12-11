@@ -23,11 +23,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".LocationInfo" />
+        <meta-data
+            android:name="com.onSet.myYoutubeID"
+            android:value="AlOtOfNumBersAndLetters123" />
+
         <activity android:name=".AddLocation" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-        <activity android:name=".Add_Location_GPS" />
+            android:value="@string/google_maps_key"
+            />
+
         <activity android:name=".Edit_Location" />
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />

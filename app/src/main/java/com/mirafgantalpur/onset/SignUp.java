@@ -1,11 +1,13 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
 
@@ -24,6 +26,8 @@ public class SignUp extends AppCompatActivity {
         EditText password1 = findViewById(R.id.password);
         EditText password2 = findViewById(R.id.password_check);
         TextView error = findViewById(R.id.error);
+        String failedLogin = "Login Failed.";
+        Context mContext = this;
 
         fields[0] = full_name;
         fields[1] = username;
@@ -35,9 +39,11 @@ public class SignUp extends AppCompatActivity {
         String password_check = password2.getText().toString();
 
         if (isEmpty(fields)) {
+            Toast.makeText(mContext,failedLogin,Toast.LENGTH_LONG).show();
             error.setText("Please fill out all fields.");
         } else {
             if (!password_check.equals(password_entry)) {
+                Toast.makeText(mContext,failedLogin,Toast.LENGTH_LONG).show();
                 error.setText("Passwords do not match, please try again.");
                 password1.getText().clear();
                 password2.getText().clear();

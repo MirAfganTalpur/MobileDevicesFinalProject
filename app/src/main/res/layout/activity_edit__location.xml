@@ -4,6 +4,327 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Edit_Location">
+    tools:context=".Edit_Location"
+    tools:layout_editor_absoluteY="81dp">
+
+    <ScrollView
+        android:id="@+id/edit_location_scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/edit_location_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:lineSpacingExtra="8sp"
+                    android:text="@string/edit_location_title"
+                    android:textAllCaps="true"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="48dp">
+
+                <TextView
+                    android:id="@+id/edit_location_name"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_name"
+                    android:textAlignment="textEnd"
+                    tools:layout_editor_absoluteX="62dp"
+                    tools:layout_editor_absoluteY="89dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_name_editText"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="@string/location_name_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="74dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location__type"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_type"
+                    android:textAlignment="textEnd"
+                    tools:layout_editor_absoluteX="61dp"
+                    tools:layout_editor_absoluteY="143dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_type_editText"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="@string/location_type_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="134dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location_address"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_address"
+                    android:textAlignment="textEnd"
+                    tools:layout_editor_absoluteX="62dp"
+                    tools:layout_editor_absoluteY="196dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_address_editText"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/location_address_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="437dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location_filming_permissions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/film_permissions"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="397dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_filming_permissions_editText"
+                    android:layout_width="227dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/film_permissions_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="370dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location_features"
+                    android:layout_width="144dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_features"
+                    android:textAlignment="textEnd"
+                    tools:layout_editor_absoluteX="59dp"
+                    tools:layout_editor_absoluteY="328dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_features_editText"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="@string/location_features_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location__privacy"
+                    android:layout_width="128dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/location_privacy"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/edit_location_is_private_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location_private_button" />
+
+                    <RadioButton
+                        android:id="@+id/edit_location_is_public_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location_public_button" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location_only_me_location"
+                    android:layout_width="288dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:text="@string/only_me_text"
+                    android:textAlignment="textEnd" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:id="@+id/edit_location_only_me_true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/only_me_true_text" />
+
+                    <RadioButton
+                        android:id="@+id/edit_location_only_me_false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/only_me_false_text" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/edit_location_add_sample_videos"
+                    android:layout_width="136dp"
+                    android:layout_height="46dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="30dp"
+                    android:text="@string/edit_sample_videos"
+                    android:textAlignment="textEnd"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="452dp" />
+
+                <EditText
+                    android:id="@+id/edit_location_youtube_link_editText"
+                    android:layout_width="226dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="16dp"
+                    android:ems="10"
+                    android:hint="@string/sample_video_text_hint"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="196dp" />
+            </LinearLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <fragment
+                    android:id="@+id/edit_location_map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="335dp"
+                    tools:context=".AddLocation" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/edit_location_cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/edit_location_cancel_button_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.571" />
+
+                <Button
+                    android:id="@+id/edit_location_apply_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
+                    android:text="@string/edit_location_apply_button_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.945"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
