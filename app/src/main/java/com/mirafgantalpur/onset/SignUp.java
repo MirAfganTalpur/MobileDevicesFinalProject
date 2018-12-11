@@ -115,7 +115,7 @@ public class SignUp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.e("test", "created new user");
-                            User user = new User(username, email.toLowerCase(), fullName);
+                            User user = new User(username, email.toLowerCase(), fullName, password);
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                             myRef.child("users").child(username.toLowerCase()).setValue(user);
                             Intent intent = new Intent(SignUp.this, LocationInfo.class);
