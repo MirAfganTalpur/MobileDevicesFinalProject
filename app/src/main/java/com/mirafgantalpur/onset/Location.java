@@ -1,5 +1,7 @@
 package com.mirafgantalpur.onset;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -27,6 +29,19 @@ public class Location implements Serializable {
         this.isPrivate = isPrivate;
         this.isOnlyForMe = isOnlyForMe;
         this.uuid = uuid;
+    }
+
+    public Location (DataSnapshot info) {
+        this.name = (String) info.child("name").getValue();
+        this.type = (String) info.child("type").getValue();
+        this.address = (String) info.child("address").getValue();
+        this.city = (String) info.child("city").getValue();
+        this.country = (String) info.child("country").getValue();
+        this.filmPermissions = (String) info.child("filmPermissions").getValue();
+        this.features = (String) info.child("features").getValue();
+        this.isPrivate = (Boolean) info.child("private").getValue();
+        this.isOnlyForMe = (Boolean) info.child("onlyForMe").getValue();
+        this.uuid = UUID.fromString((String) info.child("uuid").getValue());
     }
 
     public UUID getUuid() {

@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
         FirebaseAuth.getInstance().signOut();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Location location = new Location("namesssss", "type", "addssssssress", "city", "country",
-                "permission", "feauture", true, true, UUID.fromString("a23f6851-3d7f-4822-b218-f8e360a9868a"));
-        FirebaseHelper.updateLocation("zxc", location);
+                "permission", "feauture", true, true, UUID.fromString("2bf07803-5d84-4d65-a931-a0482d46c824"));
+        FirebaseHelper.updateLocation("zxc",location);
         if (user != null) {
             Log.e("test", "user is signed in");
             FirebaseAuth.getInstance().signOut();
