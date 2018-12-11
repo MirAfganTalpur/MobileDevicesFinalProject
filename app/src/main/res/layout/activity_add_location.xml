@@ -12,8 +12,10 @@
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -186,21 +188,32 @@
                     android:layout_width="128dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:layout_marginTop="20dp"
                     android:text="@string/location_privacy"
                     android:textAlignment="textEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/private_public_editText"
-                    android:layout_width="226dp"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/location_privacy_hint"
-                    android:inputType="textPersonName"
-                    tools:layout_editor_absoluteX="160dp"
-                    tools:layout_editor_absoluteY="307dp" />
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RadioButton
+                        android:id="@+id/is_private_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location_private_button" />
+
+                    <RadioButton
+                        android:id="@+id/is_public_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/location_public_button" />
+                </RadioGroup>
+
             </LinearLayout>
 
             <LinearLayout
@@ -211,9 +224,8 @@
                 <TextView
                     android:id="@+id/only_me_location"
                     android:layout_width="288dp"
-                    android:layout_marginTop="20dp"
-
                     android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
                     android:text="@string/only_me_text"
                     android:textAlignment="textEnd" />
@@ -221,7 +233,7 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" >
+                    android:layout_weight="1">
 
                     <RadioButton
                         android:id="@+id/only_me_true"
@@ -259,6 +271,7 @@
                     android:id="@+id/youtube_link_editText"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint="@string/sample_video_text_hint"
@@ -287,6 +300,8 @@
                     android:id="@+id/submit_location_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="15dp"
                     android:text="@string/submit_location_button_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -294,10 +309,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
             </android.support.constraint.ConstraintLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
         </LinearLayout>
     </ScrollView>

@@ -20,17 +20,20 @@
 
     <string name="location_name_hint">ex. CN Tower, Wonderland, etc.</string>
     <string name="location_address_hint">ex. 42 Wallaby Way, Sydney</string>
+    <string name="location_phone_hint">(416) 123-4567</string>
     <string name="location_type_hint">Coffee Shop, Bar, etc.</string>
     <string name="location_features_hint">ex. Stage, Pool, Lake, etc.</string>
-    <string name="location_privacy_hint">Privately Owned or Public Space</string>
+    <string name="location_private_button">Privately Owned</string>
+    <string name="location_public_button">Public Space</string>
     <string name="film_permissions_hint">ex. Weekends Only</string>
     <string name="sample_video_text_hint">https://youtu.be/O9EvBdzHvqI</string>
 
     <string name="location_name">Location Name:</string>
     <string name="location_address">Address:</string>
+    <string name="location_phone">Phone Number:</string>
     <string name="location_type">Location Type:</string>
     <string name="location_features">Features:</string>
-    <string name="location_privacy">Private or Public:</string>
+    <string name="location_privacy">Private or Public?</string>
     <string name="film_permissions">Filming Permissions:</string>
     <string name="sample_video_text">Videos/Films Shot Here</string>
     <string name="only_me_text">Only For Me?</string>
