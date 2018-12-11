@@ -31,7 +31,6 @@
 
     <string name="location_name">Location Name:</string>
     <string name="location_address">Address:</string>
-    <string name="location_phone">Phone Number:</string>
     <string name="location_type">Location Type:</string>
     <string name="location_features">Features:</string>
     <string name="location_privacy">Private or Public?</string>
@@ -48,5 +47,22 @@
     <string name="edit_sample_videos">Add YouTube link:</string>
     <string name="edit_location_apply_button_text">Apply Changes</string>
     <string name="edit_location_cancel_button_text">Cancel Changes</string>
+
+
+    <string name="spinner_keyType_label">Key Type:</string>
+    <string name="spinner_key_label">Key:</string>
+    <string name="locationList_addLabel">ADD</string>
+    <string-array name="keyList">
+        <item>name</item>
+        <item>type</item>
+        <item>Address</item>
+        <item>City</item>
+        <item>Country</item>
+        <item>Filming Permissions</item>
+        <item>Features</item>
+        <item>Private or Public</item>
+        <item>Only For Me or For Everyone</item>
+        <item>Youtube link</item>
+    </string-array>
 
 </resources>
