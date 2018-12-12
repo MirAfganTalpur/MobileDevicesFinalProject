@@ -1,35 +1,22 @@
 package com.mirafgantalpur.onset;
 
-
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.xml.sax.Locator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public final class FirebaseHelper {
-    private Context context;
-
-    public FirebaseHelper(Context context) {
-        this.context = context;
-    }
 
     static void addLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
         locationInfo.put(location.getUuid().toString(), location);
-        ref.child("users").child(username).child("locations").updateChildren(locationInfo);
+        ref.child("users").child(username.toLowerCase()).child("locations").updateChildren(locationInfo);
         if (!location.isOnlyForMe()) {
             location.setAuthorUsername(username);
             ref.child("sharedLocations").updateChildren(locationInfo);
@@ -41,7 +28,7 @@ public final class FirebaseHelper {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
         locationInfo.put(location.getUuid().toString(), location);
-        ref.child("users").child(username).child("locations").updateChildren(locationInfo);
+        ref.child("users").child(username.toLowerCase()).child("locations").updateChildren(locationInfo);
         if (location.isOnlyForMe()) {
             location.setAuthorUsername("");
             deleteLocationFromShared(location.getUuid().toString());
@@ -59,21 +46,21 @@ public final class FirebaseHelper {
 
     static void deleteLocation(String username, String uuid) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-        ref.child("users").child(username).child("locations").child(uuid).removeValue();
+        ref.child("users").child(username.toLowerCase()).child("locations").child(uuid).removeValue();
         ref.child("sharedLocations").child(uuid).removeValue();
     }
 
     static void getAllUserLocations(String username, final LocationList uiReference) {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(username).child("locations");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<Location> locations = new ArrayList<>();
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
-                            Location testing = new Location(location, location.getKey());
-                            locations.add(testing);
+                            Location tmpLocation = new Location(location, location.getKey());
+                            locations.add(tmpLocation);
                         }
 
                         uiReference.updateUI(locations);
@@ -93,17 +80,14 @@ public final class FirebaseHelper {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        Log.e("test", dataSnapshot.getValue().toString());
                         ArrayList<Location> locations = new ArrayList<>();
 
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
-                            Location testing = new Location(location, location.getKey());
-                            testing.setAuthorUsername(location.child("authorUsername").getValue().toString());
-                            locations.add(testing);
+                            Location tmpLocation = new Location(location, location.getKey());
+                            tmpLocation.setAuthorUsername(location.child("authorUsername").getValue().toString());
+                            locations.add(tmpLocation);
                         }
-                        Log.e("test", String.valueOf(locations.size()));
                         uiReference.updateUI(locations);
-
                     }
 
                     @Override
@@ -111,6 +95,32 @@ public final class FirebaseHelper {
 
                     }
                 });
+    }
+
+    static void getLocationsYoutubeLinks(String username, Location location) { // TODO , final DetailedLocationActivity uiReference) {
+        DatabaseReference ref;
+        if (location.isOnlyForMe()) {
+            ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations").child(location.getUuid().toString()).child("youtubeLinks");
+        } else {
+            ref = FirebaseDatabase.getInstance().getReference().child("sharedLocations").child(location.getUuid().toString()).child("youtubeLinks");
+        }
+        ref.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ArrayList<String> links = new ArrayList<>();
+                        for (DataSnapshot link : dataSnapshot.getChildren()) {
+                            links.add(link.getValue().toString());
+                        }
+                        // uiReference.postYoutubeLinks(links); TODO add this method to the DetailedLocationActivity
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
     }
 
 
