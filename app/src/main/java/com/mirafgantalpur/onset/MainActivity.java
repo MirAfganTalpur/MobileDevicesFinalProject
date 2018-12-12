@@ -6,13 +6,14 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import java.util.UUID;
 
 import static com.mirafgantalpur.onset.AddLocation.PERMISSIONS_MULTIPLE_REQUEST;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherLoaded {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +31,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLogin(View view)
     {
-        Intent intent = new Intent(MainActivity.this, Login.class);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this, Login.class);
+//        startActivity(intent);
+        GetWeatherTask getWeatherTask = new GetWeatherTask(this);
+        getWeatherTask.setWeatherRetrievedListener(this);
+        getWeatherTask.execute("m4b1b3,canada");
+
     }
     public void onSignUp(View view)
     {
         Intent intent = new Intent(MainActivity.this, SignUp.class);
         startActivity(intent);
     }
+
+    public void showWeatherIcon (String weather) {
+        Log.e("weather", weather);
+    }
+
 }
