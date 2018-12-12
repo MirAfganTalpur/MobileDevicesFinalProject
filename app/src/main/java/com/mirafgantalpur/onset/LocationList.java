@@ -3,6 +3,7 @@ package com.mirafgantalpur.onset;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -60,6 +61,27 @@ public class LocationList extends AppCompatActivity {
     public void search(View view) {
         editText_key = findViewById(R.id.editText_key);
         keyEntered = editText_key.getText().toString();
+        String keyType = keySpinner.getSelectedItem().toString();
+        switch (keyType) {
+            case "name": {
+                Log.e("test", "name selected");
+                break;
+            }
+            case "type": {
+                Log.e("test", "type selected");
+                break;
+            }
+            case "Address":
+            case "City":
+            case "Country":
+            case "Filming Permissions":
+            case "Features":
+            case "Private or Public":
+            case "Only for me or For Everyone":
+            default: {
+                Log.e("test", "nothing selected");
+            }
+        }
     }
 
     public void addLocation(View view) {

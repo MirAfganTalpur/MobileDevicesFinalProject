@@ -29,7 +29,6 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-//        final Intent intent = new Intent(Login.this, AddLocation.class);
         final String username = this.username.getText().toString();
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
