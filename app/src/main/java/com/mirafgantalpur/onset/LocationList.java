@@ -1,5 +1,6 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 public class LocationList extends AppCompatActivity {
+
     private String keyTypeSelected;
     private String keyEntered;
     private ArrayList<Location> locationList = new ArrayList<Location>();
@@ -22,35 +24,41 @@ public class LocationList extends AppCompatActivity {
 
     EditText editText_key;
 
+    private String username;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
+
+        username = getIntent().getStringExtra("username");
+
+        // Two types of list views to display: USER LOCATIONS & SHARED LOCATIONS:
 //        FirebaseHelper.getAllUserLocations("testing", this);
         FirebaseHelper.getAllSharedLocations(this);
+
         // Spinner Set up
+        setupSpinner(this);
+
+
+    }
+
+    public void setupSpinner(Context context) {
         keySpinner = findViewById(R.id.keySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.keyList, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.keyList, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         keySpinner.setAdapter(adapter);
-
         keySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 keyTypeSelected = parent.getItemAtPosition(position).toString();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 keyTypeSelected = null;
             }
         });
-
-        // Using firebase: obtain an arraylist for all locations in the database..
-
-
-
     }
 
     public void search(View view) {
@@ -63,10 +71,23 @@ public class LocationList extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void updateUI(ArrayList<Location> locations) {
-        locationListView = findViewById(R.id.locationLV);
+    public void updateUI(final ArrayList<Location> locations) {
 
+        locationListView = (ListView)findViewById(R.id.locationLV);
+
+        locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(LocationList.this, LocationInfo.class);
+                Location location = locations.get(position);
+                intent.putExtra("username", username);
+                intent.putExtra("selectedLocation",location);
+                startActivity(intent);
+            }
+        });
         locationAdapter = new LocationAdapter(this, locations);
         locationListView.setAdapter(locationAdapter);
     }
+
+
 }

@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
         Intent intent = new Intent(MainActivity.this, LocationList.class);
         startActivity(intent);
+
     }
     public void onSignUp(View view)
     {

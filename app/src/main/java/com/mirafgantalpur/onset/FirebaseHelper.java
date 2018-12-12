@@ -2,8 +2,6 @@ package com.mirafgantalpur.onset;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -11,12 +9,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.xml.sax.Locator;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public final class FirebaseHelper {
     private Context context;
@@ -24,6 +19,7 @@ public final class FirebaseHelper {
     public FirebaseHelper(Context context) {
         this.context = context;
     }
+
     static void addLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
@@ -34,7 +30,6 @@ public final class FirebaseHelper {
             ref.child("sharedLocations").updateChildren(locationInfo);
         }
     }
-
 
     static void updateLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -108,10 +103,6 @@ public final class FirebaseHelper {
 
                     }
                 });
-    }
-
-    static void getAllSharedLocations() {
-
     }
 
 
