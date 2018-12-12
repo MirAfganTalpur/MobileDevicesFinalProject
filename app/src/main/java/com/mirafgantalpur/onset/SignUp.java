@@ -68,8 +68,6 @@ public class SignUp extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     error.setText(R.string.username_taken);
                                 } else {
-//                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-//                                            username.getText().toString(), fullName.getText().toString());
                                     FirebaseHelper.signUp(email.getText().toString(), password1.getText().toString(),
                                             username.getText().toString(), fullName.getText().toString(), SignUp.this);
                                 }
