@@ -27,8 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private TextView error;
+    protected TextView error;
     private EditText fullName;
     private EditText username;
     private EditText email;
@@ -38,7 +37,6 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
     }
 
@@ -80,8 +78,10 @@ public class SignUp extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     error.setText(R.string.username_taken);
                                 } else {
-                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-                                            username.getText().toString(), fullName.getText().toString());
+//                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
+//                                            username.getText().toString(), fullName.getText().toString());
+                                    FirebaseHelper.signUp(email.getText().toString(), password1.getText().toString(),
+                                            username.getText().toString(), fullName.getText().toString(), SignUp.this);
                                 }
                             }
 
@@ -96,12 +96,10 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-
     public void onBack(View view) {
         Intent intent = new Intent(SignUp.this, MainActivity.class);
         startActivity(intent);
     }
-
 
     public boolean isEmpty(EditText[] fields) {
         for (int i = 0; i < fields.length; i++) {
@@ -110,41 +108,5 @@ public class SignUp extends AppCompatActivity {
             }
         }
         return false;
-    }
-
-    private void firebaseSignUp(final String email, final String password, final String username, final String fullName) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.e("test", "created new user");
-                            User user = new User(username, email.toLowerCase(), fullName, password);
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                            myRef.child("users").child(username.toLowerCase()).setValue(user);
-                            Intent intent = new Intent(SignUp.this, WelcomeActivity.class);
-                            intent.putExtra("username", username);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(SignUp.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                error.setText(R.string.password_too_weak);
-
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-
-                                if (e.getMessage().equals("The email address is badly formatted.")) {
-                                    error.setText(R.string.improper_email);
-                                }
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                error.setText(R.string.email_used);
-                            } catch (Exception e) {
-
-                            }
-                        }
-                    }
-                });
     }
 }
