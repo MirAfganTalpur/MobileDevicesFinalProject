@@ -81,19 +81,21 @@ public final class FirebaseHelper {
                 });
     }
 
-    static void getAllSharedLocations (final LocationList uiReference) {
+    static void getAllSharedLocations(final LocationList uiReference) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("sharedLocations");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.e("test", dataSnapshot.getValue().toString());
                         ArrayList<Location> locations = new ArrayList<>();
+
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
                             Location testing = new Location(location, location.getKey());
                             testing.setAuthorUsername(location.child("authorUsername").getValue().toString());
                             locations.add(testing);
                         }
-
+                        Log.e("test", String.valueOf(locations.size()));
                         uiReference.updateUI(locations);
 
                     }

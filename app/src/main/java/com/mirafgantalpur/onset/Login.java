@@ -29,7 +29,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-        final Intent intent = new Intent(Login.this, AddLocation.class);
+//        final Intent intent = new Intent(Login.this, AddLocation.class);
         final String username = this.username.getText().toString();
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
@@ -43,6 +43,8 @@ public class Login extends AppCompatActivity {
                             if (dataSnapshot.exists()) {
                                 if (dataSnapshot.child("password").getValue().equals(password)) {
                                     error.setText("");
+                                    Intent intent = new Intent(Login.this, WelcomeActivity.class);
+                                    intent.putExtra("username", username);
                                     startActivity(intent);
                                     Log.e("test", dataSnapshot.child("email").getValue().toString());
 //                                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataSnapshot.child("email").toString(), password); TODO sign user in if possible

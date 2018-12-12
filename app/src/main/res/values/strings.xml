@@ -61,6 +61,10 @@
     <string name="spinner_key_label">Key:</string>
     <string name="locationList_addLabel">ADD</string>
     <string name="no_username_entered">No username entered</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_option">What would you like to do?</string>
+    <string name="my_locations">My Locations</string>
+    <string name="shared_locations">Shared Locations</string>
     <string-array name="keyList">
         <item>name</item>
         <item>type</item>

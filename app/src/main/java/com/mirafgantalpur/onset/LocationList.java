@@ -31,34 +31,35 @@ public class LocationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-
+        String userChoice = (String) getIntent().getExtras().get("choice");
         username = getIntent().getStringExtra("username");
+        if (userChoice.equals("myLocations")) {
+            FirebaseHelper.getAllUserLocations("zxc", this);
+        } else if (userChoice.equals("sharedLocations")) {
+            FirebaseHelper.getAllSharedLocations(this);
+        }
 
-        // Two types of list views to display: USER LOCATIONS & SHARED LOCATIONS:
-//        FirebaseHelper.getAllUserLocations("testing", this);
-        FirebaseHelper.getAllSharedLocations(this);
-
-        // Spinner Set up
-        setupSpinner(this);
-
-
-    }
-
-    public void setupSpinner(Context context) {
         keySpinner = findViewById(R.id.keySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.keyList, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.keyList, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         keySpinner.setAdapter(adapter);
+
         keySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 keyTypeSelected = parent.getItemAtPosition(position).toString();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 keyTypeSelected = null;
             }
         });
+
+        // Using firebase: obtain an arraylist for all locations in the database..
+
+
+
     }
 
     public void search(View view) {

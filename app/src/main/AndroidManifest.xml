@@ -3,8 +3,8 @@
     package="com.mirafgantalpur.onset">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -23,15 +23,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".LocationInfo" />
+
         <meta-data
             android:name="com.onSet.myYoutubeID"
             android:value="@string/google_youtube_key" />
 
         <activity android:name=".AddLocation" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"
-            />
+            android:value="@string/google_maps_key" />
 
         <activity android:name=".Edit_Location" />
         <activity android:name=".Login" />
@@ -39,8 +40,8 @@
         <activity
             android:name=".LocationList"
             android:label="@string/title_activity_location_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".WelcomeActivity"></activity>
     </application>
 
 </manifest>

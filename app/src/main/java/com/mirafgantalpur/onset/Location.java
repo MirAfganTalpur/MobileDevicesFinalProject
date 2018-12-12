@@ -3,6 +3,7 @@ package com.mirafgantalpur.onset;
 import com.google.firebase.database.DataSnapshot;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Location implements Serializable {
@@ -17,6 +18,7 @@ public class Location implements Serializable {
     private boolean isOnlyForMe;       // False = is for Everyone.
     private UUID uuid;
     private String authorUsername;
+    private ArrayList<String> youtubeLinks;
 
     public Location(String name, String type, String address, String city, String country, String permissions, String features, boolean isPrivate, boolean isOnlyForMe, UUID uuid) {
         this.name = name;
@@ -29,6 +31,7 @@ public class Location implements Serializable {
         this.isPrivate = isPrivate;
         this.isOnlyForMe = isOnlyForMe;
         this.uuid = uuid;
+        this.youtubeLinks = new ArrayList<>();
     }
 
     public Location (DataSnapshot info, String uuid) {
@@ -42,6 +45,7 @@ public class Location implements Serializable {
         this.isPrivate = (Boolean) info.child("private").getValue();
         this.isOnlyForMe = (Boolean) info.child("onlyForMe").getValue();
         this.uuid = UUID.fromString(uuid);
+        this.youtubeLinks = new ArrayList<>();
     }
 
     public UUID getUuid() {
@@ -119,5 +123,17 @@ public class Location implements Serializable {
 
     public String getAuthorUsername () {
         return authorUsername;
+    }
+
+    public ArrayList<String> getYoutubeLinks() {
+        return youtubeLinks;
+    }
+
+    public void setYoutubeLinks(ArrayList<String> youtubeLinks) {
+        this.youtubeLinks = youtubeLinks;
+    }
+
+    public void addYoutubeLink (String link) {
+        youtubeLinks.add(link);
     }
 }

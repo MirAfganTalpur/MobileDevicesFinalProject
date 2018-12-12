@@ -122,7 +122,8 @@ public class SignUp extends AppCompatActivity {
                             User user = new User(username, email.toLowerCase(), fullName, password);
                             DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                             myRef.child("users").child(username.toLowerCase()).setValue(user);
-                            Intent intent = new Intent(SignUp.this, LocationInfo.class);
+                            Intent intent = new Intent(SignUp.this, WelcomeActivity.class);
+                            intent.putExtra("username", username);
                             startActivity(intent);
                         } else {
                             Toast.makeText(SignUp.this, "Authentication failed.",

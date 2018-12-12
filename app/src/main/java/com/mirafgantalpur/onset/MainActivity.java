@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.UUID;
+
 import static com.mirafgantalpur.onset.AddLocation.PERMISSIONS_MULTIPLE_REQUEST;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        FirebaseHelper firebaseHelper = new FirebaseHelper(this);
-//        firebaseHelper.getAllUserLocations("testing");
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{
                             Manifest.permission.INTERNET,
@@ -31,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onLogin(View view)
     {
-//        Intent intent = new Intent(MainActivity.this, Login.class);
-//        startActivity(intent);
-        Intent intent = new Intent(MainActivity.this, LocationList.class);
+        Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
 
     }
