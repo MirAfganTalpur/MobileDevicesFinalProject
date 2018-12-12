@@ -39,7 +39,7 @@
     <string name="only_me_text">Only For Me?</string>
     <string name="only_me_true_text">Yes - Personal Location Only </string>
     <string name="only_me_false_text">No - Share with Everyone</string>
-    <string name="add_sample_videos">YouTube Link for Video Shot Here:</string>
+    <string name="add_sample_video_text">YouTube Link for Video Shot Here:</string>
     <string name="title_activity_location_list">LocationList</string>
     <string name="please_fill_out_all_fields">Please fill out all fields.</string>
     <string name="passwords_dont_match">Passwords do not match, please try again.</string>

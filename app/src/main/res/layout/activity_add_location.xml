@@ -196,6 +196,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <RadioGroup
+                    android:id="@+id/is_private_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -231,6 +232,7 @@
                     android:textAlignment="textEnd" />
 
                 <RadioGroup
+                    android:id="@+id/is_only_me_group"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1">
@@ -262,7 +264,7 @@
                     android:layout_height="46dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="30dp"
-                    android:text="@string/add_sample_videos"
+                    android:text="@string/add_sample_video_text"
                     android:textAlignment="textEnd"
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="452dp" />
@@ -302,6 +304,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="15dp"
+                    android:onClick="onSubmitLocation"
                     android:text="@string/submit_location_button_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

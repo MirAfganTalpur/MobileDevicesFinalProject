@@ -14,6 +14,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -28,6 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                                                         GoogleMap.OnMyLocationButtonClickListener,
@@ -36,7 +39,18 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     Context mContext;
     private GoogleMap mMap;
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    EditText locationName;
     EditText locationAddress;
+    EditText locationType;
+    EditText filmingPermissions;
+    EditText features;
+    RadioGroup isPrivate;
+    RadioButton privatelyOwned;
+    RadioButton publicSpace;
+    RadioGroup isForMe;
+    RadioButton personalOnly;
+    RadioButton shareEveryone;
+    EditText youtubeLink;
     Marker marker;
 
     @Override
@@ -202,4 +216,66 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             }
         }
     }
+
+    public void onSubmitLocation(View view) {
+        locationName = findViewById(R.id.location_name_editText);
+        locationAddress = findViewById(R.id.location_address_editText);
+        locationType = findViewById(R.id.location_type_editText);
+        filmingPermissions = findViewById(R.id.filming_permissions_editText);
+        features = findViewById(R.id.location_features_editText);
+        isPrivate = findViewById(R.id.is_private_group);
+        privatelyOwned  = findViewById(R.id.is_private_button);
+        publicSpace = findViewById(R.id.is_public_button);
+        isForMe = findViewById(R.id.is_only_me_group);
+        personalOnly = findViewById(R.id.only_me_true);
+        shareEveryone = findViewById(R.id.only_me_false);
+        Boolean isPrivate = null;
+        Boolean isOnlyMe = null;
+        youtubeLink = findViewById(R.id.youtube_link_editText);
+
+        LatLng latLng = marker.getPosition();
+        List<Address> addresses = null;
+
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        try {
+            addresses = geocoder.getFromLocation(
+                    latLng.latitude,
+                    latLng.longitude,
+                    1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (privatelyOwned.isChecked()) {
+            isPrivate = true;
+        } else if (publicSpace.isChecked()){
+            isPrivate = false;
+        } else {
+            Toast.makeText(this, "Please check either privately owned or public space.",
+                    Toast.LENGTH_LONG).show();
+        }
+        if (personalOnly.isChecked()) {
+            isOnlyMe = true;
+        } else if (shareEveryone.isChecked()){
+            isOnlyMe = false;
+        } else {
+            Toast.makeText(this, "Please check either privately owned or public space.",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        com.mirafgantalpur.onset.Location newlocation =
+                new com.mirafgantalpur.onset.Location(locationName.getText().toString(),
+                                            locationType.getText().toString(),
+                                            locationAddress.getText().toString(),
+                                            addresses.get(0).getLocality(),
+                                            addresses.get(0).getCountryName(),
+                                            filmingPermissions.getText().toString(),
+                                            features.getText().toString(),
+                                            isPrivate,
+                                            isOnlyMe,
+                                            //youtubeLink.getText().toString(),
+                                            UUID.randomUUID());
+
+        FirebaseHelper.addLocation("janitove",newlocation);
+    }
+
 }

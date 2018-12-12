@@ -34,7 +34,7 @@ public class Login extends AppCompatActivity {
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         if (username.equals("")) {
-            error.setText(R.string.no_username_entered);
+            error.setText("haha idiot.");
         } else {
             ref.child("users").child(username.toLowerCase())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
