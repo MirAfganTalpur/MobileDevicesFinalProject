@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -52,6 +53,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     RadioButton shareEveryone;
     EditText youtubeLink;
     Marker marker;
+    ArrayList<String> youTubeList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,6 +218,16 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             }
         }
     }
+    public void addVideo (){
+        youtubeLink = findViewById(R.id.youtube_link_editText);
+        if (youtubeLink.getText().toString().length() > 0) {
+            youTubeList.add(youtubeLink.getText().toString());
+            youtubeLink.getText().clear();
+        }
+    }
+    public void onVideoAdd (View view){
+        addVideo();
+    }
 
     public void onSubmitLocation(View view) {
         locationName = findViewById(R.id.location_name_editText);
@@ -231,8 +243,9 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         shareEveryone = findViewById(R.id.only_me_false);
         Boolean isPrivate = null;
         Boolean isOnlyMe = null;
-        youtubeLink = findViewById(R.id.youtube_link_editText);
 
+        String city = null;
+        String country = null;
         LatLng latLng = marker.getPosition();
         List<Address> addresses = null;
 
@@ -242,6 +255,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                     latLng.latitude,
                     latLng.longitude,
                     1);
+            city =  addresses.get(0).getAddressLine(0);
+            country = addresses.get(0).getAddressLine(2);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -262,20 +277,22 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                     Toast.LENGTH_LONG).show();
         }
 
+        addVideo();
+
         com.mirafgantalpur.onset.Location newlocation =
                 new com.mirafgantalpur.onset.Location(locationName.getText().toString(),
                                             locationType.getText().toString(),
                                             locationAddress.getText().toString(),
-                                            addresses.get(0).getLocality(),
-                                            addresses.get(0).getCountryName(),
+                                            city,
+                                            country,
                                             filmingPermissions.getText().toString(),
                                             features.getText().toString(),
                                             isPrivate,
                                             isOnlyMe,
-                                            //youtubeLink.getText().toString(),
                                             UUID.randomUUID());
+        newlocation.setYoutubeLinks(youTubeList);
 
-        FirebaseHelper.addLocation("janitove",newlocation);
+        FirebaseHelper.addLocation("youtube",newlocation);
     }
 
 }
