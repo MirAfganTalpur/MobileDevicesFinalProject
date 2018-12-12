@@ -5,19 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Edit_Location"
-    tools:layout_editor_absoluteY="25dp">
-
+    tools:layout_editor_absoluteY="81dp">
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollView4"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="0dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="8dp"
         android:fillViewport="true"
-        app:layout_constraintBottom_toTopOf="@+id/edit_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -26,182 +22,231 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/location_name"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="40dp"
-                android:text="Location Name: "
+                android:id="@+id/edit_name"
+                android:layout_width="121dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/location_name"
+                android:textAlignment="textEnd"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/location_type"
-                android:layout_width="wrap_content"
-                android:layout_height="23dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="28dp"
-                android:text="Location Type: "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_name" />
-
-            <TextView
-                android:id="@+id/location_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="28dp"
-                android:text="Address:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_type" />
-
-            <TextView
-                android:id="@+id/location_privacy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="28dp"
-                android:text="Private/Public:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_address" />
-
-            <TextView
-                android:id="@+id/location_permissions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="140dp"
-                android:text="Film Permissions:"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_privacy"
-                app:layout_constraintVertical_bias="0.1" />
-
-            <TextView
-                android:id="@+id/location_features"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:layout_marginTop="32dp"
-                android:text="Features:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_permissions" />
-
-
-            <TextView
-                android:id="@+id/location_features2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/edit_type"
+                android:layout_width="109dp"
+                android:layout_height="19dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="36dp"
-                android:text="Youtube Links:"
+                android:text="@string/location_type"
+                android:textAlignment="textEnd"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_features" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_name" />
+
+            <TextView
+                android:id="@+id/edit_address"
+                android:layout_width="88dp"
+                android:layout_height="19dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/location_address"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_type" />
+
+            <TextView
+                android:id="@+id/edit_filmPerm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="36dp"
+                android:text="@string/film_permissions"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_address" />
+
+            <TextView
+                android:id="@+id/edit_feat"
+                android:layout_width="99dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/location_features"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_filmPerm" />
+
+
+            <TextView
+                android:id="@+id/edit_privacy"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/location_privacy"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_feat" />
+
+            <TextView
+                android:id="@+id/edit_forme"
+                android:layout_width="128dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="44dp"
+                android:text="For Me Only"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_privacy" />
 
             <EditText
-                android:id="@+id/edit_nameET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/edit_name_ET"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
                 android:ems="10"
+                android:hint="@string/location_name_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/edit_typeET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/edit_type_ET"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
                 android:ems="10"
+                android:hint="@string/location_type_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_nameET" />
-
+                app:layout_constraintTop_toBottomOf="@+id/edit_name_ET" />
 
             <EditText
-                android:id="@+id/edit_addrET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/edit_address_ET"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
                 android:ems="10"
+                android:hint="@string/location_address_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_typeET" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_type_ET" />
 
             <EditText
-                android:id="@+id/edit_privPubET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/edit_permissions_ET"
+                android:layout_width="227dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:ems="10"
+                android:hint="@string/film_permissions_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_addrET" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_address_ET" />
 
             <EditText
-                android:id="@+id/edit_filmPermET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/edit_features_ET"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
                 android:ems="10"
+                android:hint="@string/location_features_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_privPubET" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_permissions_ET" />
 
-            <EditText
-                android:id="@+id/edit_featET"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="36dp"
-                android:ems="10"
-                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_filmPermET" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_features_ET">
+
+                <RadioButton
+                    android:id="@+id/is_private_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/location_private_button"
+                    android:onClick="onPrivateClicked"/>
+
+                <RadioButton
+                    android:id="@+id/is_public_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/location_public_button"
+                    android:onClick="onPublicClicked"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/radioGroup2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_weight="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+                <RadioButton
+                    android:id="@+id/only_me_false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/only_me_false_text"
+                    android:onClick="onSharedClicked"/>
+
+                <RadioButton
+                    android:id="@+id/only_me_true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/only_me_true_text"
+                    android:onClick="onForMeClicked"/>
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/add_sample_videos"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="48dp"
+                android:text="@string/add_sample_videos"
+                android:textAlignment="textEnd"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_forme" />
 
             <EditText
-                android:id="@+id/edit_urls"
-                android:layout_width="wrap_content"
-                android:layout_height="41dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="36dp"
+                android:id="@+id/youtube_link_editText"
+                android:layout_width="226dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:ems="10"
+                android:hint="@string/sample_video_text_hint"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_featET" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
+            <Button
+                android:id="@+id/submit_location_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/submit_location_button_text"
+                android:onClick="submitUpdate"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.513"
+                app:layout_constraintStart_toStartOf="parent" />
         </android.support.constraint.ConstraintLayout>
+
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/back_button_text"
-        android:onClick="editBack"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
-
-    <Button
-        android:id="@+id/edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="92dp"
-        android:layout_marginBottom="4dp"
-        android:text="SAVE"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
 </android.support.constraint.ConstraintLayout>
-

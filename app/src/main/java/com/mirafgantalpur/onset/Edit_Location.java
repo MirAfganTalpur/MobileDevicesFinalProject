@@ -8,8 +8,12 @@ import android.widget.EditText;
 
 public class Edit_Location extends AppCompatActivity {
 
+    private EditText name, type, addr, filmPerm, feat;
+
     private String username;
     private Location location;
+    private boolean isPrivate;
+    private boolean isOnlyForMe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,29 +25,52 @@ public class Edit_Location extends AppCompatActivity {
         username = intent.getStringExtra("username");
         location = (Location)intent.getSerializableExtra("location");
 
-        EditText name = findViewById(R.id.edit_nameET);
+        name = findViewById(R.id.edit_name_ET);
         name.setText(location.getType());
 
-        EditText type = findViewById(R.id.edit_typeET);
+        type = findViewById(R.id.edit_type_ET);
         type.setText(location.getType());
 
-        EditText addr = findViewById(R.id.edit_addrET);
+        addr = findViewById(R.id.edit_address_ET);
         addr.setText(location.getAddress());
 
-        EditText privPub = findViewById(R.id.edit_privPubET);
-        if(location.isPrivate()) {
-            privPub.setText("PRIVATE");
-        } else {
-            privPub.setText("PUBLIC");
-        }
-
-        EditText filmPerm = findViewById(R.id.edit_filmPermET);
+        filmPerm = findViewById(R.id.edit_permissions_ET);
         filmPerm.setText(location.getFilmPermissions());
 
-        EditText feat = findViewById(R.id.edit_featET);
+        feat = findViewById(R.id.edit_features_ET);
         feat.setText(location.getFeatures());
 
-//        FirebaseHelper.updateLocation();
+    }
+
+    public void onPrivateClicked(View view) {
+        isPrivate = true;
+    }
+
+    public void onPublicClicked(View view) {
+        isPrivate = false;
+    }
+
+    public void onForMeClicked(View view) {
+        isOnlyForMe = true;
+    }
+
+    public void onSharedClicked(View view) {
+        isOnlyForMe = false;
+    }
+
+    public void submitUpdate(View view) {
+
+        location.setName(name.getText().toString());
+        location.setType(type.getText().toString());
+        location.setAddress(addr.getText().toString());
+        location.setFilmPermissions(filmPerm.getText().toString());
+        location.setFeatures(feat.getText().toString());
+        location.setPrivate(isPrivate);
+        location.setOnlyForMe(isOnlyForMe);
+
+        FirebaseHelper.updateLocation(username, location);
+
+        finish();
 
     }
 

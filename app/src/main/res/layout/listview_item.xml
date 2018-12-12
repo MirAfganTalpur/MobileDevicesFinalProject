@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/viewItem_name"
+        style="@style/ListViewItem_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,23 +22,24 @@
 
     <TextView
         android:id="@+id/viewItem_cityCountry"
+        style="@style/ListViewItem_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
         android:text="City, Country"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.069"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewItem_name" />
 
     <TextView
         android:id="@+id/viewItem_privatePub"
+        style="@style/ListViewItem_Privacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="8dp"
         android:text="Private / Public"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,12 +49,13 @@
 
     <TextView
         android:id="@+id/viewItem_descLabel"
+        style="@style/ListViewItem_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="14dp"
         android:layout_marginEnd="8dp"
-        android:text="Description"
+        android:text="Features:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,16 +63,17 @@
 
     <TextView
         android:id="@+id/viewItem_desc"
-        android:layout_width="327dp"
-        android:layout_height="37dp"
+        style="@style/ListViewItem_Text"
+        android:layout_width="280dp"
+        android:layout_height="52dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="4dp"
         android:text="The coolest place ever!"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewItem_descLabel" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/viewItem_descLabel"
+        app:layout_constraintTop_toBottomOf="@+id/viewItem_privatePub" />
 
 
 </android.support.constraint.ConstraintLayout>
