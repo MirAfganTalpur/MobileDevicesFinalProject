@@ -1,5 +1,6 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
@@ -12,10 +13,17 @@ import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,8 +34,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                                                         GoogleMap.OnMyLocationButtonClickListener,
@@ -36,8 +46,23 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     Context mContext;
     private GoogleMap mMap;
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    EditText locationName;
     EditText locationAddress;
+    EditText locationType;
+    EditText filmingPermissions;
+    EditText features;
+    RadioGroup isPrivate;
+    RadioButton privatelyOwned;
+    RadioButton publicSpace;
+    RadioGroup isForMe;
+    RadioButton personalOnly;
+    RadioButton shareEveryone;
+    EditText youtubeLink;
     Marker marker;
+    ArrayList<String> youTubeList = new ArrayList<>();
+    private static final String TAG = "AddLocation";
+
+    PlaceAutocompleteFragment placeAutoComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +74,29 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        placeAutoComplete = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        placeAutoComplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                locationAddress.setText(place.getAddress());
+                toAddress(mContext,place.getAddress().toString());            }
+
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2000,
-                10, locationListenerGPS);
+                25, locationListenerGPS);
 
         locationAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -71,7 +113,10 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -90,11 +135,16 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public boolean onMyLocationButtonClick() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2000,
-                10, locationListenerGPS);
+                25, locationListenerGPS);
         return false;
     }
 
@@ -123,6 +173,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             String msg="Location Updated!";
             Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
             findLocation(latitude, longitude);
+            locationManager.removeUpdates(this);
+
         }
 
         @Override
@@ -161,7 +213,9 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
 
                     mMap.clear();
 
-                    marker = mMap.addMarker(new MarkerOptions().position(newLocation).title("Marker:"+address).snippet(city + ", " + prov + ", " + country + ", " + postalCode + ", " + phone + ", " + url).draggable(true));
+                    marker = mMap.addMarker(new MarkerOptions().position(newLocation).title(
+                                            address).snippet(city + ", " + prov + ", " + country +
+                                            ", " + postalCode).draggable(true));
 
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
@@ -202,4 +256,121 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             }
         }
     }
+    public void addVideo (){
+        youtubeLink = findViewById(R.id.youtube_link_editText);
+        if (youtubeLink.getText().toString().length() > 0) {
+            youTubeList.add(youtubeLink.getText().toString());
+            youtubeLink.getText().clear();
+        }
+    }
+    public void onVideoAdd (View view){
+        addVideo();
+    }
+
+    public void onSubmitLocation(View view) {
+        locationName = findViewById(R.id.location_name_editText);
+        locationAddress = findViewById(R.id.location_address_editText);
+        locationType = findViewById(R.id.location_type_editText);
+        filmingPermissions = findViewById(R.id.filming_permissions_editText);
+        features = findViewById(R.id.location_features_editText);
+        isPrivate = findViewById(R.id.is_private_group);
+        privatelyOwned  = findViewById(R.id.is_private_button);
+        publicSpace = findViewById(R.id.is_public_button);
+        isForMe = findViewById(R.id.is_only_me_group);
+        personalOnly = findViewById(R.id.only_me_true);
+        shareEveryone = findViewById(R.id.only_me_false);
+        Boolean isPrivate = null;
+        Boolean isOnlyMe = null;
+
+        String city = null;
+        String country = null;
+        LatLng latLng = marker.getPosition();
+        List<Address> addresses = null;
+        EditText[] fields = new EditText[5];
+
+        fields [0] = locationName;
+        fields [1] = locationAddress;
+        fields [2] = locationType;
+        fields [3] = filmingPermissions;
+        fields [4] = features;
+
+        if (isEmpty(fields)){
+            Toast.makeText(mContext,R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();
+        } else {
+            if (checkShareable() && checkPrivate()) {
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                try {
+                    addresses = geocoder.getFromLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            1);
+                    city = addresses.get(0).getLocality();
+                    country = addresses.get(0).getCountryName();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (privatelyOwned.isChecked()) {
+                    isPrivate = true;
+                } else if (publicSpace.isChecked()) {
+                    isPrivate = false;
+                }
+                if (personalOnly.isChecked()) {
+                    isOnlyMe = true;
+                } else if (shareEveryone.isChecked()){
+                    isOnlyMe = false;
+                }
+
+                addVideo();
+
+                com.mirafgantalpur.onset.Location newlocation =
+                        new com.mirafgantalpur.onset.Location(locationName.getText().toString(),
+                                locationType.getText().toString(),
+                                locationAddress.getText().toString(),
+                                city,
+                                country,
+                                filmingPermissions.getText().toString(),
+                                features.getText().toString(),
+                                isPrivate,
+                                isOnlyMe,
+                                UUID.randomUUID());
+                newlocation.setYoutubeLinks(youTubeList);
+
+                FirebaseHelper.addLocation("youtube",newlocation);
+
+                Intent intent = new Intent(AddLocation.this, LocationList.class);
+                startActivity(intent);
+            }
+        }
+    }
+
+    public boolean isEmpty(EditText[] fields) {
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getText().toString().length() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+        public boolean checkPrivate() {
+            if (privatelyOwned.isChecked()) {
+                return true;
+            } else if (publicSpace.isChecked()) {
+                return true;
+            } else {
+                Toast.makeText(this, "Please check either privately owned or public space.",
+                        Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
+        public boolean checkShareable() {
+            if (personalOnly.isChecked()) {
+                return true;
+            } else if (shareEveryone.isChecked()) {
+                return true;
+            } else {
+                Toast.makeText(this, "Please check either personal or shared location.",
+                        Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
 }

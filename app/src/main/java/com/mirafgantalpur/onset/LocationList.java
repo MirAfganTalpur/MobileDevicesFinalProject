@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,29 +15,27 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 public class LocationList extends AppCompatActivity {
-
     private String keyTypeSelected;
     private String keyEntered;
     private ArrayList<Location> locationList = new ArrayList<Location>();
     private LocationAdapter locationAdapter;
     private ListView locationListView;
     private Spinner keySpinner;
-
-    EditText editText_key;
-
     private String username;
+    private String userActivityChoice;
+    EditText editText_key;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-
-        String userChoice = (String) getIntent().getExtras().get("choice");
+        userActivityChoice = (String) getIntent().getExtras().get("choice");
         username = getIntent().getStringExtra("username");
-        if (userChoice.equals("myLocations")) {
-            FirebaseHelper.getAllUserLocations("zxc", this);
-        } else if (userChoice.equals("sharedLocations")) {
+
+        if (userActivityChoice.equals("myLocations")) {
+            FirebaseHelper.getAllUserLocations(username, this);
+        } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
         }
 
@@ -64,17 +63,70 @@ public class LocationList extends AppCompatActivity {
     public void search(View view) {
         editText_key = findViewById(R.id.editText_key);
         keyEntered = editText_key.getText().toString();
+        String keyType = keySpinner.getSelectedItem().toString();
+        Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
+        // TODO fix UI so we can see the key type
+        switch (keyType) {
+            case "name": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "name", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "type": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "type", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Address": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "address", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "City": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "city", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Country": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "country", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Filming Permissions": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "filmPermissions", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Features": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "features", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Private or Public": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "private", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Only for me or For Everyone": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "onlyForMe", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            default: {
+                Log.e("test", "nothing selected");
+
+            }
+        }
     }
 
     public void addLocation(View view) {
         Intent intent = new Intent(this, AddLocation.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
     public void updateUI(final ArrayList<Location> locations) {
-
         locationListView = (ListView)findViewById(R.id.locationLV);
-
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +139,6 @@ public class LocationList extends AppCompatActivity {
         });
         locationAdapter = new LocationAdapter(this, locations);
         locationListView.setAdapter(locationAdapter);
+
     }
-
-
 }

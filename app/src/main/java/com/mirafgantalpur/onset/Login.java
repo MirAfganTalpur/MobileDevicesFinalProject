@@ -29,12 +29,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-//        final Intent intent = new Intent(Login.this, AddLocation.class);
         final String username = this.username.getText().toString();
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         if (username.equals("")) {
-            error.setText(R.string.no_username_entered);
+            error.setText("haha idiot.");
         } else {
             ref.child("users").child(username.toLowerCase())
                     .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -46,8 +45,6 @@ public class Login extends AppCompatActivity {
                                     Intent intent = new Intent(Login.this, WelcomeActivity.class);
                                     intent.putExtra("username", username);
                                     startActivity(intent);
-                                    Log.e("test", dataSnapshot.child("email").getValue().toString());
-//                                FirebaseAuth.getInstance().signInWithEmailAndPassword(dataSnapshot.child("email").toString(), password); TODO sign user in if possible
                                 } else {
                                     error.setText(R.string.wrong_password);
 

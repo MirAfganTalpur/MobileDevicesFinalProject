@@ -6,8 +6,12 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 import java.util.UUID;
 
 import static com.mirafgantalpur.onset.AddLocation.PERMISSIONS_MULTIPLE_REQUEST;
@@ -28,14 +32,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onLogin(View view)
-    {
+    public void onLogin(View view) {
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
 
     }
-    public void onSignUp(View view)
-    {
+
+    public void onSignUp(View view) {
         Intent intent = new Intent(MainActivity.this, SignUp.class);
         startActivity(intent);
     }
