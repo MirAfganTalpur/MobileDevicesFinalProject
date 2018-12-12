@@ -152,7 +152,6 @@ public final class FirebaseHelper {
                             String examinedValue = (String) location.child(keyType).getValue();
                             if (examinedValue.toLowerCase().contains(key.toLowerCase())) {
                                 locations.add(new Location(location, location.getKey()));
-                                Log.e("search", "added a location");
                             }
                         }
                         uiReference.updateUI(locations);
