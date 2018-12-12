@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.UUID;
+
 import static com.mirafgantalpur.onset.AddLocation.PERMISSIONS_MULTIPLE_REQUEST;
 
 public class MainActivity extends AppCompatActivity {

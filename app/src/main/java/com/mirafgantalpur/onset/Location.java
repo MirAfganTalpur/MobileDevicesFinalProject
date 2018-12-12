@@ -2,8 +2,8 @@ package com.mirafgantalpur.onset;
 
 import com.google.firebase.database.DataSnapshot;
 
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Location implements Serializable {
@@ -34,7 +34,7 @@ public class Location implements Serializable {
         this.youtubeLinks = new ArrayList<>();
     }
 
-    public Location (DataSnapshot info) {
+    public Location (DataSnapshot info, String uuid) {
         this.name = (String) info.child("name").getValue();
         this.type = (String) info.child("type").getValue();
         this.address = (String) info.child("address").getValue();
@@ -44,7 +44,7 @@ public class Location implements Serializable {
         this.features = (String) info.child("features").getValue();
         this.isPrivate = (Boolean) info.child("private").getValue();
         this.isOnlyForMe = (Boolean) info.child("onlyForMe").getValue();
-        this.uuid = UUID.fromString((String) info.child("uuid").getValue());
+        this.uuid = UUID.fromString(uuid);
         this.youtubeLinks = new ArrayList<>();
     }
 
@@ -128,9 +128,11 @@ public class Location implements Serializable {
     public ArrayList<String> getYoutubeLinks() {
         return youtubeLinks;
     }
+
     public void setYoutubeLinks(ArrayList<String> youtubeLinks) {
         this.youtubeLinks = youtubeLinks;
     }
+
     public void addYoutubeLink (String link) {
         youtubeLinks.add(link);
     }

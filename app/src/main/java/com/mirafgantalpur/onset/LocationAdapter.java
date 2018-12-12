@@ -1,22 +1,25 @@
 package com.mirafgantalpur.onset;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocationAdapter extends ArrayAdapter<Location> {
     private Context context;
-    private List<Location> data;
+    private ArrayList<Location> data;
 
-    public LocationAdapter(Context context, List<Location> data) {
+    public LocationAdapter(Context context, ArrayList<Location> data) {
         super(context,0,data);
         this.context = context;
         this.data = data;
+        Log.e("test", "inside location Adapter: " + String.valueOf(data.size()));
     }
 
     @Override
@@ -25,7 +28,11 @@ public class LocationAdapter extends ArrayAdapter<Location> {
     }
 
     private View createItemView(int position, View convertView, ViewGroup parent) {
-        final View listItem = LayoutInflater.from(context).inflate(R.layout.listview_item, parent, false);
+        View listItem = convertView;
+
+        if (listItem == null){
+            listItem = LayoutInflater.from(context).inflate(R.layout.listview_item, parent, false);
+        }
 
         Location location = data.get(position);
         String cityCountry = location.getCity() + ", " + location.getCountry();
