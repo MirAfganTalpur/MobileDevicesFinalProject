@@ -18,6 +18,7 @@
 
     <string name="add_location_title">Add Location</string>
     <string name="edit_location_title">Edit Location</string>
+    <string name="add_locaiton_search">Search for Locations:</string>
 
     <string name="location_name_hint">ex. CN Tower, Wonderland, etc.</string>
     <string name="location_address_hint">ex. 42 Wallaby Way, Sydney</string>

@@ -1,5 +1,6 @@
 package com.mirafgantalpur.onset;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
@@ -12,12 +13,17 @@ import android.location.LocationManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -54,6 +60,9 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     EditText youtubeLink;
     Marker marker;
     ArrayList<String> youTubeList = new ArrayList<>();
+    private static final String TAG = "AddLocation";
+
+    PlaceAutocompleteFragment placeAutoComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +74,29 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+        placeAutoComplete = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        placeAutoComplete.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                locationAddress.setText(place.getAddress());
+                toAddress(mContext,place.getAddress().toString());            }
+
+            @Override
+            public void onError(Status status) {
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2000,
-                10, locationListenerGPS);
+                25, locationListenerGPS);
 
         locationAddress.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -87,7 +113,10 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -106,11 +135,16 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public boolean onMyLocationButtonClick() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2000,
-                10, locationListenerGPS);
+                25, locationListenerGPS);
         return false;
     }
 
@@ -139,6 +173,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             String msg="Location Updated!";
             Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
             findLocation(latitude, longitude);
+            locationManager.removeUpdates(this);
+
         }
 
         @Override
@@ -177,7 +213,9 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
 
                     mMap.clear();
 
-                    marker = mMap.addMarker(new MarkerOptions().position(newLocation).title("Marker:"+address).snippet(city + ", " + prov + ", " + country + ", " + postalCode + ", " + phone + ", " + url).draggable(true));
+                    marker = mMap.addMarker(new MarkerOptions().position(newLocation).title(
+                                            address).snippet(city + ", " + prov + ", " + country +
+                                            ", " + postalCode).draggable(true));
 
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
@@ -248,51 +286,91 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         String country = null;
         LatLng latLng = marker.getPosition();
         List<Address> addresses = null;
+        EditText[] fields = new EditText[5];
 
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            addresses = geocoder.getFromLocation(
-                    latLng.latitude,
-                    latLng.longitude,
-                    1);
-            city =  addresses.get(0).getAddressLine(0);
-            country = addresses.get(0).getAddressLine(2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (privatelyOwned.isChecked()) {
-            isPrivate = true;
-        } else if (publicSpace.isChecked()){
-            isPrivate = false;
+        fields [0] = locationName;
+        fields [1] = locationAddress;
+        fields [2] = locationType;
+        fields [3] = filmingPermissions;
+        fields [4] = features;
+
+        if (isEmpty(fields)){
+            Toast.makeText(mContext,R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Please check either privately owned or public space.",
-                    Toast.LENGTH_LONG).show();
+            if (checkShareable() && checkPrivate()) {
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                try {
+                    addresses = geocoder.getFromLocation(
+                            latLng.latitude,
+                            latLng.longitude,
+                            1);
+                    city = addresses.get(0).getLocality();
+                    country = addresses.get(0).getCountryName();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (privatelyOwned.isChecked()) {
+                    isPrivate = true;
+                } else if (publicSpace.isChecked()) {
+                    isPrivate = false;
+                }
+                if (personalOnly.isChecked()) {
+                    isOnlyMe = true;
+                } else if (shareEveryone.isChecked()){
+                    isOnlyMe = false;
+                }
+
+                addVideo();
+
+                com.mirafgantalpur.onset.Location newlocation =
+                        new com.mirafgantalpur.onset.Location(locationName.getText().toString(),
+                                locationType.getText().toString(),
+                                locationAddress.getText().toString(),
+                                city,
+                                country,
+                                filmingPermissions.getText().toString(),
+                                features.getText().toString(),
+                                isPrivate,
+                                isOnlyMe,
+                                UUID.randomUUID());
+                newlocation.setYoutubeLinks(youTubeList);
+
+                FirebaseHelper.addLocation("youtube",newlocation);
+
+                Intent intent = new Intent(AddLocation.this, LocationList.class);
+                startActivity(intent);
+            }
         }
-        if (personalOnly.isChecked()) {
-            isOnlyMe = true;
-        } else if (shareEveryone.isChecked()){
-            isOnlyMe = false;
-        } else {
-            Toast.makeText(this, "Please check either privately owned or public space.",
-                    Toast.LENGTH_LONG).show();
-        }
-
-        addVideo();
-
-        com.mirafgantalpur.onset.Location newlocation =
-                new com.mirafgantalpur.onset.Location(locationName.getText().toString(),
-                                            locationType.getText().toString(),
-                                            locationAddress.getText().toString(),
-                                            city,
-                                            country,
-                                            filmingPermissions.getText().toString(),
-                                            features.getText().toString(),
-                                            isPrivate,
-                                            isOnlyMe,
-                                            UUID.randomUUID());
-        newlocation.setYoutubeLinks(youTubeList);
-
-        FirebaseHelper.addLocation("youtube",newlocation);
     }
 
+    public boolean isEmpty(EditText[] fields) {
+        for (int i = 0; i < fields.length; i++) {
+            if (fields[i].getText().toString().length() == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+        public boolean checkPrivate() {
+            if (privatelyOwned.isChecked()) {
+                return true;
+            } else if (publicSpace.isChecked()) {
+                return true;
+            } else {
+                Toast.makeText(this, "Please check either privately owned or public space.",
+                        Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
+        public boolean checkShareable() {
+            if (personalOnly.isChecked()) {
+                return true;
+            } else if (shareEveryone.isChecked()) {
+                return true;
+            } else {
+                Toast.makeText(this, "Please check either personal or shared location.",
+                        Toast.LENGTH_LONG).show();
+            }
+            return false;
+        }
 }
