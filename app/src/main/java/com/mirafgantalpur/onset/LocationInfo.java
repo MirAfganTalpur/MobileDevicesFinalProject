@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +17,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,10 +26,18 @@ import java.util.regex.Pattern;
 public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
 {
 
-    private YouTubePlayerView youTubeView;
     private static final int RECOVERY_REQUEST = 1;
     Context mContext = this;
     String YOUTUBE_API_KEY;
+    ArrayList<String> youTubeLinks = new ArrayList<>();
+    String youTubeLink;
+    String youTubeId;
+    int youTubeIndex = 0;
+    ImageButton backButton;
+    ImageButton nextButton;
+    YouTubePlayerView youTubeView;
+    //YouTubePlayer.OnInitializedListener onInitializedListener;
+    YouTubePlayer youTubePlayer;
 
     private String username;
     private Location location;
@@ -46,9 +59,11 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         } catch (PackageManager.NameNotFoundException n) {
             n.printStackTrace();
         }
-        youTubeView = findViewById(R.id.youtube_view);
-        youTubeView.initialize(YOUTUBE_API_KEY, this);
 
+        FirebaseHelper.getLocationsYoutubeLinks(username,location,this);
+
+        backButton = findViewById(R.id.imageButton3);
+        nextButton = findViewById(R.id.imageButton4);
         // Populate information edit texts:
         populateInfo();
     }
@@ -56,8 +71,11 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
         if (!wasRestored) {
-            String youTubeLink = getYouTubeId("https://www.youtube.com/watch?v=4CbLXeGSDxg");
-            player.cueVideo(youTubeLink);
+            youTubePlayer = player;
+            youTubeLink = youTubeLinks.get(youTubeIndex);
+            youTubeId = getYouTubeId(youTubeLink);
+            youTubePlayer.cueVideo(youTubeId);
+            Log.d("test","initialized");
         }
     }
 
@@ -80,6 +98,48 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     protected YouTubePlayer.Provider getYouTubePlayerProvider() {
         return youTubeView;
+    }
+
+    public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex){
+        youTubeLink = youTubeLinks.get(youTubeIndex);
+        youTubeId = getYouTubeId(youTubeLink);
+        player.cueVideo(youTubeId);
+        checkButton(youTubeIndex);
+    }
+
+    public void checkButton(int youTubeIndex){
+        if (youTubeIndex == 0 ){
+            backButton.setEnabled(false);
+            if (youTubeIndex == youTubeLinks.size()-1){
+                nextButton.setEnabled(false);
+            } else {
+                nextButton.setEnabled(true);
+            }
+        } else if (youTubeIndex < youTubeLinks.size()-1) {
+            backButton.setEnabled(true);
+            nextButton.setEnabled(true);
+        } else {
+            nextButton.setEnabled(false);
+            backButton.setEnabled(true);
+        }
+    }
+    public void onBackButton(View view) {
+        youTubeIndex--;
+        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+    }
+    public void onNextButton(View view) {
+        youTubeIndex++;
+        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+    }
+
+    public void getYouTubeLinks(ArrayList<String> youTubeLinksList) {
+        youTubeLinks = youTubeLinksList;
+        if (youTubeLinks.size() >=1 ) {
+            youTubeView = findViewById(R.id.youtube_view);
+            youTubeView.initialize(YOUTUBE_API_KEY, this);
+        }
+        checkButton(youTubeIndex);
+
     }
 
     public static String getYouTubeId (String url) {

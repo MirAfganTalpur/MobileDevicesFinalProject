@@ -109,7 +109,7 @@ public final class FirebaseHelper {
                 });
     }
 
-    static void getLocationsYoutubeLinks(String username, Location location) { // TODO , final DetailedLocationActivity uiReference) {
+    static void getLocationsYoutubeLinks(String username, Location location, final LocationInfo uiReference) { // TODO , final DetailedLocationActivity uiReference) {
         DatabaseReference ref;
         if (location.isOnlyForMe()) {
             ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations").child(location.getUuid().toString()).child("youtubeLinks");
@@ -124,7 +124,8 @@ public final class FirebaseHelper {
                         for (DataSnapshot link : dataSnapshot.getChildren()) {
                             links.add(link.getValue().toString());
                         }
-                        // uiReference.postYoutubeLinks(links); TODO add this method to the DetailedLocationActivity
+                        Log.e("test", String.valueOf(links.size()));
+                        uiReference.getYouTubeLinks(links);
                     }
 
                     @Override
