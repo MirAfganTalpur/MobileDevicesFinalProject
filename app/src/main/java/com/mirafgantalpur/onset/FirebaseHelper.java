@@ -93,13 +93,15 @@ public final class FirebaseHelper {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.e("test", dataSnapshot.getValue().toString());
                         ArrayList<Location> locations = new ArrayList<>();
+
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
                             Location testing = new Location(location, location.getKey());
                             testing.setAuthorUsername(location.child("authorUsername").getValue().toString());
                             locations.add(testing);
                         }
-
+                        Log.e("test", String.valueOf(locations.size()));
                         uiReference.updateUI(locations);
 
                     }

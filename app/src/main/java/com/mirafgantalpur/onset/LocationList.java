@@ -27,9 +27,13 @@ public class LocationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-//        FirebaseHelper.getAllUserLocations("testing", this);
-        FirebaseHelper.getAllSharedLocations(this);
-        // Spinner Set up
+        String userChoice = (String) getIntent().getExtras().get("choice");
+        if (userChoice.equals("myLocations")) {
+            FirebaseHelper.getAllUserLocations("zxc", this);
+        } else if (userChoice.equals("sharedLocations")) {
+            FirebaseHelper.getAllSharedLocations(this);
+        }
+
         keySpinner = findViewById(R.id.keySpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.keyList, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -68,5 +72,6 @@ public class LocationList extends AppCompatActivity {
 
         locationAdapter = new LocationAdapter(this, locations);
         locationListView.setAdapter(locationAdapter);
+
     }
 }
