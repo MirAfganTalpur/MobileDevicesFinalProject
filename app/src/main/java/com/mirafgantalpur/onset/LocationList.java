@@ -20,7 +20,8 @@ public class LocationList extends AppCompatActivity {
     private LocationAdapter locationAdapter;
     private ListView locationListView;
     private Spinner keySpinner;
-
+    private String username;
+    private String userActivityChoice;
     EditText editText_key;
 
 
@@ -28,10 +29,12 @@ public class LocationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-        String userChoice = (String) getIntent().getExtras().get("choice");
-        if (userChoice.equals("myLocations")) {
-            FirebaseHelper.getAllUserLocations("zxc", this);
-        } else if (userChoice.equals("sharedLocations")) {
+        userActivityChoice = (String) getIntent().getExtras().get("choice");
+        username = getIntent().getStringExtra("username");
+
+        if (userActivityChoice.equals("myLocations")) {
+            FirebaseHelper.getAllUserLocations(username, this);
+        } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
         }
 
@@ -51,10 +54,6 @@ public class LocationList extends AppCompatActivity {
                 keyTypeSelected = null;
             }
         });
-
-        // Using firebase: obtain an arraylist for all locations in the database..
-
-
     }
 
     public void search(View view) {
@@ -118,6 +117,7 @@ public class LocationList extends AppCompatActivity {
 
     public void addLocation(View view) {
         Intent intent = new Intent(this, AddLocation.class);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 

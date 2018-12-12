@@ -2,20 +2,11 @@ package com.mirafgantalpur.onset;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,11 +15,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SignUp extends AppCompatActivity {
-    private FirebaseAuth mAuth;
-    private TextView error;
+    protected TextView error;
     private EditText fullName;
     private EditText username;
     private EditText email;
@@ -38,7 +27,6 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuth = FirebaseAuth.getInstance();
         setContentView(R.layout.activity_sign_up);
     }
 
@@ -80,8 +68,8 @@ public class SignUp extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     error.setText(R.string.username_taken);
                                 } else {
-                                    firebaseSignUp(email.getText().toString(), password1.getText().toString(),
-                                            username.getText().toString(), fullName.getText().toString());
+                                    FirebaseHelper.signUp(email.getText().toString(), password1.getText().toString(),
+                                            username.getText().toString(), fullName.getText().toString(), SignUp.this);
                                 }
                             }
 
@@ -96,12 +84,10 @@ public class SignUp extends AppCompatActivity {
         }
     }
 
-
     public void onBack(View view) {
         Intent intent = new Intent(SignUp.this, MainActivity.class);
         startActivity(intent);
     }
-
 
     public boolean isEmpty(EditText[] fields) {
         for (int i = 0; i < fields.length; i++) {
@@ -110,41 +96,5 @@ public class SignUp extends AppCompatActivity {
             }
         }
         return false;
-    }
-
-    private void firebaseSignUp(final String email, final String password, final String username, final String fullName) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.e("test", "created new user");
-                            User user = new User(username, email.toLowerCase(), fullName, password);
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                            myRef.child("users").child(username.toLowerCase()).setValue(user);
-                            Intent intent = new Intent(SignUp.this, WelcomeActivity.class);
-                            intent.putExtra("username", username);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(SignUp.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            try {
-                                throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException e) {
-                                error.setText(R.string.password_too_weak);
-
-                            } catch (FirebaseAuthInvalidCredentialsException e) {
-
-                                if (e.getMessage().equals("The email address is badly formatted.")) {
-                                    error.setText(R.string.improper_email);
-                                }
-                            } catch (FirebaseAuthUserCollisionException e) {
-                                error.setText(R.string.email_used);
-                            } catch (Exception e) {
-
-                            }
-                        }
-                    }
-                });
     }
 }

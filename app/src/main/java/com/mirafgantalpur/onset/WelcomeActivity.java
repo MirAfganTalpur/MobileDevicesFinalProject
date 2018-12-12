@@ -8,27 +8,29 @@ import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
     private TextView welcomeUserName;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         welcomeUserName = findViewById(R.id.welcomeUserName);
-        welcomeUserName.setText(getIntent().getStringExtra("username").toUpperCase());
+        username = getIntent().getStringExtra("username");
+        welcomeUserName.setText(username.toUpperCase());
 
     }
 
     public void viewMyLocations(View view) {
         Intent intent = new Intent(WelcomeActivity.this, LocationList.class);
         intent.putExtra("choice", "myLocations");
-        intent.putExtra("username", (String) getIntent().getStringExtra("username"));
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
     public void viewSharedLocations(View view) {
         Intent intent = new Intent(WelcomeActivity.this, LocationList.class);
         intent.putExtra("choice", "sharedLocations");
-        intent.putExtra("username", (String) getIntent().getExtras().get("username"));
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }
