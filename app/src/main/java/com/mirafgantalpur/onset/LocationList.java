@@ -55,31 +55,63 @@ public class LocationList extends AppCompatActivity {
         // Using firebase: obtain an arraylist for all locations in the database..
 
 
-
     }
 
     public void search(View view) {
         editText_key = findViewById(R.id.editText_key);
         keyEntered = editText_key.getText().toString();
         String keyType = keySpinner.getSelectedItem().toString();
+        Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
+        // TODO fix UI so we can see the key type
         switch (keyType) {
             case "name": {
-                Log.e("test", "name selected");
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "name", keyEntered, isViewingSharedLocations, this);
                 break;
             }
             case "type": {
-                Log.e("test", "type selected");
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "type", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Address":
-            case "City":
-            case "Country":
-            case "Filming Permissions":
-            case "Features":
-            case "Private or Public":
-            case "Only for me or For Everyone":
+            case "Address": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "address", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "City": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "city", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Country": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "country", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Filming Permissions": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "filmPermissions", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Features": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "features", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Private or Public": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "private", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
+            case "Only for me or For Everyone": {
+                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
+                        "onlyForMe", keyEntered, isViewingSharedLocations, this);
+                break;
+            }
             default: {
                 Log.e("test", "nothing selected");
+
             }
         }
     }

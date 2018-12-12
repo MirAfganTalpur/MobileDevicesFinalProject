@@ -1,5 +1,7 @@
 package com.mirafgantalpur.onset;
 
+import android.util.Log;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -113,6 +115,37 @@ public final class FirebaseHelper {
                             links.add(link.getValue().toString());
                         }
                         // uiReference.postYoutubeLinks(links); TODO add this method to the DetailedLocationActivity
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+    }
+
+    static void getSearchResults(String username, final String keyType, final String key, Boolean isViewingSharedLocations, final LocationList uiReference) {
+        DatabaseReference ref;
+
+        if (isViewingSharedLocations) {
+            ref = FirebaseDatabase.getInstance().getReference().child("sharedLocations");
+        } else {
+            ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations");
+        }
+        ref.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        ArrayList<Location> locations = new ArrayList<>();
+                        for (DataSnapshot location : dataSnapshot.getChildren()) {
+                            String examinedValue = (String) location.child(keyType).getValue();
+                            if (examinedValue.toLowerCase().contains(key.toLowerCase())) {
+                                locations.add(new Location(location, location.getKey()));
+                                Log.e("search", "added a location");
+                            }
+                        }
+                        uiReference.updateUI(locations);
                     }
 
                     @Override
