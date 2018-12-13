@@ -142,10 +142,10 @@ public final class FirebaseHelper {
     }
 
     // simple search functionality to narrow down the lists shown to the user. Takes the keyType (name, address, city etc.)
-    // and iterates over locations to see if that key is contained in the keyType anywhere
-    // For example keyType "feature" key is "pool", it will search through locations and updated the UI with  all locations which
-    // contain a "pool" as one of its features (keyType renamed to tag, key renamed to searchTerm)
-    static void getSearchResults(String username, final String keyType, final String key, Boolean isViewingSharedLocations, final LocationList uiReference) {
+    // and iterates over locations to see if that tag value contains the searchTerm
+    // For example tag "feature" searchTerm is "pool", it will search through locations and updated the UI with  all locations which
+    // contain a "pool" as one of its features
+    static void getSearchResults(String username, final String tag, final String searchTerm, Boolean isViewingSharedLocations, final LocationList uiReference) {
         DatabaseReference ref;
 
         if (isViewingSharedLocations) {
@@ -159,8 +159,8 @@ public final class FirebaseHelper {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<Location> locations = new ArrayList<>();
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
-                            String examinedValue = (String) location.child(keyType).getValue();
-                            if (examinedValue.toLowerCase().contains(key.toLowerCase())) {
+                            String examinedValue = String.valueOf(location.child(tag).getValue());
+                            if (examinedValue.toLowerCase().contains(searchTerm.toLowerCase())) {
                                 locations.add(new Location(location, location.getKey()));
                             }
                         }
@@ -176,8 +176,8 @@ public final class FirebaseHelper {
     }
 
     // uses FirebaseAuth to ensure no account has been created with the email address and password
-    // Then stores the users and their info directly in the database. (Couldn't implement FirebaseAuth for signing in)
-    // Stores passwords as plaintext rather than a hashed password (bad practice)
+    // Then stores the users and their info directly in the database for reference when logging in
+    // Stores passwords as plaintext rather than a hashed password
     static void signUp (final String email, final String password, final String username, final String fullName, final SignUp uiReference) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)

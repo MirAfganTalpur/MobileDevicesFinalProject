@@ -89,6 +89,7 @@ public class EditLocation extends AppCompatActivity {
 
     }
 
+    // makes sure all forms are filled in before updating a location
     private boolean isValidInput() {
         EditText locationName = findViewById(R.id.edit_name_ET);
         EditText locationType = findViewById(R.id.edit_type_ET);
