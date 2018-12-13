@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class Edit_Location extends AppCompatActivity {
 
@@ -75,13 +77,49 @@ public class Edit_Location extends AppCompatActivity {
         location.setOnlyForMe(isOnlyForMe);
         location.setYoutubeLinks(getIntent().getStringArrayListExtra("youtubeLinks"));
 
-
+        if (!isValidInput()){
+            return;
+        }
         FirebaseHelper.updateLocation(username, location);
 
         Intent intent = new Intent(this, LocationList.class);
         intent.putExtra("username", username);
         intent.putExtra("choice", getIntent().getStringExtra("choice"));
         startActivity(intent);
+
+    }
+
+    private boolean isValidInput() {
+        EditText locationName = findViewById(R.id.edit_name_ET);
+        EditText locationType = findViewById(R.id.edit_type_ET);
+        EditText permissions = findViewById(R.id.edit_permissions_ET);
+        EditText features = findViewById(R.id.edit_features_ET);
+        RadioButton isPrivate = findViewById(R.id.is_private_button);
+        RadioButton isPublic = findViewById(R.id.is_public_button);
+        RadioButton notOnlyForMe = findViewById(R.id.only_me_false);
+        RadioButton isOnlyForMe= findViewById(R.id.only_me_true);
+
+        EditText[] editTexts = new EditText[]{ locationName, locationType, permissions, features};
+        for (EditText editText : editTexts) {
+            if (editText.getText().toString().length() == 0) {
+                Toast.makeText(this, R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();
+                return false;
+            }
+        }
+
+        if (!isPrivate.isChecked() && !isPublic.isChecked()) {
+            Toast.makeText(this, R.string.select_private_or_public_space,
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        if (!isOnlyForMe.isChecked() && !notOnlyForMe.isChecked()) {
+            Toast.makeText(this, R.string.select_personal_or_shared,
+                    Toast.LENGTH_LONG).show();
+            return false;
+        }
+
+        return true;
 
     }
 
