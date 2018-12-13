@@ -68,16 +68,15 @@
     <string name="my_locations">My Locations</string>
     <string name="shared_locations">Shared Locations</string>
     <string-array name="keyList">
-        <item>name</item>
-        <item>type</item>
-        <item>Address</item>
-        <item>City</item>
-        <item>Country</item>
-        <item>Filming Permissions</item>
-        <item>Features</item>
-        <item>Private or Public</item>
-        <item>Only For Me or For Everyone</item>
-        <item>Youtube link</item>
+        <item>NAME</item>
+        <item>TYPE</item>
+        <item>ADDRESS</item>
+        <item>CITY</item>
+        <item>COUNTRY</item>
+        <item>FILMING PERMISSIONS</item>
+        <item>FEATURES</item>
+        <item>PRIVATE OR PUBLIC</item>
+        <item>ONLY FOR ME OR FOR EVERYONE</item>
     </string-array>
 
     <string name="Login_header_label">LOGIN</string>
