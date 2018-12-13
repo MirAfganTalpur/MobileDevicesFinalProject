@@ -29,6 +29,7 @@ public class Edit_Location extends AppCompatActivity {
         username = intent.getStringExtra("username");
         location = (Location)intent.getSerializableExtra("location");
 
+
         name = findViewById(R.id.edit_name_ET);
         name.setText(location.getName());
 
@@ -37,6 +38,7 @@ public class Edit_Location extends AppCompatActivity {
 
         addr = findViewById(R.id.edit_address_ET);
         addr.setText(location.getAddress());
+        addr.setFocusable(false);
 
         filmPerm = findViewById(R.id.edit_permissions_ET);
         filmPerm.setText(location.getFilmPermissions());
@@ -71,6 +73,8 @@ public class Edit_Location extends AppCompatActivity {
         location.setFeatures(feat.getText().toString());
         location.setPrivate(isPrivate);
         location.setOnlyForMe(isOnlyForMe);
+        location.setYoutubeLinks(getIntent().getStringArrayListExtra("youtubeLinks"));
+
 
         FirebaseHelper.updateLocation(username, location);
 
