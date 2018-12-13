@@ -30,7 +30,7 @@ public class Edit_Location extends AppCompatActivity {
         location = (Location)intent.getSerializableExtra("location");
 
         name = findViewById(R.id.edit_name_ET);
-        name.setText(location.getType());
+        name.setText(location.getName());
 
         type = findViewById(R.id.edit_type_ET);
         type.setText(location.getType());
@@ -74,7 +74,10 @@ public class Edit_Location extends AppCompatActivity {
 
         FirebaseHelper.updateLocation(username, location);
 
-        finish();
+        Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("username", username);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
+        startActivity(intent);
 
     }
 

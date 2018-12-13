@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -65,6 +64,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
         backButton = findViewById(R.id.info_backButton);
         nextButton = findViewById(R.id.info_nextButton);
+
         // Populate information text views:
         populateInfo();
     }
@@ -187,6 +187,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         Intent intent = new Intent(this, Edit_Location.class);
         intent.putExtra("username", username);
         intent.putExtra("location", location);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
         startActivity(intent);
     }
 

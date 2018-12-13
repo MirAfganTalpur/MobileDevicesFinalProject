@@ -151,6 +151,7 @@ public class LocationList extends AppCompatActivity {
                 Location location = locations.get(position);
                 intent.putExtra("username", username);
                 intent.putExtra("selectedLocation",location);
+                intent.putExtra("choice", getIntent().getStringExtra("choice"));
                 startActivity(intent);
             }
         });
