@@ -16,7 +16,7 @@
     <string name="edit_button_text">Edit</string>
 
 
-    <string name="add_location_title">Add Location</string>
+    <string name="add_location_title">ADD LOCATION</string>
     <string name="edit_location_title">Edit Location</string>
     <string name="add_locaiton_search">Search for Locations:</string>
 
@@ -35,12 +35,12 @@
     <string name="location_type">Location Type:</string>
     <string name="location_features">Features:</string>
     <string name="location_privacy">Private or Public?</string>
-    <string name="film_permissions">Filming Permissions:</string>
+    <string name="film_permissions">Film Permissions:</string>
     <string name="sample_video_text">Videos/Films Shot Here</string>
     <string name="only_me_text">Only For Me?</string>
     <string name="only_me_true_text">Yes - Personal Location Only </string>
     <string name="only_me_false_text">No - Share with Everyone</string>
-    <string name="add_sample_video_text">YouTube Link for Video Shot Here:</string>
+    <string name="add_sample_video_text">YouTube Links:</string>
     <string name="add_more_videos_text">Add Another YouTube Video</string>
     <string name="title_activity_location_list">LocationList</string>
     <string name="please_fill_out_all_fields">Please fill out all fields.</string>

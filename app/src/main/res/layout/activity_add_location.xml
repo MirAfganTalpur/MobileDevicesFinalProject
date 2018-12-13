@@ -5,16 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddLocation"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="25dp"
+    style="@style/BackgroundAddLocation">
+
+    <TextView
+        android:id="@+id/addHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/raleway_black"
+        android:text="ADD LOCATION"
+        android:textColor="#CE69C0"
+        android:textSize="29dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView4"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,24 +41,6 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/add_location_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="sans-serif-condensed"
-                    android:lineSpacingExtra="8sp"
-                    android:text="@string/add_location_title"
-                    android:textAllCaps="true"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:typeface="monospace"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -67,7 +66,8 @@
 
                 <TextView
                     android:id="@+id/add_location_name"
-                    android:layout_width="144dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="122dp"
                     android:layout_height="wrap_content"
                     android:text="@string/location_name"
                     android:textAlignment="textEnd"
@@ -82,6 +82,8 @@
                     android:ems="10"
                     android:hint="@string/location_name_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="74dp" />
 
@@ -94,7 +96,8 @@
 
                 <TextView
                     android:id="@+id/add_location_type"
-                    android:layout_width="144dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="122dp"
                     android:layout_height="wrap_content"
                     android:text="@string/location_type"
                     android:textAlignment="textEnd"
@@ -109,6 +112,8 @@
                     android:ems="10"
                     android:hint="@string/location_type_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="134dp" />
             </LinearLayout>
@@ -120,7 +125,8 @@
 
                 <TextView
                     android:id="@+id/add_location_address"
-                    android:layout_width="144dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="122dp"
                     android:layout_height="wrap_content"
                     android:text="@string/location_address"
                     android:textAlignment="textEnd"
@@ -134,6 +140,8 @@
                     android:ems="10"
                     android:hint="@string/location_address_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="437dp" />
             </LinearLayout>
@@ -145,9 +153,10 @@
 
                 <TextView
                     android:id="@+id/add_location_filming_permissions"
-                    android:layout_width="wrap_content"
+                    style="@style/AddLabeLText"
+                    android:layout_width="118dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/film_permissions"
                     android:textAlignment="textEnd"
                     app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +169,8 @@
                     android:ems="10"
                     android:hint="@string/film_permissions_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="370dp" />
             </LinearLayout>
@@ -171,7 +182,8 @@
 
                 <TextView
                     android:id="@+id/add_location_features"
-                    android:layout_width="144dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="122dp"
                     android:layout_height="wrap_content"
                     android:text="@string/location_features"
                     android:textAlignment="textEnd"
@@ -186,6 +198,8 @@
                     android:ems="10"
                     android:hint="@string/location_features_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -198,10 +212,11 @@
 
                 <TextView
                     android:id="@+id/add_location_privacy"
-                    android:layout_width="128dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="9dp"
                     android:text="@string/location_privacy"
                     android:textAlignment="textEnd"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -218,14 +233,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/location_private_button" />
+                        android:text="@string/location_private_button"
+                        style="@style/RadioText"/>
 
                     <RadioButton
                         android:id="@+id/is_public_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/location_public_button" />
+                        android:text="@string/location_public_button"
+                        style="@style/RadioText"/>
                 </RadioGroup>
 
             </LinearLayout>
@@ -237,9 +254,10 @@
 
                 <TextView
                     android:id="@+id/only_me_location"
-                    android:layout_width="288dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="9dp"
                     android:layout_weight="1"
                     android:text="@string/only_me_text"
                     android:textAlignment="textEnd" />
@@ -255,14 +273,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/only_me_true_text" />
+                        android:text="@string/only_me_true_text"
+                        style="@style/RadioText"/>
 
                     <RadioButton
                         android:id="@+id/only_me_false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/only_me_false_text" />
+                        android:text="@string/only_me_false_text"
+                        style="@style/RadioText"/>
                 </RadioGroup>
             </LinearLayout>
 
@@ -273,8 +293,9 @@
 
                 <TextView
                     android:id="@+id/add_sample_videos"
-                    android:layout_width="136dp"
-                    android:layout_height="46dp"
+                    style="@style/AddLabeLText"
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginBottom="20dp"
                     android:text="@string/add_sample_video_text"
@@ -286,11 +307,13 @@
                     android:id="@+id/youtube_link_editText"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="0dp"
                     android:layout_marginEnd="16dp"
                     android:ems="10"
                     android:hint="@string/sample_video_text_hint"
                     android:inputType="textPersonName"
+                    android:theme="@style/AddEditTextTheme"
+                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="196dp" />
             </LinearLayout>
@@ -301,15 +324,16 @@
 
                 <Button
                     android:id="@+id/more_videos_button"
-                    android:layout_width="229dp"
-                    android:layout_height="wrap_content"
+                    style="@style/customButton_white"
+                    android:layout_width="179dp"
+                    android:layout_height="31dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/round_button_dark"
                     android:onClick="onVideoAdd"
                     android:text="@string/add_more_videos_text"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.726"
+                    app:layout_constraintHorizontal_bias="0.645"
                     app:layout_constraintStart_toStartOf="parent" />
             </android.support.constraint.ConstraintLayout>
 
@@ -320,8 +344,14 @@
                 <fragment
                     android:id="@+id/map"
                     android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="335dp"
+                    android:layout_width="364dp"
+                    android:layout_height="277dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:context=".AddLocation" />
             </android.support.constraint.ConstraintLayout>
 
@@ -331,10 +361,12 @@
 
                 <Button
                     android:id="@+id/submit_location_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    style="@style/customButton_white"
+                    android:layout_width="112dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="17dp"
                     android:layout_marginBottom="15dp"
+                    android:background="@drawable/round_button_dark"
                     android:onClick="onSubmitLocation"
                     android:text="@string/submit_location_button_text"
                     app:layout_constraintBottom_toBottomOf="parent"

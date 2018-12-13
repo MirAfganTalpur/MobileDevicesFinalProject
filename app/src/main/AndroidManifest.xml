@@ -44,7 +44,7 @@
             android:name=".LocationList"
             android:label="@string/title_activity_location_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".WelcomeActivity" />
     </application>
 
 </manifest>
