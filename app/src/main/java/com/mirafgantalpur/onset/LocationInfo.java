@@ -6,8 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +15,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -62,9 +59,9 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
         FirebaseHelper.getLocationsYoutubeLinks(username,location,this);
 
-        backButton = findViewById(R.id.imageButton3);
-        nextButton = findViewById(R.id.imageButton4);
-        // Populate information edit texts:
+        backButton = findViewById(R.id.info_backButton);
+        nextButton = findViewById(R.id.info_nextButton);
+        // Populate information text views:
         populateInfo();
     }
 
@@ -123,10 +120,12 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             backButton.setEnabled(true);
         }
     }
+
     public void onBackButton(View view) {
         youTubeIndex--;
         updateYouTubeVideo(youTubePlayer,youTubeIndex);
     }
+
     public void onNextButton(View view) {
         youTubeIndex++;
         updateYouTubeVideo(youTubePlayer,youTubeIndex);
@@ -155,49 +154,30 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     public void populateInfo() {
 
-        TextView name = findViewById(R.id.location_title);
+        TextView name = findViewById(R.id.info_nameTV);
         name.setText(location.getName());
 
-        EditText type = findViewById(R.id.info_typeET);
-        type.setText(location.getType());
-
-        EditText addr = findViewById(R.id.info_addrET);
+        TextView addr = findViewById(R.id.info_addrTV);
         addr.setText(location.getAddress());
 
-        EditText privPub = findViewById(R.id.info_privPubET);
+        TextView type = findViewById(R.id.info_typeTV);
+        type.setText(location.getType());
+
+        TextView privPub = findViewById(R.id.info_privacyTV);
         if(location.isPrivate()) {
             privPub.setText("PRIVATE");
         } else {
             privPub.setText("PUBLIC");
         }
 
-        EditText filmPerm = findViewById(R.id.info_filmPermET);
+        TextView filmPerm = findViewById(R.id.info_filmPermTV);
         filmPerm.setText(location.getFilmPermissions());
 
-        EditText feat = findViewById(R.id.info_featET);
+        TextView feat = findViewById(R.id.info_featTV);
         feat.setText(location.getFeatures());
 
-        editDisable(type, addr, privPub, filmPerm, feat);
-
     }
 
-    public void editDisable(EditText t, EditText a, EditText p, EditText fp, EditText f) {
-
-        t.setFocusable(false);
-        t.setClickable(false);
-
-        a.setFocusable(false);
-        a.setClickable(false);
-
-        p.setFocusable(false);
-        p.setClickable(false);
-
-        fp.setFocusable(false);
-        fp.setClickable(false);
-
-        f.setFocusable(false);
-        f.setClickable(false);
-    }
 
     public void editEnabled(View view) {
         Intent intent = new Intent(this, Edit_Location.class);

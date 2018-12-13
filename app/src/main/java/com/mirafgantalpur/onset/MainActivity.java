@@ -27,10 +27,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onLogin(View view) {
-//        Intent intent = new Intent(MainActivity.this, Login.class);
-//        startActivity(intent);
-        Intent intent = new Intent(MainActivity.this, AddLocation.class);
+        Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
+
 
     }
 

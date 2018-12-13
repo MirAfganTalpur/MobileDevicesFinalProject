@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="25dp"
     style="@style/BackgroundAddLocation">
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/addHeaderTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:orientation="horizontal"
                 tools:layout_editor_absoluteY="48dp">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_name"
                     style="@style/AddLabeLText"
                     android:layout_width="122dp"
@@ -94,7 +94,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_type"
                     style="@style/AddLabeLText"
                     android:layout_width="122dp"
@@ -123,7 +123,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_address"
                     style="@style/AddLabeLText"
                     android:layout_width="122dp"
@@ -151,7 +151,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_filming_permissions"
                     style="@style/AddLabeLText"
                     android:layout_width="118dp"
@@ -180,7 +180,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_features"
                     style="@style/AddLabeLText"
                     android:layout_width="122dp"
@@ -210,7 +210,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_location_privacy"
                     style="@style/AddLabeLText"
                     android:layout_width="wrap_content"
@@ -252,11 +252,11 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/only_me_location"
                     style="@style/AddLabeLText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_width="98dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="9dp"
                     android:layout_weight="1"
                     android:text="@string/only_me_text"
@@ -264,8 +264,8 @@
 
                 <RadioGroup
                     android:id="@+id/is_only_me_group"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <RadioButton
@@ -291,7 +291,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
 
-                <TextView
+                <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/add_sample_videos"
                     style="@style/AddLabeLText"
                     android:layout_width="114dp"

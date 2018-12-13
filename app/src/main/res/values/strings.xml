@@ -85,4 +85,6 @@
 
     <string name="locations_header_label">LOCATIONS</string>
 
+    <string name="vids_filmed_here_label">VIDEOS FILMED HERE:</string>
+    <string name="viewMapButtonLabel">View Map</string>
 </resources>
