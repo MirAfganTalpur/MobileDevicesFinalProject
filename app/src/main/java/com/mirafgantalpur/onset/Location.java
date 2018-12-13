@@ -34,6 +34,7 @@ public class Location implements Serializable {
         this.youtubeLinks = new ArrayList<>();
     }
 
+    // Constructor for when accessing FirebaseDatabase while working with DataSnapshots
     public Location (DataSnapshot info, String uuid) {
         this.name = (String) info.child("name").getValue();
         this.type = (String) info.child("type").getValue();
