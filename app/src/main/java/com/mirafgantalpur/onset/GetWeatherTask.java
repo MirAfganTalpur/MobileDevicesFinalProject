@@ -46,7 +46,6 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
 
 
         } catch (IOException e) {
-            Log.e("weather", "didn't work", e);
             return null;
         }
         return getCurrentWeather(content.toString());
@@ -72,7 +71,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         try {
-            address = coder.getFromLocationName(inputtedAddress, 5);
+            address = coder.getFromLocationName(inputtedAddress, 1);
             if (address.size() == 0) {
                 return "";
             }
