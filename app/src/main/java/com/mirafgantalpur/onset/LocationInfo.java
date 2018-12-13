@@ -246,6 +246,8 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
                 imageView.setImageResource(R.drawable.mist);
             } else if (weatherType.contains("cloud")) {
                 imageView.setImageResource(R.drawable.cloudy);
+            } else {
+                imageView.setImageDrawable(null);
             }
         }
     }
