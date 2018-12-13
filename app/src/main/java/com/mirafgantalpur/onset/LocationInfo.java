@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,7 +17,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -171,9 +169,9 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
         EditText privPub = findViewById(R.id.info_privPubET);
         if (location.isPrivate()) {
-            privPub.setText("PRIVATE");
+            privPub.setText(R.string.capital_private);
         } else {
-            privPub.setText("PUBLIC");
+            privPub.setText(R.string.capital_public);
         }
 
         EditText filmPerm = findViewById(R.id.info_filmPermET);

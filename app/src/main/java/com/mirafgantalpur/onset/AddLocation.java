@@ -1,6 +1,5 @@
 package com.mirafgantalpur.onset;
 
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
@@ -380,7 +379,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         } else if (publicSpace.isChecked()) {
             return true;
         } else {
-            Toast.makeText(this, "Please check either privately owned or public space.",
+            Toast.makeText(this, R.string.select_private_or_public_space,
                     Toast.LENGTH_LONG).show();
         }
         return false;
@@ -392,7 +391,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         } else if (shareEveryone.isChecked()) {
             return true;
         } else {
-            Toast.makeText(this, "Please check either personal or shared location.",
+            Toast.makeText(this, R.string.select_personal_or_shared,
                     Toast.LENGTH_LONG).show();
         }
         return false;
