@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,7 +19,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
+public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded
 {
 
     private YouTubePlayerView youTubeView;
@@ -39,6 +40,9 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         location = (Location)intent.getSerializableExtra("selectedLocation");
+        GetWeatherTask getWeatherTask = new GetWeatherTask(this);
+        getWeatherTask.setWeatherRetrievedListener(this);
+        getWeatherTask.execute(location.getAddress());
 
         // Handle Youtube Links:
         try {
@@ -148,6 +152,10 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     public void infoBack(View view) {
         finish();
+    }
+
+    public void showWeatherIcon(String[] weather) {
+        Log.e("weather", weather[0] + ":::" + weather[1]);
     }
 
 }
