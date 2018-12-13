@@ -63,7 +63,6 @@ public final class FirebaseHelper {
     }
 
     static void getAllUserLocations(String username, final LocationList uiReference) {
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations");
         ref.addListenerForSingleValueEvent(
                 new ValueEventListener() {

@@ -4,13 +4,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -44,28 +42,29 @@ import java.util.UUID;
 public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener {
-    LocationManager locationManager;
-    Context mContext;
-    private GoogleMap mMap;
     public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
-    EditText locationName;
-    EditText locationAddress;
-    EditText locationType;
-    EditText filmingPermissions;
-    EditText features;
-    RadioGroup isPrivate;
-    RadioButton privatelyOwned;
-    RadioButton publicSpace;
-    RadioGroup isForMe;
-    RadioButton personalOnly;
-    RadioButton shareEveryone;
-    EditText youtubeLink;
-    Marker marker;
-    ArrayList<String> youTubeList = new ArrayList<>();
+
+    private LocationManager locationManager;
+    private Context mContext;
+    private GoogleMap mMap;
+    private EditText locationName;
+    private EditText locationAddress;
+    private EditText locationType;
+    private EditText filmingPermissions;
+    private EditText features;
+    private RadioGroup isPrivate;
+    private RadioButton privatelyOwned;
+    private RadioButton publicSpace;
+    private RadioGroup isForMe;
+    private RadioButton personalOnly;
+    private RadioButton shareEveryone;
+    private EditText youtubeLink;
+    private Marker marker;
+    private ArrayList<String> youTubeList = new ArrayList<>();
     private String username;
     private static final String TAG = "AddLocation";
 
-    PlaceAutocompleteFragment placeAutoComplete;
+    private PlaceAutocompleteFragment placeAutoComplete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,8 +194,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         public void onLocationChanged(android.location.Location location) {
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
-            String msg = "Location Updated!";
-            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, R.string.location_updated, Toast.LENGTH_LONG).show();
             findLocation(latitude, longitude);
             locationManager.removeUpdates(this);
 
@@ -222,8 +220,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             Geocoder geocoder = new Geocoder(this,
                     Locale.getDefault());
             try {
-                List<Address> ls = geocoder.getFromLocation(latitude, longitude, 1);
-                for (Address addr : ls) {
+                List<Address> locations = geocoder.getFromLocation(latitude, longitude, 1);
+                for (Address addr : locations) {
                     String address = addr.getAddressLine(0);
                     locationAddress.setText(address);
 

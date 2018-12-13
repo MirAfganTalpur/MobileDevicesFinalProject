@@ -180,7 +180,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     public void editEnabled(View view) {
-        Intent intent = new Intent(this, Edit_Location.class);
+        Intent intent = new Intent(this, EditLocation.class);
         intent.putExtra("username", username);
         intent.putExtra("location", location);
         intent.putExtra("choice", getIntent().getStringExtra("choice"));

@@ -9,9 +9,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-public class Edit_Location extends AppCompatActivity {
+public class EditLocation extends AppCompatActivity {
 
-    private EditText name, type, addr, filmPerm, feat;
+    private EditText name, type, address, filmPerm, feat;
 
     private String username;
     private Location location;
@@ -29,7 +29,7 @@ public class Edit_Location extends AppCompatActivity {
         // get username and location from LocationInfo
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        location = (Location)intent.getSerializableExtra("location");
+        location = (Location) intent.getSerializableExtra("location");
 
 
         name = findViewById(R.id.edit_name_ET);
@@ -38,9 +38,9 @@ public class Edit_Location extends AppCompatActivity {
         type = findViewById(R.id.edit_type_ET);
         type.setText(location.getType());
 
-        addr = findViewById(R.id.edit_address_ET);
-        addr.setText(location.getAddress());
-        addr.setFocusable(false);
+        address = findViewById(R.id.edit_address_ET);
+        address.setText(location.getAddress());
+        address.setFocusable(false);
 
         filmPerm = findViewById(R.id.edit_permissions_ET);
         filmPerm.setText(location.getFilmPermissions());
@@ -70,14 +70,14 @@ public class Edit_Location extends AppCompatActivity {
 
         location.setName(name.getText().toString());
         location.setType(type.getText().toString());
-        location.setAddress(addr.getText().toString());
+        location.setAddress(address.getText().toString());
         location.setFilmPermissions(filmPerm.getText().toString());
         location.setFeatures(feat.getText().toString());
         location.setPrivate(isPrivate);
         location.setOnlyForMe(isOnlyForMe);
         location.setYoutubeLinks(getIntent().getStringArrayListExtra("youtubeLinks"));
 
-        if (!isValidInput()){
+        if (!isValidInput()) {
             return;
         }
         FirebaseHelper.updateLocation(username, location);
@@ -97,9 +97,9 @@ public class Edit_Location extends AppCompatActivity {
         RadioButton isPrivate = findViewById(R.id.is_private_button);
         RadioButton isPublic = findViewById(R.id.is_public_button);
         RadioButton notOnlyForMe = findViewById(R.id.only_me_false);
-        RadioButton isOnlyForMe= findViewById(R.id.only_me_true);
+        RadioButton isOnlyForMe = findViewById(R.id.only_me_true);
 
-        EditText[] editTexts = new EditText[]{ locationName, locationType, permissions, features};
+        EditText[] editTexts = new EditText[]{locationName, locationType, permissions, features};
         for (EditText editText : editTexts) {
             if (editText.getText().toString().length() == 0) {
                 Toast.makeText(this, R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();

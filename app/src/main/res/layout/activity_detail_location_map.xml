@@ -29,7 +29,7 @@
         android:background="@drawable/round_button_dark"
         android:onClick="onBackButton"
         android:text="@string/map_back_button"
-        android:textSize="13dp"
+        android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -27,8 +27,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class DetailLocationMap extends FragmentActivity implements OnMapReadyCallback,
-                                                        GoogleMap.OnMyLocationButtonClickListener,
-                                                        GoogleMap.OnMyLocationClickListener {
+        GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener {
     GoogleMap mMap;
     String username;
     Location location;
@@ -46,7 +46,7 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        location = (Location)intent.getSerializableExtra("location");
+        location = (Location) intent.getSerializableExtra("location");
         String addressString = location.getAddress();
         double[] latlng = toAddress(addressString);
         latitude = latlng[0];
@@ -66,10 +66,10 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         if (ActivityCompat.checkSelfPermission(this,
-            Manifest.permission.ACCESS_FINE_LOCATION) !=
-            PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    return;
+            return;
         }
         mMap.setMyLocationEnabled(true);
         mMap.setOnMyLocationButtonClickListener(this);
@@ -104,7 +104,8 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
                 25, locationListenerGPS);
         return false;
     }
-    public double[] toAddress (String inputtedAddress) {
+
+    public double[] toAddress(String inputtedAddress) {
         double[] latlng = new double[2];
         Geocoder coder = new Geocoder(mContext);
         List<Address> address;
@@ -127,13 +128,16 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
         }
 
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
 
         @Override
-        public void onProviderEnabled(String provider) {}
+        public void onProviderEnabled(String provider) {
+        }
 
         @Override
-        public void onProviderDisabled(String provider) {}
+        public void onProviderDisabled(String provider) {
+        }
     };
 
     public void onBackButton(View view) {

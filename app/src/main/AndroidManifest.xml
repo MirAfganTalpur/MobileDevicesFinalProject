@@ -39,7 +39,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Edit_Location" />
+        <activity android:name=".EditLocation" />
         <activity android:name=".Login" />
         <activity android:name=".SignUp" />
         <activity
