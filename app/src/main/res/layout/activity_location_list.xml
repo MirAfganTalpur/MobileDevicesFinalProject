@@ -32,13 +32,16 @@
 
     <Button
         android:id="@+id/LocationList_addButton"
+        style="@style/customButton_white"
         android:layout_width="wrap_content"
-        android:layout_height="39dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="4dp"
+        android:background="@drawable/round_button_dark"
         android:onClick="addLocation"
         android:text="@string/locationList_addLabel"
+        android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

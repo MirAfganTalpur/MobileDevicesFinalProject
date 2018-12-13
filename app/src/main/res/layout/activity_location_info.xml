@@ -138,7 +138,7 @@
         style="@style/customButton_white"
         android:layout_width="80dp"
         android:layout_height="33dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/round_button_dark"
         android:onClick="editEnabled"
