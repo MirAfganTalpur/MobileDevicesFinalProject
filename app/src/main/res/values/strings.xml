@@ -83,5 +83,6 @@
     <string name="signup_header_label">SIGN UP</string>
 
     <string name="locations_header_label">LOCATIONS</string>
+    <string name="use_valid_location">Please use a valid location</string>
 
 </resources>

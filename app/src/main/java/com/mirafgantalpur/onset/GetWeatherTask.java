@@ -47,6 +47,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
 
         } catch (IOException e) {
             Log.e("weather", "didn't work", e);
+            return null;
         }
         return getCurrentWeather(content.toString());
     }
