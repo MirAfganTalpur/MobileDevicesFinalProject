@@ -209,6 +209,13 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         startActivity(intent);
     }
 
+    public void onViewMap (View view) {
+        Intent intent = new Intent(this, DetailLocationMap.class);
+        intent.putExtra("username", username);
+        intent.putExtra("location",location);
+        startActivity(intent);
+
+    }
     public void infoBack(View view) {
         finish();
     }

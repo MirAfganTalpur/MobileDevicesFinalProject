@@ -39,7 +39,9 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/info_featET"
+            app:layout_constraintTop_toBottomOf="@+id/info_featET">
 
             <TextView
                 android:id="@+id/location_type"
@@ -65,8 +67,8 @@
                 android:id="@+id/location_privacy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="76dp"
                 android:text="Private/Public:"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_address" />
@@ -75,21 +77,21 @@
                 android:id="@+id/location_permissions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="140dp"
                 android:text="Film Permissions:"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_privacy"
-                app:layout_constraintVertical_bias="0.108" />
+                app:layout_constraintVertical_bias="0.198" />
 
             <TextView
                 android:id="@+id/location_features"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="56dp"
+                android:layout_marginTop="20dp"
                 android:text="Features:"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_permissions" />
@@ -97,9 +99,9 @@
             <com.google.android.youtube.player.YouTubePlayerView
                 android:id="@+id/youtube_view"
                 android:layout_width="match_parent"
-                android:layout_height="182dp"
+                android:layout_height="199dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -112,18 +114,19 @@
                 android:id="@+id/imageButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="4dp"
                 android:onClick="onBackButton"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/youtube_view"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@android:drawable/ic_media_previous" />
 
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
                 android:onClick="onNextButton"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -155,6 +158,7 @@
                 android:id="@+id/info_privPubET"
                 android:layout_width="wrap_content"
                 android:layout_height="41dp"
+                android:layout_marginTop="68dp"
                 android:layout_marginEnd="36dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -165,6 +169,7 @@
                 android:id="@+id/info_filmPermET"
                 android:layout_width="wrap_content"
                 android:layout_height="41dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginEnd="36dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -175,11 +180,23 @@
                 android:id="@+id/info_featET"
                 android:layout_width="wrap_content"
                 android:layout_height="41dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginEnd="36dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/info_filmPermET" />
+
+            <Button
+                android:id="@+id/to_map_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="9dp"
+                android:onClick="onViewMap"
+                android:text="@string/to_map_text"
+                app:layout_constraintBottom_toTopOf="@+id/info_privPubET"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </android.support.constraint.ConstraintLayout>
 

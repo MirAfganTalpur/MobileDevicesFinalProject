@@ -58,6 +58,9 @@
     <string name="edit_location_apply_button_text">Apply Changes</string>
     <string name="edit_location_cancel_button_text">Cancel Changes</string>
 
+    <string name="to_map_text">View Map</string>
+
+    <string name="map_back_button">Return to Location Information</string>
 
     <string name="spinner_keyType_label">Key Type:</string>
     <string name="spinner_key_label">Key:</string>
