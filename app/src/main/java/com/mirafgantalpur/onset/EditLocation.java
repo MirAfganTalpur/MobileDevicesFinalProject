@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class EditLocation extends AppCompatActivity {
 
-    private EditText name, type, address, filmPerm, feat;
+    private EditText name, type, address, filmPerm, feat, youtube;
 
     private String username;
     private Location location;
@@ -48,6 +48,10 @@ public class EditLocation extends AppCompatActivity {
         feat = findViewById(R.id.edit_feature_edittext);
         feat.setText(location.getFeatures());
 
+        youtube = findViewById(R.id.youtube_link_edittext);
+
+
+
     }
 
     public void onPrivateClicked(View view) {
@@ -76,6 +80,7 @@ public class EditLocation extends AppCompatActivity {
         location.setPrivate(isPrivate);
         location.setOnlyForMe(isOnlyForMe);
         location.setYoutubeLinks(getIntent().getStringArrayListExtra("youtubeLinks"));
+        location.addYoutubeLink(youtube.getText().toString());
 
         if (!isValidInput()) {
             return;
