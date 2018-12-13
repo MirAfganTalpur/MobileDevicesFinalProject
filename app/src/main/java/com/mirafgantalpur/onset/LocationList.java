@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -25,6 +24,7 @@ public class LocationList extends AppCompatActivity {
     private String username;
     private String userActivityChoice;
     EditText editText_key;
+    private boolean userChoseMyLocations;
 
 
     @Override
@@ -35,17 +35,29 @@ public class LocationList extends AppCompatActivity {
         // Hides the soft keyboard auto show when activity starts
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        userActivityChoice = (String) getIntent().getExtras().get("choice");
+        userActivityChoice = (String) getIntent().getStringExtra("choice");
         username = getIntent().getStringExtra("username");
 
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
+            userChoseMyLocations = true;
         } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
+            userChoseMyLocations = false;
         }
 
         setupSpinner(this);
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if (userChoseMyLocations){
+            FirebaseHelper.getAllUserLocations(username, this);
+        } else {
+            FirebaseHelper.getAllSharedLocations(this);
+        }
     }
 
     public void setupSpinner(Context context) {
@@ -71,7 +83,7 @@ public class LocationList extends AppCompatActivity {
         String keyType = keySpinner.getSelectedItem().toString();
         Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
         // TODO fix UI so we can see the key type
-        switch (keyType) {
+        switch (keyType.toLowerCase()) {
             case "name": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "name", keyEntered, isViewingSharedLocations, this);
@@ -82,44 +94,43 @@ public class LocationList extends AppCompatActivity {
                         "type", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Address": {
+            case "address": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "address", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "City": {
+            case "city": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "city", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Country": {
+            case "country": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "country", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Filming Permissions": {
+            case "filming permissions": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "filmPermissions", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Features": {
+            case "features": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "features", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Private or Public": {
+            case "private or public": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "private", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "Only for me or For Everyone": {
+            case "only for me or for everyone": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "onlyForMe", keyEntered, isViewingSharedLocations, this);
                 break;
             }
             default: {
-                Log.e("test", "nothing selected");
-
+                break;
             }
         }
     }
@@ -127,6 +138,7 @@ public class LocationList extends AppCompatActivity {
     public void addLocation(View view) {
         Intent intent = new Intent(this, AddLocation.class);
         intent.putExtra("username", username);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
         startActivity(intent);
     }
 

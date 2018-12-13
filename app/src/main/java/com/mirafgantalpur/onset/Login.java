@@ -3,7 +3,6 @@ package com.mirafgantalpur.onset;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class Login extends AppCompatActivity {
         final String password = this.password.getText().toString();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         if (username.equals("")) {
-            error.setText("haha idiot.");
+            error.setText(R.string.enter_username);
         } else {
             ref.child("users").child(username.toLowerCase())
                     .addListenerForSingleValueEvent(new ValueEventListener() {

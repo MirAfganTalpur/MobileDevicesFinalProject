@@ -6,7 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
-{
+public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded {
 
     private static final int RECOVERY_REQUEST = 1;
     Context mContext = this;
@@ -48,7 +49,10 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         // Get username and location from locationList activity:
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        location = (Location)intent.getSerializableExtra("selectedLocation");
+        location = (Location) intent.getSerializableExtra("selectedLocation");
+        GetWeatherTask getWeatherTask = new GetWeatherTask(this);
+        getWeatherTask.setWeatherRetrievedListener(this);
+        getWeatherTask.execute(location.getAddress());
 
         // Handle Youtube Links:
         try {
@@ -57,7 +61,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             n.printStackTrace();
         }
 
-        FirebaseHelper.getLocationsYoutubeLinks(username,location,this);
+        FirebaseHelper.getLocationsYoutubeLinks(username, location, this);
 
         backButton = findViewById(R.id.info_backButton);
         nextButton = findViewById(R.id.info_nextButton);
@@ -72,7 +76,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             youTubeLink = youTubeLinks.get(youTubeIndex);
             youTubeId = getYouTubeId(youTubeLink);
             youTubePlayer.cueVideo(youTubeId);
-            Log.d("test","initialized");
+            Log.d("test", "initialized");
         }
     }
 
@@ -97,22 +101,22 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         return youTubeView;
     }
 
-    public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex){
+    public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex) {
         youTubeLink = youTubeLinks.get(youTubeIndex);
         youTubeId = getYouTubeId(youTubeLink);
         player.cueVideo(youTubeId);
         checkButton(youTubeIndex);
     }
 
-    public void checkButton(int youTubeIndex){
-        if (youTubeIndex == 0 ){
+    public void checkButton(int youTubeIndex) {
+        if (youTubeIndex == 0) {
             backButton.setEnabled(false);
-            if (youTubeIndex == youTubeLinks.size()-1){
+            if (youTubeIndex == youTubeLinks.size() - 1) {
                 nextButton.setEnabled(false);
             } else {
                 nextButton.setEnabled(true);
             }
-        } else if (youTubeIndex < youTubeLinks.size()-1) {
+        } else if (youTubeIndex < youTubeLinks.size() - 1) {
             backButton.setEnabled(true);
             nextButton.setEnabled(true);
         } else {
@@ -123,17 +127,17 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     public void onBackButton(View view) {
         youTubeIndex--;
-        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+        updateYouTubeVideo(youTubePlayer, youTubeIndex);
     }
 
     public void onNextButton(View view) {
         youTubeIndex++;
-        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+        updateYouTubeVideo(youTubePlayer, youTubeIndex);
     }
 
     public void getYouTubeLinks(ArrayList<String> youTubeLinksList) {
         youTubeLinks = youTubeLinksList;
-        if (youTubeLinks.size() >=1 ) {
+        if (youTubeLinks.size() >= 1) {
             youTubeView = findViewById(R.id.youtube_view);
             youTubeView.initialize(YOUTUBE_API_KEY, this);
         }
@@ -141,11 +145,11 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     }
 
-    public static String getYouTubeId (String url) {
+    public static String getYouTubeId(String url) {
         String pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
         Pattern compiledPattern = Pattern.compile(pattern);
         Matcher matcher = compiledPattern.matcher(url);
-        if(matcher.find()){
+        if (matcher.find()) {
             return matcher.group();
         } else {
             return "error";
@@ -186,8 +190,45 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         startActivity(intent);
     }
 
+    public void onViewMap(View view) {
+        Intent intent = new Intent(this, DetailLocationMap.class);
+        intent.putExtra("username", username);
+        intent.putExtra("location", location);
+        startActivity(intent);
+
+    }
+
     public void infoBack(View view) {
         finish();
+    }
+
+    public void showWeatherIcon(String[] weather) {
+        TextView temp = findViewById(R.id.weatherTemperatureTextView);
+        ImageView imageView = findViewById(R.id.weatherImageView);
+        if (weather == null) {
+            imageView.setImageDrawable(null);
+        } else {
+            // convert from kelvin to celsius
+            String temperature = String.format("%.2f °C", Double.parseDouble(weather[1]) - 273.15);
+            String weatherType = weather[0].toLowerCase();
+            temp.setText(temperature);
+            if (weatherType.contains("clear")) {
+                imageView.setImageResource(R.drawable.clearsky);
+            } else if (weatherType.contains("thunderstorm")) {
+                imageView.setImageResource(R.drawable.thunder);
+            } else if (weatherType.contains("rain")) {
+                imageView.setImageResource(R.drawable.rain);
+            } else if (weatherType.contains("snow")) {
+                imageView.setImageResource(R.drawable.snow);
+                ;
+            } else if (weatherType.contains("mist") || weatherType.contains("haze")) {
+                imageView.setImageResource(R.drawable.mist);
+            } else if (weatherType.contains("cloud")) {
+                imageView.setImageResource(R.drawable.cloudy);
+            } else {
+                imageView.setImageDrawable(null);
+            }
+        }
     }
 
 }

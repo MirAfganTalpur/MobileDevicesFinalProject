@@ -39,7 +39,6 @@ public class SignUp extends AppCompatActivity {
         password1 = findViewById(R.id.loginPassword);
         password2 = findViewById(R.id.password_check);
         error = findViewById(R.id.error);
-        String failedLogin = "Login Failed.";
         Context mContext = this;
 
         fields[0] = fullName;
@@ -53,10 +52,10 @@ public class SignUp extends AppCompatActivity {
 
         if (isEmpty(fields)) {
             error.setText(R.string.please_fill_out_all_fields);
-            Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, R.string.login_failed, Toast.LENGTH_LONG).show();
         } else {
             if (!password_check.equals(password_entry)) {
-                Toast.makeText(mContext, failedLogin, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.login_failed, Toast.LENGTH_LONG).show();
                 password1.getText().clear();
                 password2.getText().clear();
             } else {

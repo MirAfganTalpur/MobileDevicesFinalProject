@@ -58,6 +58,9 @@
     <string name="edit_location_apply_button_text">Apply Changes</string>
     <string name="edit_location_cancel_button_text">Cancel Changes</string>
 
+    <string name="to_map_text">View Map</string>
+
+    <string name="map_back_button">Return to Location Information</string>
 
     <string name="spinner_keyType_label">Key Type:</string>
     <string name="spinner_key_label">Key:</string>
@@ -68,22 +71,30 @@
     <string name="my_locations">My Locations</string>
     <string name="shared_locations">Shared Locations</string>
     <string-array name="keyList">
-        <item>name</item>
-        <item>type</item>
-        <item>Address</item>
-        <item>City</item>
-        <item>Country</item>
-        <item>Filming Permissions</item>
-        <item>Features</item>
-        <item>Private or Public</item>
-        <item>Only For Me or For Everyone</item>
-        <item>Youtube link</item>
+        <item>NAME</item>
+        <item>TYPE</item>
+        <item>ADDRESS</item>
+        <item>CITY</item>
+        <item>COUNTRY</item>
+        <item>FILMING PERMISSIONS</item>
+        <item>FEATURES</item>
+        <item>PRIVATE OR PUBLIC</item>
+        <item>ONLY FOR ME OR FOR EVERYONE</item>
     </string-array>
 
     <string name="Login_header_label">LOGIN</string>
     <string name="signup_header_label">SIGN UP</string>
 
     <string name="locations_header_label">LOCATIONS</string>
+    <string name="use_valid_location">Please use a valid location</string>
+    <string name="select_private_or_public_space">Please check either privately owned or public space.</string>
+    <string name="select_personal_or_shared">Please check either personal or shared location.</string>
+    <string name="_private">Private</string>
+    <string name="_public">Public</string>
+    <string name="capital_private">PRIVATE</string>
+    <string name="capital_public">PUBLIC</string>
+    <string name="enter_username">Please enter a username</string>
+    <string name="login_failed">Login Failed.</string>
 
     <string name="vids_filmed_here_label">VIDEOS FILMED HERE:</string>
     <string name="viewMapButtonLabel">View Map</string>
