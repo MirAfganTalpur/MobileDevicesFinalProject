@@ -214,7 +214,28 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     public void showWeatherIcon(String[] weather) {
-        Log.e("weather", weather[0] + ":::" + weather[1]);
+        if (weather == null) {
+            // TODO no weather info available
+        } else {
+            // convert from kelvin to celsius
+            String temperature = String.valueOf(Double.parseDouble(weather[1]) + 273.15);
+            String weatherType = weather[0];
+            if (weatherType.contains("clear")){
+
+            } else if (weatherType.contains("thunderstorm")) {
+
+            } else if (weatherType.contains("rain")) {
+
+            } else if (weatherType.contains("snow")) {
+
+            } else if (weatherType.contains("mist")) {
+
+            } else if (weatherType.contains("cloud")) {
+
+            } else {
+                // TODO just set temperature
+            }
+        }
     }
 
 }
