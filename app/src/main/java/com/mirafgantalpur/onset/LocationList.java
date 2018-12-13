@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,21 +26,25 @@ public class LocationList extends AppCompatActivity {
     private String userActivityChoice;
     EditText editText_key;
     private boolean userChoseMyLocations;
-
+    TextView userViewOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
+        userViewOption = findViewById(R.id.userViewOption);
         userActivityChoice = (String) getIntent().getStringExtra("choice");
         username = getIntent().getStringExtra("username");
-
+        //keySpinner.setPrompt("Search Type:");
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
             userChoseMyLocations = true;
+            userViewOption.setText(R.string.choice_my_locations);
+
         } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
             userChoseMyLocations = false;
+            userViewOption.setText(R.string.choice_shared_locations);
         }
 
         setupSpinner(this);
@@ -80,6 +85,9 @@ public class LocationList extends AppCompatActivity {
         Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
         // TODO fix UI so we can see the key type
         switch (keyType.toLowerCase()) {
+            case "search type:": {
+                break;
+            }
             case "name": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "name", keyEntered, isViewingSharedLocations, this);

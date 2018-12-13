@@ -44,6 +44,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.ConstraintLayout
+        style="@style/BackgroundSearchTab"
         android:layout_width="362dp"
         android:layout_height="46dp"
         android:layout_marginStart="8dp"
@@ -51,74 +52,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/BackgroundSearchTab">
-
-        <TextView
-            android:id="@+id/keyTypeLabel"
-            style="@style/SimpleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/spinner_keyType_label"
-            android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
             android:id="@+id/keySpinner"
-            android:layout_width="74dp"
-            android:layout_height="13dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             style="@style/customSpinner"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/keyTypeLabel"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/keyLabel"
-            style="@style/SimpleText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="166dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/spinner_key_label"
-            android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/keySpinner"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/editText_key"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.615" />
 
         <EditText
             android:id="@+id/editText_key"
             style="@style/EditTextStyling"
-            android:layout_width="143dp"
+            android:layout_width="0dp"
             android:layout_height="39dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="34dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
+            android:hint="@string/search_hint"
             android:inputType="textPersonName"
             android:textSize="9dp"
             android:theme="@style/EditTextTheme"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/keyLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/keySpinner"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/imageButton8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@null"
             android:onClick="search"
             app:layout_constraintBottom_toBottomOf="parent"
