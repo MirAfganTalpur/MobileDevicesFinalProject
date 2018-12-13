@@ -32,20 +32,20 @@ public class EditLocation extends AppCompatActivity {
         location = (Location) intent.getSerializableExtra("location");
 
 
-        name = findViewById(R.id.edit_name_ET);
+        name = findViewById(R.id.edit_name_edittext);
         name.setText(location.getName());
 
-        type = findViewById(R.id.edit_type_ET);
+        type = findViewById(R.id.edit_type_edittext);
         type.setText(location.getType());
 
-        address = findViewById(R.id.edit_address_ET);
+        address = findViewById(R.id.edit_address_edittext);
         address.setText(location.getAddress());
         address.setFocusable(false);
 
-        filmPerm = findViewById(R.id.edit_permissions_ET);
+        filmPerm = findViewById(R.id.edit_permissions_edittext);
         filmPerm.setText(location.getFilmPermissions());
 
-        feat = findViewById(R.id.edit_features_ET);
+        feat = findViewById(R.id.edit_feature_edittext);
         feat.setText(location.getFeatures());
 
     }
@@ -90,10 +90,10 @@ public class EditLocation extends AppCompatActivity {
     }
 
     private boolean isValidInput() {
-        EditText locationName = findViewById(R.id.edit_name_ET);
-        EditText locationType = findViewById(R.id.edit_type_ET);
-        EditText permissions = findViewById(R.id.edit_permissions_ET);
-        EditText features = findViewById(R.id.edit_features_ET);
+        EditText locationName = findViewById(R.id.edit_name_edittext);
+        EditText locationType = findViewById(R.id.edit_type_edittext);
+        EditText permissions = findViewById(R.id.edit_permissions_edittext);
+        EditText features = findViewById(R.id.edit_feature_edittext);
         RadioButton isPrivate = findViewById(R.id.is_private_button);
         RadioButton isPublic = findViewById(R.id.is_public_button);
         RadioButton notOnlyForMe = findViewById(R.id.only_me_false);
