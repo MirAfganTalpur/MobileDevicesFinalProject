@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -49,6 +48,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         location = (Location) intent.getSerializableExtra("selectedLocation");
+
         GetWeatherTask getWeatherTask = new GetWeatherTask(this);
         getWeatherTask.setWeatherRetrievedListener(this);
         getWeatherTask.execute(location.getAddress());
@@ -76,7 +76,6 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             youTubeLink = youTubeLinks.get(youTubeIndex);
             youTubeId = getYouTubeId(youTubeLink);
             youTubePlayer.cueVideo(youTubeId);
-            Log.d("test", "initialized");
         }
     }
 
@@ -109,17 +108,17 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     public void checkButton(int youTubeIndex) {
-
         if (youTubeIndex == 0) {
-            backButton.setEnabled(false);
-        } else if (youTubeLinks.size() >1 ) {
-            backButton.setEnabled(true);
+            backButton.setVisibility(View.GONE);
+        } else if (youTubeLinks.size() > 1) {
+            backButton.setVisibility(View.VISIBLE);
         }
 
-        if (youTubeIndex < youTubeLinks.size() -1 ) {
-            nextButton.setEnabled(true);
+        if (youTubeIndex < youTubeLinks.size() - 1 ) {
+            nextButton.setVisibility(View.VISIBLE);
         } else {
-            nextButton.setEnabled(false);
+            nextButton.setVisibility(View.GONE);
+
         }
     }
 
@@ -185,6 +184,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         intent.putExtra("username", username);
         intent.putExtra("location", location);
         intent.putExtra("choice", getIntent().getStringExtra("choice"));
+        intent.putExtra("youtubeLinks", youTubeLinks);
         startActivity(intent);
     }
 
