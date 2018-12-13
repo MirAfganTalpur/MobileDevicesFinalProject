@@ -63,9 +63,8 @@
 
     <string name="to_map_text">View Map</string>
 
-    <string name="permissions_error">OnSet requires location permissions in order to function properly.</string>
-    <string name="permissions_error_two">Please grant us these permissions under Settings/Apps/OnSet/Permissions.</string>
-    <string name="permissions_error_three"> - OnSet Team</string>
+    <string name="permissions_error">OnSet requires location permissions in order to function properly.
+                                Please grant us these permissions under Settings/Apps/OnSet/Permissions.</string>
 
     <string name="map_back_button">Return to Location Information</string>
     <string name="search_hint">Enter Search Term Here</string>
