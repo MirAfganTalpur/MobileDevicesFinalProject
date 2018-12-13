@@ -14,10 +14,10 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        welcomeUserName = findViewById(R.id.welcomeUserName);
+        // greet the user by their username
+        welcomeUserName = findViewById(R.id.welcome_username);
         username = getIntent().getStringExtra("username");
         welcomeUserName.setText(username.toUpperCase());
-
     }
 
     public void viewMyLocations(View view) {

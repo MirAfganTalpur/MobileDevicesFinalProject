@@ -8,7 +8,7 @@
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_nameTV"
+        android:id="@+id/info_name_textview"
         style="@style/InfoName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_addrTV"
+        android:id="@+id/info_addr_textview"
         style="@style/InfoAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,10 +27,10 @@
         android:layout_marginTop="4dp"
         android:text="100 Queen St. W, Toronto, Canada, L1Z 2B1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_nameTV" />
+        app:layout_constraintTop_toBottomOf="@+id/info_name_textview" />
 
     <Button
-        android:id="@+id/viewMap_button"
+        android:id="@+id/view_map_button"
         style="@style/customButton_white"
         android:layout_width="86dp"
         android:layout_height="28dp"
@@ -40,11 +40,11 @@
         android:text="@string/viewMapButtonLabel"
         android:onClick="viewDetailMap"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_addrTV" />
+        app:layout_constraintTop_toBottomOf="@+id/info_addr_textview" />
 
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_typeLabel"
+        android:id="@+id/info_type_label"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,21 +52,21 @@
         android:layout_marginTop="12dp"
         android:text="Location Type:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewMap_button" />
+        app:layout_constraintTop_toBottomOf="@+id/view_map_button" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_typeTV"
+        android:id="@+id/info_type_textview"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="12dp"
         android:text="Public Park"
-        app:layout_constraintStart_toEndOf="@+id/info_typeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/viewMap_button" />
+        app:layout_constraintStart_toEndOf="@+id/info_type_label"
+        app:layout_constraintTop_toBottomOf="@+id/view_map_button" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_privacyTV"
+        android:id="@+id/info_privacy_textview"
         style="@style/InfoPrivacy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,10 +74,10 @@
         android:layout_marginTop="12dp"
         android:text="PUBLIC"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_typeTV" />
+        app:layout_constraintTop_toBottomOf="@+id/info_type_textview" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_filmPermLabel"
+        android:id="@+id/info_film_perm_label"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,22 +85,22 @@
         android:layout_marginTop="12dp"
         android:text="Filming Permissions:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_privacyTV" />
+        app:layout_constraintTop_toBottomOf="@+id/info_privacy_textview" />
 
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_filmPermTV"
+        android:id="@+id/info_film_perm_textview"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="12dp"
         android:text="Everyday"
-        app:layout_constraintStart_toEndOf="@+id/info_filmPermLabel"
-        app:layout_constraintTop_toBottomOf="@+id/info_privacyTV" />
+        app:layout_constraintStart_toEndOf="@+id/info_film_perm_label"
+        app:layout_constraintTop_toBottomOf="@+id/info_privacy_textview" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_featLabel"
+        android:id="@+id/info_feat_label"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,18 +108,18 @@
         android:layout_marginTop="12dp"
         android:text="Features:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_filmPermTV" />
+        app:layout_constraintTop_toBottomOf="@+id/info_film_perm_textview" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/info_featTV"
+        android:id="@+id/info_feat_textview"
         style="@style/InfoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="12dp"
         android:text="Skating Rink, Toronto Sign "
-        app:layout_constraintStart_toEndOf="@+id/info_featLabel"
-        app:layout_constraintTop_toBottomOf="@+id/info_filmPermLabel" />
+        app:layout_constraintStart_toEndOf="@+id/info_feat_label"
+        app:layout_constraintTop_toBottomOf="@+id/info_film_perm_label" />
 
     <Button
         android:id="@+id/back_button"
@@ -156,10 +156,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/info_featLabel">
+        app:layout_constraintTop_toBottomOf="@+id/info_feat_label">
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/textView10"
+            android:id="@+id/videos_filmed_here_label"
             style="@style/SimpleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -183,12 +183,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.545"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10">
+            app:layout_constraintTop_toBottomOf="@+id/videos_filmed_here_label">
 
         </com.google.android.youtube.player.YouTubePlayerView>
 
         <ImageButton
-            android:id="@+id/info_nextButton"
+            android:id="@+id/info_next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -199,7 +199,7 @@
             app:layout_constraintTop_toBottomOf="@+id/youtube_view" />
 
         <ImageButton
-            android:id="@+id/info_backButton"
+            android:id="@+id/info_back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -214,7 +214,7 @@
 
 
     <ImageView
-        android:id="@+id/weatherImageView"
+        android:id="@+id/weather_image_view"
         android:layout_width="39dp"
         android:layout_height="38dp"
         android:layout_marginTop="236dp"
@@ -227,11 +227,11 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/weatherTemperatureTextView"
+        android:id="@+id/weather_temperature_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="@+id/weatherImageView"
-        app:layout_constraintTop_toBottomOf="@+id/weatherImageView" />
+        app:layout_constraintEnd_toEndOf="@+id/weather_image_view"
+        app:layout_constraintTop_toBottomOf="@+id/weather_image_view" />
 
 </android.support.constraint.ConstraintLayout>
 

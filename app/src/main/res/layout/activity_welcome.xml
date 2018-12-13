@@ -7,7 +7,7 @@
     tools:context=".WelcomeActivity">
 
     <TextView
-        android:id="@+id/welcomeTextView"
+        android:id="@+id/welcome_textview"
         style="@style/HeaderText"
         android:layout_width="236dp"
         android:layout_height="52dp"
@@ -18,16 +18,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/welcomeUserName"
+        android:id="@+id/welcome_username"
         style="@style/WelcomeUsernameStyling"
         android:layout_width="192dp"
         android:layout_height="25dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_textview" />
 
     <TextView
-        android:id="@+id/chooseOptionTextView"
+        android:id="@+id/choose_option_textview"
         style="@style/SimpleText"
         android:layout_width="295dp"
         android:layout_height="37dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/myLocationsButton"
+        android:id="@+id/my_locations_button"
         style="@style/customButton"
         android:layout_width="181dp"
         android:layout_height="36dp"
@@ -51,10 +51,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chooseOptionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/choose_option_textview" />
 
     <Button
-        android:id="@+id/sharedLocations"
+        android:id="@+id/shared_locations_button"
         style="@style/customButton"
         android:layout_width="181dp"
         android:layout_height="36dp"
@@ -63,6 +63,6 @@
         android:text="@string/shared_locations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myLocationsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/my_locations_button" />
 
 </android.support.constraint.ConstraintLayout>

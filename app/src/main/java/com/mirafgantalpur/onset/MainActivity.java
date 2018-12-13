@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         login = findViewById(R.id.login_button);
         signup = findViewById(R.id.signup_button);
-        error = findViewById(R.id.permissions_error_edittext);
-
+        error = findViewById(R.id.permissions_error_textview);
 
         // Check if app has permission to use location features, if not, ask for permission
         if(!checkPermissions()){
@@ -37,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
     public void onLogin(View view) {
         Intent intent = new Intent(MainActivity.this, Login.class);
         startActivity(intent);
-
-
     }
 
     public void onSignUp(View view) {
@@ -46,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // check for location permissions
     public boolean checkPermissions(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // request permissions from user
     private void requestLocationPermissions() {
         requestPermissions(new String[]{
                         Manifest.permission.INTERNET,
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 PERMISSIONS_MULTIPLE_REQUEST);
     }
 
+    // when user responds, check if permissions are given or not
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {

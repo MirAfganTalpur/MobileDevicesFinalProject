@@ -32,27 +32,26 @@ public class LocationList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-        userViewOption = findViewById(R.id.userViewOption);
+        userViewOption = findViewById(R.id.user_view_option);
 
-        // Hides the soft keyboard auto show when activity starts
+        // hide the soft keyboard auto show when activity starts
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         userActivityChoice = (String) getIntent().getStringExtra("choice");
         username = getIntent().getStringExtra("username");
 
+        // depending on the choice made on the previous page, return the appropriate list of
+        // locaitons
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
             userChoseMyLocations = true;
             userViewOption.setText(R.string.choice_my_locations);
-
         } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
             userChoseMyLocations = false;
             userViewOption.setText(R.string.choice_shared_locations);
         }
-
         setupSpinner(this);
-
     }
 
     @Override
@@ -66,8 +65,10 @@ public class LocationList extends AppCompatActivity {
     }
 
     public void setupSpinner(Context context) {
-        keySpinner = findViewById(R.id.keySpinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.keyList, android.R.layout.simple_spinner_item);
+        keySpinner = findViewById(R.id.key_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
+                                                R.array.keyList,
+                                                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         keySpinner.setAdapter(adapter);
         keySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -82,12 +83,13 @@ public class LocationList extends AppCompatActivity {
         });
     }
 
+    // set up a search based on the category chosen from spinner and the text entered
     public void search(View view) {
-        editText_key = findViewById(R.id.editText_key);
+        editText_key = findViewById(R.id.edittext_key);
         keyEntered = editText_key.getText().toString();
         String keyType = keySpinner.getSelectedItem().toString();
-        Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
-        // TODO fix UI so we can see the key type
+        Boolean isViewingSharedLocations =
+                            getIntent().getStringExtra("choice").equals("sharedLocations");
         switch (keyType.toLowerCase()) {
             case "name": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
@@ -147,8 +149,9 @@ public class LocationList extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // populate listview with location list and go to detailed activity activity on click
     public void updateUI(final ArrayList<Location> locations) {
-        locationListView = (ListView)findViewById(R.id.locationLV);
+        locationListView = (ListView)findViewById(R.id.location_list_view);
         locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

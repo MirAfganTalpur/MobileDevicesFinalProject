@@ -62,8 +62,8 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
         FirebaseHelper.getLocationsYoutubeLinks(username, location, this);
 
-        backButton = findViewById(R.id.info_backButton);
-        nextButton = findViewById(R.id.info_nextButton);
+        backButton = findViewById(R.id.info_back_button);
+        nextButton = findViewById(R.id.info_next_button);
 
         // Populate information text views:
         populateInfo();
@@ -155,26 +155,26 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     public void populateInfo() {
 
-        TextView name = findViewById(R.id.info_nameTV);
+        TextView name = findViewById(R.id.info_name_textview);
         name.setText(location.getName());
 
-        TextView addr = findViewById(R.id.info_addrTV);
+        TextView addr = findViewById(R.id.info_addr_textview);
         addr.setText(location.getAddress());
 
-        TextView type = findViewById(R.id.info_typeTV);
+        TextView type = findViewById(R.id.info_type_textview);
         type.setText(location.getType());
 
-        TextView privPub = findViewById(R.id.info_privacyTV);
+        TextView privPub = findViewById(R.id.info_privacy_textview);
         if(location.isPrivate()) {
             privPub.setText("PRIVATE");
         } else {
             privPub.setText("PUBLIC");
         }
 
-        TextView filmPerm = findViewById(R.id.info_filmPermTV);
+        TextView filmPerm = findViewById(R.id.info_film_perm_textview);
         filmPerm.setText(location.getFilmPermissions());
 
-        TextView feat = findViewById(R.id.info_featTV);
+        TextView feat = findViewById(R.id.info_feat_textview);
         feat.setText(location.getFeatures());
 
     }
@@ -200,9 +200,11 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         finish();
     }
 
+    // depending on result from async task for finding weather at location, display appropriate
+    // weather icon
     public void showWeatherIcon(String[] weather) {
-        TextView temp = findViewById(R.id.weatherTemperatureTextView);
-        ImageView imageView = findViewById(R.id.weatherImageView);
+        TextView temp = findViewById(R.id.weather_temperature_textview);
+        ImageView imageView = findViewById(R.id.weather_image_view);
         if (weather == null) {
             imageView.setImageDrawable(null);
         } else {

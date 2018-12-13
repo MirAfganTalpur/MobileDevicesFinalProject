@@ -34,9 +34,9 @@ public class SignUp extends AppCompatActivity {
         EditText[] fields = new EditText[5];
 
         fullName = findViewById(R.id.full_name);
-        username = findViewById(R.id.loginUsername);
+        username = findViewById(R.id.signup_username);
         email = findViewById(R.id.email);
-        password1 = findViewById(R.id.loginPassword);
+        password1 = findViewById(R.id.signup_password);
         password2 = findViewById(R.id.password_check);
         error = findViewById(R.id.error);
         Context mContext = this;
@@ -50,15 +50,19 @@ public class SignUp extends AppCompatActivity {
         String password_entry = password1.getText().toString();
         String password_check = password2.getText().toString();
 
+        // verify that all fields have information entered in them
         if (isEmpty(fields)) {
             error.setText(R.string.please_fill_out_all_fields);
-            Toast.makeText(mContext, R.string.login_failed, Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, R.string.signup_failed, Toast.LENGTH_LONG).show();
         } else {
             if (!password_check.equals(password_entry)) {
-                Toast.makeText(mContext, R.string.login_failed, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, R.string.signup_failed, Toast.LENGTH_LONG).show();
+                error.setText(R.string.passwords_dont_match);
                 password1.getText().clear();
                 password2.getText().clear();
             } else {
+                // if all fields have information and passwords match, create instance of database
+                // helper
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                 ref.child("users").child(this.username.getText().toString().toLowerCase())
                         .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -67,18 +71,19 @@ public class SignUp extends AppCompatActivity {
                                 if (dataSnapshot.exists()) {
                                     error.setText(R.string.username_taken);
                                 } else {
-                                    FirebaseHelper.signUp(email.getText().toString(), password1.getText().toString(),
-                                            username.getText().toString(), fullName.getText().toString(), SignUp.this);
+                                    // if username is available, create new account
+                                    FirebaseHelper.signUp(email.getText().toString(),
+                                            password1.getText().toString(),
+                                            username.getText().toString(),
+                                            fullName.getText().toString(),
+                                            SignUp.this);
                                 }
                             }
 
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
-
                             }
                         });
-
-
             }
         }
     }
@@ -88,6 +93,7 @@ public class SignUp extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // check for empty edittexts
     public boolean isEmpty(EditText[] fields) {
         for (int i = 0; i < fields.length; i++) {
             if (fields[i].getText().toString().length() == 0) {

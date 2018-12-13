@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/full_name" />
 
     <EditText
-        android:id="@+id/loginUsername"
+        android:id="@+id/signup_username"
         style="@style/EditTextStyling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/loginPassword"
+        android:id="@+id/signup_password"
         style="@style/EditTextStyling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
         android:theme="@style/EditTextTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_username" />
 
     <EditText
         android:id="@+id/password_check"
@@ -99,7 +99,7 @@
         android:theme="@style/EditTextTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/signup_password" />
 
 
     <Button
@@ -125,7 +125,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/signupHeaderLabel"
+        android:id="@+id/signup_header_label"
         style="@style/HeaderText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

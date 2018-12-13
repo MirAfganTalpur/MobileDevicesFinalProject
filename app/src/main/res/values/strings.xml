@@ -103,6 +103,7 @@
     <string name="capital_public">PUBLIC</string>
     <string name="enter_username">Please enter a username</string>
     <string name="login_failed">Login Failed.</string>
+    <string name="signup_failed">Registration Failed.</string>
 
     <string name="vids_filmed_here_label">VIDEOS FILMED HERE:</string>
     <string name="viewMapButtonLabel">View Map</string>
