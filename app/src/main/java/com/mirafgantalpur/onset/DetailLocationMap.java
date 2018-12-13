@@ -48,7 +48,7 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
         username = intent.getStringExtra("username");
         location = (Location) intent.getSerializableExtra("location");
         String addressString = location.getAddress();
-        double[] latlng = toAddress(addressString);
+        double[] latlng = getLatLong(addressString);
         latitude = latlng[0];
         longitude = latlng[1];
 
@@ -105,7 +105,7 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
         return false;
     }
 
-    public double[] toAddress(String inputtedAddress) {
+    public double[] getLatLong(String inputtedAddress) {
         double[] latlng = new double[2];
         Geocoder coder = new Geocoder(mContext);
         List<Address> address;

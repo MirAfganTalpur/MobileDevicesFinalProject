@@ -126,16 +126,6 @@ public class LocationList extends AppCompatActivity {
                         "features", keyEntered, isViewingSharedLocations, this);
                 break;
             }
-            case "private or public": {
-                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
-                        "private", keyEntered, isViewingSharedLocations, this);
-                break;
-            }
-            case "only for me or for everyone": {
-                FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
-                        "onlyForMe", keyEntered, isViewingSharedLocations, this);
-                break;
-            }
             default: {
                 break;
             }

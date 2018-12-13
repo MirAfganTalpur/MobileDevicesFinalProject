@@ -24,6 +24,7 @@ import java.util.Map;
 
 public final class FirebaseHelper {
 
+
     static void addLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
@@ -35,7 +36,7 @@ public final class FirebaseHelper {
         }
     }
 
-
+    // updates a location in the database. If the user specifies it isOnlyForMe, removes it from shared
     static void updateLocation(String username, Location location) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> locationInfo = new HashMap<>();
@@ -62,6 +63,8 @@ public final class FirebaseHelper {
         ref.child("sharedLocations").child(uuid).removeValue();
     }
 
+    // gathers all the current users locations and uses the uiReference to update the UI
+    // with the information when done
     static void getAllUserLocations(String username, final LocationList uiReference) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users").child(username.toLowerCase()).child("locations");
         ref.addListenerForSingleValueEvent(
@@ -85,6 +88,7 @@ public final class FirebaseHelper {
                 });
     }
 
+    // same as above but shared locations
     static void getAllSharedLocations(final LocationList uiReference) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("sharedLocations");
         ref.addListenerForSingleValueEvent(
@@ -108,6 +112,8 @@ public final class FirebaseHelper {
                 });
     }
 
+    // creates an ArrayList<String> of all youtube links for a given location. Once complete, uses
+    // the uiReference to call the method to post the youtubeLinks
     static void getLocationsYoutubeLinks(String username, Location location, final LocationInfo uiReference) {
         DatabaseReference ref;
         if (location.isOnlyForMe()) {
@@ -135,7 +141,11 @@ public final class FirebaseHelper {
 
     }
 
-    static void getSearchResults(String username, final String keyType, final String key, Boolean isViewingSharedLocations, final LocationList uiReference) {
+    // simple search functionality to narrow down the lists shown to the user. Takes the keyType (name, address, city etc.)
+    // and iterates over locations to see if that tag value contains the searchTerm
+    // For example tag "feature" searchTerm is "pool", it will search through locations and updated the UI with  all locations which
+    // contain a "pool" as one of its features
+    static void getSearchResults(String username, final String tag, final String searchTerm, Boolean isViewingSharedLocations, final LocationList uiReference) {
         DatabaseReference ref;
 
         if (isViewingSharedLocations) {
@@ -149,8 +159,8 @@ public final class FirebaseHelper {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<Location> locations = new ArrayList<>();
                         for (DataSnapshot location : dataSnapshot.getChildren()) {
-                            String examinedValue = (String) location.child(keyType).getValue();
-                            if (examinedValue.toLowerCase().contains(key.toLowerCase())) {
+                            String examinedValue = String.valueOf(location.child(tag).getValue());
+                            if (examinedValue.toLowerCase().contains(searchTerm.toLowerCase())) {
                                 locations.add(new Location(location, location.getKey()));
                             }
                         }
@@ -165,6 +175,9 @@ public final class FirebaseHelper {
 
     }
 
+    // uses FirebaseAuth to ensure no account has been created with the email address and password
+    // Then stores the users and their info directly in the database for reference when logging in
+    // Stores passwords as plaintext rather than a hashed password
     static void signUp (final String email, final String password, final String username, final String fullName, final SignUp uiReference) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)

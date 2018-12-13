@@ -29,6 +29,8 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         this.listener = handler;
     }
 
+    // works to achieve sending a string pair containing the weather type (e.g. cloudy) and the current
+    // temp at the specified String address passed in
     @Override
     protected String[] doInBackground(String... string) {
         StringBuilder content = new StringBuilder();
@@ -54,6 +56,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         listener.showWeatherIcon(weather);
     }
 
+    // gathers necessary information from the api call in doInBackground
     private String[] getCurrentWeather(String json) {
         try {
             JSONObject data = new JSONObject(json);
@@ -65,6 +68,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         }
     }
 
+    // converts the address passed in on .execute and tries to convert it to lat/long, then returns a formatted baseURL with those values
     private String getURL(String inputtedAddress) {
         Geocoder coder = new Geocoder(context);
         List<Address> address;
