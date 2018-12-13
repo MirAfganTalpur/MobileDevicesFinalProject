@@ -23,7 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener
+public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded
 {
 
     private static final int RECOVERY_REQUEST = 1;
@@ -52,6 +52,9 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         location = (Location)intent.getSerializableExtra("selectedLocation");
+        GetWeatherTask getWeatherTask = new GetWeatherTask(this);
+        getWeatherTask.setWeatherRetrievedListener(this);
+        getWeatherTask.execute(location.getAddress());
 
         // Handle Youtube Links:
         try {
@@ -215,6 +218,31 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
     public void infoBack(View view) {
         finish();
+    }
+
+    public void showWeatherIcon(String[] weather) {
+        if (weather == null) {
+            // TODO no weather info available
+        } else {
+            // convert from kelvin to celsius
+            String temperature = String.valueOf(Double.parseDouble(weather[1]) + 273.15);
+            String weatherType = weather[0];
+            if (weatherType.contains("clear")){
+
+            } else if (weatherType.contains("thunderstorm")) {
+
+            } else if (weatherType.contains("rain")) {
+
+            } else if (weatherType.contains("snow")) {
+
+            } else if (weatherType.contains("mist")) {
+
+            } else if (weatherType.contains("cloud")) {
+
+            } else {
+                // TODO just set temperature
+            }
+        }
     }
 
 }

@@ -19,7 +19,6 @@ public class LocationAdapter extends ArrayAdapter<Location> {
         super(context,0,data);
         this.context = context;
         this.data = data;
-        Log.e("test", "inside location Adapter: " + String.valueOf(data.size()));
     }
 
     @Override
