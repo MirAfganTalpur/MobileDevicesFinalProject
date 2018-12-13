@@ -9,7 +9,7 @@
     style="@style/BackgroundAddLocation">
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/addHeaderTitle"
+        android:id="@+id/add_header_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/scrollView4"
+        android:id="@+id/scrollviwe"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginTop="165dp"
@@ -70,7 +70,7 @@
                     tools:layout_editor_absoluteY="89dp" />
 
                 <EditText
-                    android:id="@+id/location_name_editText"
+                    android:id="@+id/location_name_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                     tools:layout_editor_absoluteY="143dp" />
 
                 <EditText
-                    android:id="@+id/location_type_editText"
+                    android:id="@+id/location_type_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
                     tools:layout_editor_absoluteY="196dp" />
 
                 <EditText
-                    android:id="@+id/location_address_editText"
+                    android:id="@+id/location_address_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                     tools:layout_editor_absoluteY="397dp" />
 
                 <EditText
-                    android:id="@+id/filming_permissions_editText"
+                    android:id="@+id/filming_permissions_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="227dp"
                     android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
                     tools:layout_editor_absoluteY="328dp" />
 
                 <EditText
-                    android:id="@+id/location_features_editText"
+                    android:id="@+id/location_features_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
@@ -299,7 +299,7 @@
                     tools:layout_editor_absoluteY="452dp" />
 
                 <EditText
-                    android:id="@+id/youtube_link_editText"
+                    android:id="@+id/youtube_link_edittext"
                     style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"

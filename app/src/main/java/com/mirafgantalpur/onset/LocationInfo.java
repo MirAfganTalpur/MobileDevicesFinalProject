@@ -20,7 +20,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded {
+public class LocationInfo extends YouTubeBaseActivity implements
+                                                YouTubePlayer.OnInitializedListener, WeatherLoaded {
 
     private static final int RECOVERY_REQUEST = 1;
     Context mContext = this;
@@ -32,45 +33,50 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     ImageButton backButton;
     ImageButton nextButton;
     YouTubePlayerView youTubeView;
-    //YouTubePlayer.OnInitializedListener onInitializedListener;
     YouTubePlayer youTubePlayer;
 
     private String username;
     private Location location;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_info);
 
-        // Get username and location from locationList activity:
+        // get username and location from locationList activity
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         location = (Location) intent.getSerializableExtra("selectedLocation");
 
+        // start weather async task for chosen location
         GetWeatherTask getWeatherTask = new GetWeatherTask(this);
         getWeatherTask.setWeatherRetrievedListener(this);
         getWeatherTask.execute(location.getAddress());
 
-        // Handle Youtube Links:
+        // get YouTube API key
         try {
-            YOUTUBE_API_KEY = mContext.getPackageManager().getApplicationInfo(mContext.getPackageName(), PackageManager.GET_META_DATA).metaData.getString("com.onSet.myYoutubeID");
+            YOUTUBE_API_KEY = mContext.getPackageManager().getApplicationInfo
+                    (mContext.getPackageName(), PackageManager.GET_META_DATA)
+                    .metaData.getString("com.onSet.myYoutubeID");
         } catch (PackageManager.NameNotFoundException n) {
             n.printStackTrace();
         }
 
+        // use firebase helper to get YouTube links from database
         FirebaseHelper.getLocationsYoutubeLinks(username, location, this);
 
         backButton = findViewById(R.id.info_back_button);
         nextButton = findViewById(R.id.info_next_button);
 
-        // Populate information text views:
+        // populate information text views:
         populateInfo();
     }
 
+    // if YouTube player is successfully initialized, get the links from database helper,
+    // convert links to YouTubeIds, then pass them to player to cue video
     @Override
-    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player,
+                                                                        boolean wasRestored) {
         if (!wasRestored) {
             youTubePlayer = player;
             youTubeLink = youTubeLinks.get(youTubeIndex);
@@ -80,11 +86,13 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
+    public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                        YouTubeInitializationResult errorReason) {
         if (errorReason.isUserRecoverableError()) {
             errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
         } else {
-            String error = String.format(getString(R.string.player_error), errorReason.toString());
+            String error = String.format(getString(R.string.player_error),
+                                                                    errorReason.toString());
             Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         }
     }
@@ -100,6 +108,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         return youTubeView;
     }
 
+    // when button is clicked, go to next or previous YouTube video for this location
     public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex) {
         youTubeLink = youTubeLinks.get(youTubeIndex);
         youTubeId = getYouTubeId(youTubeLink);
@@ -118,7 +127,6 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             nextButton.setVisibility(View.VISIBLE);
         } else {
             nextButton.setVisibility(View.GONE);
-
         }
     }
 
@@ -132,6 +140,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         updateYouTubeVideo(youTubePlayer, youTubeIndex);
     }
 
+    // get YouTube links from arraylist
     public void getYouTubeLinks(ArrayList<String> youTubeLinksList) {
         youTubeLinks = youTubeLinksList;
         if (youTubeLinks.size() >= 1) {
@@ -142,6 +151,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     }
 
+    // use delimiters to get the YouTubeId from both types of YouTube links
     public static String getYouTubeId(String url) {
         String pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
         Pattern compiledPattern = Pattern.compile(pattern);
@@ -153,8 +163,8 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         }
     }
 
+    // show appropriate information for this location
     public void populateInfo() {
-
         TextView name = findViewById(R.id.info_name_textview);
         name.setText(location.getName());
 
@@ -165,6 +175,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         type.setText(location.getType());
 
         TextView privPub = findViewById(R.id.info_privacy_textview);
+
         if(location.isPrivate()) {
             privPub.setText("PRIVATE");
         } else {
@@ -176,24 +187,6 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
         TextView feat = findViewById(R.id.info_feat_textview);
         feat.setText(location.getFeatures());
-
-    }
-
-    public void editEnabled(View view) {
-        Intent intent = new Intent(this, EditLocation.class);
-        intent.putExtra("username", username);
-        intent.putExtra("location", location);
-        intent.putExtra("choice", getIntent().getStringExtra("choice"));
-        intent.putExtra("youtubeLinks", youTubeLinks);
-        startActivity(intent);
-    }
-
-    public void onViewMap(View view) {
-        Intent intent = new Intent(this, DetailLocationMap.class);
-        intent.putExtra("username", username);
-        intent.putExtra("location", location);
-        startActivity(intent);
-
     }
 
     public void infoBack(View view) {
@@ -229,6 +222,15 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
                 imageView.setImageDrawable(null);
             }
         }
+    }
+
+    public void editEnabled(View view) {
+        Intent intent = new Intent(this, EditLocation.class);
+        intent.putExtra("username", username);
+        intent.putExtra("location", location);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
+        intent.putExtra("youtubeLinks", youTubeLinks);
+        startActivity(intent);
     }
 
     public void viewDetailMap(View view) {
