@@ -61,7 +61,6 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     Marker marker;
     ArrayList<String> youTubeList = new ArrayList<>();
     private String username;
-    private String choice;
     private static final String TAG = "AddLocation";
 
     PlaceAutocompleteFragment placeAutoComplete;
@@ -73,7 +72,6 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         mContext = this;
         locationAddress = findViewById(R.id.location_address_editText);
         username = getIntent().getStringExtra("username");
-        choice = getIntent().getStringExtra("choice");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -170,6 +168,20 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public boolean isValidAddress(Context context, String inputtedAddress) {
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        try {
+            address = coder.getFromLocationName(inputtedAddress, 1);
+            return address.size() != 0;
+
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     LocationListener locationListenerGPS = new LocationListener() {
@@ -327,6 +339,10 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                 } else if (shareEveryone.isChecked()) {
                     isOnlyMe = false;
                 }
+                if (!isValidAddress(this, locationAddress.getText().toString())) {
+                    Toast.makeText(mContext, R.string.use_valid_location, Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 addVideo();
 
@@ -344,11 +360,6 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                 newlocation.setYoutubeLinks(youTubeList);
 
                 FirebaseHelper.addLocation(username, newlocation);
-
-                Intent intent = new Intent(AddLocation.this, LocationList.class);
-//                intent.putExtra("username", username);
-//                intent.putExtra("choice", choice);
-//                startActivity(intent);
                 this.finish();
             }
         }
