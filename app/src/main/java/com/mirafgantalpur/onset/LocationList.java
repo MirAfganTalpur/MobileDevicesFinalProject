@@ -24,23 +24,36 @@ public class LocationList extends AppCompatActivity {
     private String username;
     private String userActivityChoice;
     EditText editText_key;
+    private boolean userChoseMyLocations;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
-        userActivityChoice = (String) getIntent().getExtras().get("choice");
+        userActivityChoice = (String) getIntent().getStringExtra("choice");
         username = getIntent().getStringExtra("username");
 
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
+            userChoseMyLocations = true;
         } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
+            userChoseMyLocations = false;
         }
 
         setupSpinner(this);
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if (userChoseMyLocations){
+            FirebaseHelper.getAllUserLocations(username, this);
+        } else {
+            FirebaseHelper.getAllSharedLocations(this);
+        }
     }
 
     public void setupSpinner(Context context) {
@@ -122,6 +135,7 @@ public class LocationList extends AppCompatActivity {
     public void addLocation(View view) {
         Intent intent = new Intent(this, AddLocation.class);
         intent.putExtra("username", username);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
         startActivity(intent);
     }
 

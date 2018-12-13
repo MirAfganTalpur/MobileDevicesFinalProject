@@ -63,7 +63,7 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
             String temp = data.getJSONObject("main").getString("temp");
             return new String[]{weatherType, temp};
         } catch (Exception e) {
-            return new String[]{"",""};
+            return null;
         }
     }
 
@@ -72,6 +72,9 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         List<Address> address;
         try {
             address = coder.getFromLocationName(inputtedAddress, 5);
+            if (address.size() == 0) {
+                return "";
+            }
             Address location = address.get(0);
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();

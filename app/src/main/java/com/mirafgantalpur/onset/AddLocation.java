@@ -40,12 +40,12 @@ import java.util.Locale;
 import java.util.UUID;
 
 public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
-                                                        GoogleMap.OnMyLocationButtonClickListener,
-                                                        GoogleMap.OnMyLocationClickListener {
+        GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener {
     LocationManager locationManager;
     Context mContext;
     private GoogleMap mMap;
-    public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    public static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
     EditText locationName;
     EditText locationAddress;
     EditText locationType;
@@ -60,6 +60,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     EditText youtubeLink;
     Marker marker;
     ArrayList<String> youTubeList = new ArrayList<>();
+    private String username;
+    private String choice;
     private static final String TAG = "AddLocation";
 
     PlaceAutocompleteFragment placeAutoComplete;
@@ -70,6 +72,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         setContentView(R.layout.activity_add_location);
         mContext = this;
         locationAddress = findViewById(R.id.location_address_editText);
+        username = getIntent().getStringExtra("username");
+        choice = getIntent().getStringExtra("choice");
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -82,7 +86,8 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             @Override
             public void onPlaceSelected(Place place) {
                 locationAddress.setText(place.getAddress());
-                toAddress(mContext,place.getAddress().toString());            }
+                toAddress(mContext, place.getAddress().toString());
+            }
 
             @Override
             public void onError(Status status) {
@@ -103,7 +108,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     String address = locationAddress.getText().toString();
-                    toAddress(mContext,address);
+                    toAddress(mContext, address);
                 }
             }
         });
@@ -148,17 +153,19 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         return false;
     }
 
-    public void toAddress (Context context, String inputtedAddress) {
+    public void toAddress(Context context, String inputtedAddress) {
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         try {
             address = coder.getFromLocationName(inputtedAddress, 5);
-
+            if (address.size() == 0) {
+                return;
+            }
             Address location = address.get(0);
             double latitude = location.getLatitude();
-            double longitude =location.getLongitude();
+            double longitude = location.getLongitude();
 
-            findLocation(latitude,longitude);
+            findLocation(latitude, longitude);
 
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -168,26 +175,29 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
     LocationListener locationListenerGPS = new LocationListener() {
         @Override
         public void onLocationChanged(android.location.Location location) {
-            double latitude=location.getLatitude();
-            double longitude=location.getLongitude();
-            String msg="Location Updated!";
-            Toast.makeText(mContext,msg,Toast.LENGTH_LONG).show();
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            String msg = "Location Updated!";
+            Toast.makeText(mContext, msg, Toast.LENGTH_LONG).show();
             findLocation(latitude, longitude);
             locationManager.removeUpdates(this);
 
         }
 
         @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+        }
 
         @Override
-        public void onProviderEnabled(String provider) {}
+        public void onProviderEnabled(String provider) {
+        }
 
         @Override
-        public void onProviderDisabled(String provider) {}
+        public void onProviderDisabled(String provider) {
+        }
     };
 
-    public void findLocation(double latitude, double longitude){
+    public void findLocation(double latitude, double longitude) {
         final LatLng newLocation = new LatLng(latitude, longitude);
 
         if (Geocoder.isPresent()) {
@@ -195,44 +205,38 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                     Locale.getDefault());
             try {
                 List<Address> ls = geocoder.getFromLocation(latitude, longitude, 1);
-                for (Address addr: ls) {
+                for (Address addr : ls) {
                     String address = addr.getAddressLine(0);
                     locationAddress.setText(address);
 
                     String city = addr.getLocality();
-
                     String prov = addr.getAdminArea();
-
                     String country = addr.getCountryName();
-
                     String postalCode = addr.getPostalCode();
-
-                    String phone = addr.getPhone();
-
-                    String url = addr.getUrl();
 
                     mMap.clear();
 
                     marker = mMap.addMarker(new MarkerOptions().position(newLocation).title(
-                                            address).snippet(city + ", " + prov + ", " + country +
-                                            ", " + postalCode).draggable(true));
+                            address).snippet(city + ", " + prov + ", " + country +
+                            ", " + postalCode).draggable(true));
 
                     mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
                         public void onMapClick(LatLng latLng) {
                             marker.setPosition(latLng);
                             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 21);
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng ));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                             mMap.animateCamera(cameraUpdate);
                             double newLat = latLng.latitude;
                             double newLong = latLng.longitude;
-                            findLocation(newLat,newLong);
+                            findLocation(newLat, newLong);
                         }
                     });
 
                     mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
                         @Override
-                        public void onMarkerDragStart(Marker arg0) {}
+                        public void onMarkerDragStart(Marker arg0) {
+                        }
 
                         @SuppressWarnings("unchecked")
                         @Override
@@ -240,11 +244,12 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                             mMap.animateCamera(CameraUpdateFactory.newLatLng(arg0.getPosition()));
                             double newLong = arg0.getPosition().longitude;
                             double newLat = arg0.getPosition().latitude;
-                            findLocation(newLat,newLong);
+                            findLocation(newLat, newLong);
                         }
 
                         @Override
-                        public void onMarkerDrag(Marker arg0) {}
+                        public void onMarkerDrag(Marker arg0) {
+                        }
                     });
 
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(newLocation, 15);
@@ -256,14 +261,16 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
             }
         }
     }
-    public void addVideo (){
+
+    public void addVideo() {
         youtubeLink = findViewById(R.id.youtube_link_editText);
         if (youtubeLink.getText().toString().length() > 0) {
             youTubeList.add(youtubeLink.getText().toString());
             youtubeLink.getText().clear();
         }
     }
-    public void onVideoAdd (View view){
+
+    public void onVideoAdd(View view) {
         addVideo();
     }
 
@@ -274,7 +281,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         filmingPermissions = findViewById(R.id.filming_permissions_editText);
         features = findViewById(R.id.location_features_editText);
         isPrivate = findViewById(R.id.is_private_group);
-        privatelyOwned  = findViewById(R.id.is_private_button);
+        privatelyOwned = findViewById(R.id.is_private_button);
         publicSpace = findViewById(R.id.is_public_button);
         isForMe = findViewById(R.id.is_only_me_group);
         personalOnly = findViewById(R.id.only_me_true);
@@ -286,16 +293,17 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         String country = null;
         LatLng latLng = marker.getPosition();
         List<Address> addresses = null;
-        EditText[] fields = new EditText[5];
+        EditText[] fields = new EditText[]{
+                locationName,
+                locationAddress,
+                locationType,
+                filmingPermissions,
+                features,
+        };
 
-        fields [0] = locationName;
-        fields [1] = locationAddress;
-        fields [2] = locationType;
-        fields [3] = filmingPermissions;
-        fields [4] = features;
 
-        if (isEmpty(fields)){
-            Toast.makeText(mContext,R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();
+        if (isEmpty(fields)) {
+            Toast.makeText(mContext, R.string.please_fill_out_all_fields, Toast.LENGTH_LONG).show();
         } else {
             if (checkShareable() && checkPrivate()) {
                 Geocoder geocoder = new Geocoder(this, Locale.getDefault());
@@ -316,7 +324,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                 }
                 if (personalOnly.isChecked()) {
                     isOnlyMe = true;
-                } else if (shareEveryone.isChecked()){
+                } else if (shareEveryone.isChecked()) {
                     isOnlyMe = false;
                 }
 
@@ -335,10 +343,13 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
                                 UUID.randomUUID());
                 newlocation.setYoutubeLinks(youTubeList);
 
-                FirebaseHelper.addLocation("youtube",newlocation);
+                FirebaseHelper.addLocation(username, newlocation);
 
                 Intent intent = new Intent(AddLocation.this, LocationList.class);
-                startActivity(intent);
+//                intent.putExtra("username", username);
+//                intent.putExtra("choice", choice);
+//                startActivity(intent);
+                this.finish();
             }
         }
     }
@@ -351,26 +362,28 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
         }
         return false;
     }
-        public boolean checkPrivate() {
-            if (privatelyOwned.isChecked()) {
-                return true;
-            } else if (publicSpace.isChecked()) {
-                return true;
-            } else {
-                Toast.makeText(this, "Please check either privately owned or public space.",
-                        Toast.LENGTH_LONG).show();
-            }
-            return false;
+
+    public boolean checkPrivate() {
+        if (privatelyOwned.isChecked()) {
+            return true;
+        } else if (publicSpace.isChecked()) {
+            return true;
+        } else {
+            Toast.makeText(this, "Please check either privately owned or public space.",
+                    Toast.LENGTH_LONG).show();
         }
-        public boolean checkShareable() {
-            if (personalOnly.isChecked()) {
-                return true;
-            } else if (shareEveryone.isChecked()) {
-                return true;
-            } else {
-                Toast.makeText(this, "Please check either personal or shared location.",
-                        Toast.LENGTH_LONG).show();
-            }
-            return false;
+        return false;
+    }
+
+    public boolean checkShareable() {
+        if (personalOnly.isChecked()) {
+            return true;
+        } else if (shareEveryone.isChecked()) {
+            return true;
+        } else {
+            Toast.makeText(this, "Please check either personal or shared location.",
+                    Toast.LENGTH_LONG).show();
         }
+        return false;
+    }
 }
