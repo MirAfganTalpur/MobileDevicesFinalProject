@@ -25,7 +25,4 @@ public class User {
         return fullName;
     }
 
-    public String getPassword() {
-        return password;
-    }
 }

@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -33,9 +33,13 @@ public class LocationList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
         userViewOption = findViewById(R.id.userViewOption);
+
+        // Hides the soft keyboard auto show when activity starts
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         userActivityChoice = (String) getIntent().getStringExtra("choice");
         username = getIntent().getStringExtra("username");
-        //keySpinner.setPrompt("Search Type:");
+
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
             userChoseMyLocations = true;
@@ -85,9 +89,6 @@ public class LocationList extends AppCompatActivity {
         Boolean isViewingSharedLocations = getIntent().getStringExtra("choice").equals("sharedLocations");
         // TODO fix UI so we can see the key type
         switch (keyType.toLowerCase()) {
-            case "search type:": {
-                break;
-            }
             case "name": {
                 FirebaseHelper.getSearchResults(getIntent().getStringExtra("username"),
                         "name", keyEntered, isViewingSharedLocations, this);
@@ -134,8 +135,7 @@ public class LocationList extends AppCompatActivity {
                 break;
             }
             default: {
-                Log.e("test", "nothing selected");
-                //TODO change spinner font colour
+                break;
             }
         }
     }
@@ -156,6 +156,7 @@ public class LocationList extends AppCompatActivity {
                 Location location = locations.get(position);
                 intent.putExtra("username", username);
                 intent.putExtra("selectedLocation",location);
+                intent.putExtra("choice", getIntent().getStringExtra("choice"));
                 startActivity(intent);
             }
         });

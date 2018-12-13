@@ -7,246 +7,289 @@
     tools:context=".Edit_Location"
     tools:layout_editor_absoluteY="81dp">
 
-    <ScrollView
-        android:id="@+id/scrollView4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView"
+        style="@style/AddHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fillViewport="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="EDIT"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        style="@style/BackgroundEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
-            <TextView
-                android:id="@+id/edit_name"
-                android:layout_width="121dp"
-                android:layout_height="22dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/location_name"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_name"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/location_name"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/edit_type"
-                android:layout_width="109dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="36dp"
-                android:text="@string/location_type"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_name" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_type"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/location_type"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_name" />
 
-            <TextView
-                android:id="@+id/edit_address"
-                android:layout_width="88dp"
-                android:layout_height="19dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/location_address"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_type" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_address"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/location_address"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_type" />
 
-            <TextView
-                android:id="@+id/edit_filmPerm"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_filmPerm"
+            style="@style/EditSimpleText"
+            android:layout_width="89dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/film_permissions"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_address" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_feat"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/location_features"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_filmPerm" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_privacy"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/location_privacy"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_feat" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/edit_forme"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="44dp"
+            android:text="For Me Only"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_privacy" />
+
+        <EditText
+            android:id="@+id/edit_name_ET"
+            style="@style/AddEditTextStyling"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/location_name_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_type_ET"
+            style="@style/AddEditTextStyling"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/location_type_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_name_ET" />
+
+        <EditText
+            android:id="@+id/edit_address_ET"
+            style="@style/AddEditTextStyling"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/location_address_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_type_ET" />
+
+        <EditText
+            android:id="@+id/edit_permissions_ET"
+            style="@style/AddEditTextStyling"
+            android:layout_width="227dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/film_permissions_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_address_ET" />
+
+        <EditText
+            android:id="@+id/edit_features_ET"
+            style="@style/AddEditTextStyling"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/location_features_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_permissions_ET" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="36dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_features_ET">
+
+            <RadioButton
+                android:id="@+id/is_private_button"
+                style="@style/EditRadioText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
-                android:text="@string/film_permissions"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_address" />
-
-            <TextView
-                android:id="@+id/edit_feat"
-                android:layout_width="99dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="36dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/location_features"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_filmPerm" />
-
-
-            <TextView
-                android:id="@+id/edit_privacy"
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/location_privacy"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_feat" />
-
-            <TextView
-                android:id="@+id/edit_forme"
-                android:layout_width="128dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="44dp"
-                android:text="For Me Only"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_privacy" />
-
-            <EditText
-                android:id="@+id/edit_name_ET"
-                android:layout_width="226dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:ems="10"
-                android:hint="@string/location_name_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/edit_type_ET"
-                android:layout_width="226dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:ems="10"
-                android:hint="@string/location_type_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_name_ET" />
-
-            <EditText
-                android:id="@+id/edit_address_ET"
-                android:layout_width="226dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:ems="10"
-                android:hint="@string/location_address_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_type_ET" />
-
-            <EditText
-                android:id="@+id/edit_permissions_ET"
-                android:layout_width="227dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="@string/film_permissions_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_address_ET" />
-
-            <EditText
-                android:id="@+id/edit_features_ET"
-                android:layout_width="226dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="12dp"
-                android:ems="10"
-                android:hint="@string/location_features_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_permissions_ET" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="36dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_features_ET">
-
-                <RadioButton
-                    android:id="@+id/is_private_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/location_private_button"
-                    android:onClick="onPrivateClicked"/>
-
-                <RadioButton
-                    android:id="@+id/is_public_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/location_public_button"
-                    android:onClick="onPublicClicked"/>
-            </RadioGroup>
-
-            <RadioGroup
-                android:id="@+id/radioGroup2"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
                 android:layout_weight="1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+                android:onClick="onPrivateClicked"
+                android:text="@string/location_private_button" />
 
-                <RadioButton
-                    android:id="@+id/only_me_false"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/only_me_false_text"
-                    android:onClick="onSharedClicked"/>
-
-                <RadioButton
-                    android:id="@+id/only_me_true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/only_me_true_text"
-                    android:onClick="onForMeClicked"/>
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/add_sample_videos"
-                android:layout_width="136dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="48dp"
-                android:text="@string/add_sample_video_text"
-                android:textAlignment="textEnd"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_forme" />
-
-            <EditText
-                android:id="@+id/youtube_link_editText"
-                android:layout_width="226dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="@string/sample_video_text_hint"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
-
-            <Button
-                android:id="@+id/submit_location_button"
+            <RadioButton
+                android:id="@+id/is_public_button"
+                style="@style/EditRadioText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:text="@string/submit_location_button_text"
-                android:onClick="submitUpdate"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.513"
-                app:layout_constraintStart_toStartOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+                android:layout_weight="1"
+                android:onClick="onPublicClicked"
+                android:text="@string/location_public_button" />
+        </RadioGroup>
 
+        <RadioGroup
+            android:id="@+id/radioGroup2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
-    </ScrollView>
+            <RadioButton
+                android:id="@+id/only_me_false"
+                style="@style/EditRadioText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onSharedClicked"
+                android:text="@string/only_me_false_text" />
+
+            <RadioButton
+                android:id="@+id/only_me_true"
+                style="@style/EditRadioText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onForMeClicked"
+                android:text="@string/only_me_true_text" />
+        </RadioGroup>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/add_sample_videos"
+            style="@style/EditSimpleText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="52dp"
+            android:text="@string/add_sample_video_text"
+            android:textAlignment="textEnd"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_forme" />
+
+        <EditText
+            android:id="@+id/youtube_link_editText"
+            style="@style/AddEditTextStyling"
+            android:layout_width="226dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:ems="10"
+            android:hint="@string/sample_video_text_hint"
+            android:inputType="textPersonName"
+            android:theme="@style/AddEditTextTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+
+        <Button
+            android:id="@+id/submit_location_button"
+            style="@style/customButton_white"
+            android:layout_width="117dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_button_dark"
+            android:onClick="submitUpdate"
+            android:text="@string/submit_location_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

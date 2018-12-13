@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
 public class Edit_Location extends AppCompatActivity {
@@ -20,13 +21,16 @@ public class Edit_Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit__location);
 
+        // Hides the soft keyboard auto show when activity starts
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
         // get username and location from LocationInfo
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         location = (Location)intent.getSerializableExtra("location");
 
         name = findViewById(R.id.edit_name_ET);
-        name.setText(location.getType());
+        name.setText(location.getName());
 
         type = findViewById(R.id.edit_type_ET);
         type.setText(location.getType());
@@ -70,7 +74,10 @@ public class Edit_Location extends AppCompatActivity {
 
         FirebaseHelper.updateLocation(username, location);
 
-        finish();
+        Intent intent = new Intent(this, LocationList.class);
+        intent.putExtra("username", username);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
+        startActivity(intent);
 
     }
 

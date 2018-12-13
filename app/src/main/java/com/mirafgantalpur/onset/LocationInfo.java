@@ -6,9 +6,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +16,12 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded
-{
+public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener, WeatherLoaded {
 
     private static final int RECOVERY_REQUEST = 1;
     Context mContext = this;
@@ -51,7 +48,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         // Get username and location from locationList activity:
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-        location = (Location)intent.getSerializableExtra("selectedLocation");
+        location = (Location) intent.getSerializableExtra("selectedLocation");
         GetWeatherTask getWeatherTask = new GetWeatherTask(this);
         getWeatherTask.setWeatherRetrievedListener(this);
         getWeatherTask.execute(location.getAddress());
@@ -63,11 +60,12 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             n.printStackTrace();
         }
 
-        FirebaseHelper.getLocationsYoutubeLinks(username,location,this);
+        FirebaseHelper.getLocationsYoutubeLinks(username, location, this);
 
-        backButton = findViewById(R.id.imageButton3);
-        nextButton = findViewById(R.id.imageButton4);
-        // Populate information edit texts:
+        backButton = findViewById(R.id.info_backButton);
+        nextButton = findViewById(R.id.info_nextButton);
+
+        // Populate information text views:
         populateInfo();
     }
 
@@ -78,7 +76,7 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             youTubeLink = youTubeLinks.get(youTubeIndex);
             youTubeId = getYouTubeId(youTubeLink);
             youTubePlayer.cueVideo(youTubeId);
-            Log.d("test","initialized");
+            Log.d("test", "initialized");
         }
     }
 
@@ -103,22 +101,22 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         return youTubeView;
     }
 
-    public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex){
+    public void updateYouTubeVideo(YouTubePlayer player, int youTubeIndex) {
         youTubeLink = youTubeLinks.get(youTubeIndex);
         youTubeId = getYouTubeId(youTubeLink);
         player.cueVideo(youTubeId);
         checkButton(youTubeIndex);
     }
 
-    public void checkButton(int youTubeIndex){
-        if (youTubeIndex == 0 ){
+    public void checkButton(int youTubeIndex) {
+        if (youTubeIndex == 0) {
             backButton.setEnabled(false);
-            if (youTubeIndex == youTubeLinks.size()-1){
+            if (youTubeIndex == youTubeLinks.size() - 1) {
                 nextButton.setEnabled(false);
             } else {
                 nextButton.setEnabled(true);
             }
-        } else if (youTubeIndex < youTubeLinks.size()-1) {
+        } else if (youTubeIndex < youTubeLinks.size() - 1) {
             backButton.setEnabled(true);
             nextButton.setEnabled(true);
         } else {
@@ -126,18 +124,20 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
             backButton.setEnabled(true);
         }
     }
+
     public void onBackButton(View view) {
         youTubeIndex--;
-        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+        updateYouTubeVideo(youTubePlayer, youTubeIndex);
     }
+
     public void onNextButton(View view) {
         youTubeIndex++;
-        updateYouTubeVideo(youTubePlayer,youTubeIndex);
+        updateYouTubeVideo(youTubePlayer, youTubeIndex);
     }
 
     public void getYouTubeLinks(ArrayList<String> youTubeLinksList) {
         youTubeLinks = youTubeLinksList;
-        if (youTubeLinks.size() >=1 ) {
+        if (youTubeLinks.size() >= 1) {
             youTubeView = findViewById(R.id.youtube_view);
             youTubeView.initialize(YOUTUBE_API_KEY, this);
         }
@@ -145,11 +145,11 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     }
 
-    public static String getYouTubeId (String url) {
+    public static String getYouTubeId(String url) {
         String pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*";
         Pattern compiledPattern = Pattern.compile(pattern);
         Matcher matcher = compiledPattern.matcher(url);
-        if(matcher.find()){
+        if (matcher.find()) {
             return matcher.group();
         } else {
             return "error";
@@ -158,89 +158,76 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     public void populateInfo() {
 
-        TextView name = findViewById(R.id.location_title);
+        TextView name = findViewById(R.id.info_nameTV);
         name.setText(location.getName());
 
-        EditText type = findViewById(R.id.info_typeET);
-        type.setText(location.getType());
-
-        EditText addr = findViewById(R.id.info_addrET);
+        TextView addr = findViewById(R.id.info_addrTV);
         addr.setText(location.getAddress());
 
-        EditText privPub = findViewById(R.id.info_privPubET);
+        TextView type = findViewById(R.id.info_typeTV);
+        type.setText(location.getType());
+
+        TextView privPub = findViewById(R.id.info_privacyTV);
         if(location.isPrivate()) {
             privPub.setText("PRIVATE");
         } else {
             privPub.setText("PUBLIC");
         }
 
-        EditText filmPerm = findViewById(R.id.info_filmPermET);
+        TextView filmPerm = findViewById(R.id.info_filmPermTV);
         filmPerm.setText(location.getFilmPermissions());
 
-        EditText feat = findViewById(R.id.info_featET);
+        TextView feat = findViewById(R.id.info_featTV);
         feat.setText(location.getFeatures());
 
-        editDisable(type, addr, privPub, filmPerm, feat);
-
     }
 
-    public void editDisable(EditText t, EditText a, EditText p, EditText fp, EditText f) {
-
-        t.setFocusable(false);
-        t.setClickable(false);
-
-        a.setFocusable(false);
-        a.setClickable(false);
-
-        p.setFocusable(false);
-        p.setClickable(false);
-
-        fp.setFocusable(false);
-        fp.setClickable(false);
-
-        f.setFocusable(false);
-        f.setClickable(false);
-    }
 
     public void editEnabled(View view) {
         Intent intent = new Intent(this, Edit_Location.class);
         intent.putExtra("username", username);
         intent.putExtra("location", location);
+        intent.putExtra("choice", getIntent().getStringExtra("choice"));
         startActivity(intent);
     }
 
-    public void onViewMap (View view) {
+    public void onViewMap(View view) {
         Intent intent = new Intent(this, DetailLocationMap.class);
         intent.putExtra("username", username);
-        intent.putExtra("location",location);
+        intent.putExtra("location", location);
         startActivity(intent);
 
     }
+
     public void infoBack(View view) {
         finish();
     }
 
     public void showWeatherIcon(String[] weather) {
+        TextView temp = findViewById(R.id.weatherTemperatureTextView);
+        ImageView imageView = findViewById(R.id.weatherImageView);
         if (weather == null) {
-            // TODO no weather info available
+            imageView.setImageDrawable(null);
         } else {
             // convert from kelvin to celsius
-            String temperature = String.valueOf(Double.parseDouble(weather[1]) + 273.15);
-            String weatherType = weather[0];
-            if (weatherType.contains("clear")){
-
+            String temperature = String.format("%.2f °C", Double.parseDouble(weather[1]) - 273.15);
+            String weatherType = weather[0].toLowerCase();
+            temp.setText(temperature);
+            if (weatherType.contains("clear")) {
+                imageView.setImageResource(R.drawable.clearsky);
             } else if (weatherType.contains("thunderstorm")) {
-
+                imageView.setImageResource(R.drawable.thunder);
             } else if (weatherType.contains("rain")) {
-
+                imageView.setImageResource(R.drawable.rain);
             } else if (weatherType.contains("snow")) {
-
-            } else if (weatherType.contains("mist")) {
-
+                imageView.setImageResource(R.drawable.snow);
+                ;
+            } else if (weatherType.contains("mist") || weatherType.contains("haze")) {
+                imageView.setImageResource(R.drawable.mist);
             } else if (weatherType.contains("cloud")) {
-
+                imageView.setImageResource(R.drawable.cloudy);
             } else {
-                // TODO just set temperature
+                imageView.setImageDrawable(null);
             }
         }
     }

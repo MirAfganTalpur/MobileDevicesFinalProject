@@ -4,9 +4,7 @@ import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -17,7 +15,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
-    private String base = "http://api.openweathermap.org/data/2.5/weather?lat=%1$,.5f&lon=%2$,.5f&APPID=af487439612e72cb69eebfc4cef7f802";
+    private String baseURL = "http://api.openweathermap.org/data/2.5/weather?lat=%1$,.5f&lon=%2$,.5f&APPID=af487439612e72cb69eebfc4cef7f802";
 
     private Exception exception = null;
     private Context context;
@@ -46,7 +44,6 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
 
 
         } catch (IOException e) {
-            Log.e("weather", "didn't work", e);
             return null;
         }
         return getCurrentWeather(content.toString());
@@ -68,18 +65,18 @@ public class GetWeatherTask extends AsyncTask<String, Void, String[]> {
         }
     }
 
-    public String getURL(String inputtedAddress) {
+    private String getURL(String inputtedAddress) {
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         try {
-            address = coder.getFromLocationName(inputtedAddress, 5);
+            address = coder.getFromLocationName(inputtedAddress, 1);
             if (address.size() == 0) {
                 return "";
             }
             Address location = address.get(0);
             double latitude = location.getLatitude();
             double longitude = location.getLongitude();
-            return String.format(base, latitude, longitude);
+            return String.format(baseURL, latitude, longitude);
 
         } catch (IOException ex) {
             ex.printStackTrace();
