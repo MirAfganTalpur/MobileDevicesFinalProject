@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,12 +26,13 @@ public class LocationList extends AppCompatActivity {
     private String userActivityChoice;
     EditText editText_key;
     private boolean userChoseMyLocations;
-
+    TextView userViewOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_list);
+        userViewOption = findViewById(R.id.userViewOption);
 
         // Hides the soft keyboard auto show when activity starts
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
@@ -41,9 +43,12 @@ public class LocationList extends AppCompatActivity {
         if (userActivityChoice.equals("myLocations")) {
             FirebaseHelper.getAllUserLocations(username, this);
             userChoseMyLocations = true;
+            userViewOption.setText(R.string.choice_my_locations);
+
         } else if (userActivityChoice.equals("sharedLocations")) {
             FirebaseHelper.getAllSharedLocations(this);
             userChoseMyLocations = false;
+            userViewOption.setText(R.string.choice_shared_locations);
         }
 
         setupSpinner(this);
