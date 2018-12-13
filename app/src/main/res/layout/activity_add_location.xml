@@ -23,7 +23,7 @@
         android:id="@+id/scrollView4"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="165dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -36,25 +36,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </android.support.constraint.ConstraintLayout>
-
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                tools:layout_editor_absoluteY="48dp">
 
                 <fragment
                     android:id="@+id/place_autocomplete_fragment"
                     android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
-                    android:layout_width="368dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
-            </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,6 +71,7 @@
 
                 <EditText
                     android:id="@+id/location_name_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -81,7 +79,6 @@
                     android:hint="@string/location_name_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="74dp" />
 
@@ -104,6 +101,7 @@
 
                 <EditText
                     android:id="@+id/location_type_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -111,7 +109,6 @@
                     android:hint="@string/location_type_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="134dp" />
             </LinearLayout>
@@ -133,13 +130,13 @@
 
                 <EditText
                     android:id="@+id/location_address_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/location_address_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="437dp" />
             </LinearLayout>
@@ -162,13 +159,13 @@
 
                 <EditText
                     android:id="@+id/filming_permissions_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="227dp"
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/film_permissions_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="370dp" />
             </LinearLayout>
@@ -190,6 +187,7 @@
 
                 <EditText
                     android:id="@+id/location_features_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -197,7 +195,6 @@
                     android:hint="@string/location_features_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -228,19 +225,19 @@
 
                     <RadioButton
                         android:id="@+id/is_private_button"
+                        style="@style/RadioText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/location_private_button"
-                        style="@style/RadioText"/>
+                        android:text="@string/location_private_button" />
 
                     <RadioButton
                         android:id="@+id/is_public_button"
+                        style="@style/RadioText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/location_public_button"
-                        style="@style/RadioText"/>
+                        android:text="@string/location_public_button" />
                 </RadioGroup>
 
             </LinearLayout>
@@ -268,19 +265,19 @@
 
                     <RadioButton
                         android:id="@+id/only_me_true"
+                        style="@style/RadioText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/only_me_true_text"
-                        style="@style/RadioText"/>
+                        android:text="@string/only_me_true_text" />
 
                     <RadioButton
                         android:id="@+id/only_me_false"
+                        style="@style/RadioText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/only_me_false_text"
-                        style="@style/RadioText"/>
+                        android:text="@string/only_me_false_text" />
                 </RadioGroup>
             </LinearLayout>
 
@@ -303,6 +300,7 @@
 
                 <EditText
                     android:id="@+id/youtube_link_editText"
+                    style="@style/AddEditTextStyling"
                     android:layout_width="226dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
@@ -311,7 +309,6 @@
                     android:hint="@string/sample_video_text_hint"
                     android:inputType="textPersonName"
                     android:theme="@style/AddEditTextTheme"
-                    style="@style/AddEditTextStyling"
                     app:layout_constraintEnd_toEndOf="parent"
                     tools:layout_editor_absoluteY="196dp" />
             </LinearLayout>
