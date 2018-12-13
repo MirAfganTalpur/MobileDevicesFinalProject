@@ -38,6 +38,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/round_button_dark"
         android:text="@string/viewMapButtonLabel"
+        android:onClick="viewDetailMap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info_addrTV" />
 

@@ -8,11 +8,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -35,6 +36,7 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
     LocationManager locationManager;
     double latitude;
     double longitude;
+    TextView locationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,10 @@ public class DetailLocationMap extends FragmentActivity implements OnMapReadyCal
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.detail_location_map);
         mapFragment.getMapAsync(this);
+
+        // populate textview
+        locationName = findViewById(R.id.detail_map_title);
+        locationName.setText(location.getName());
     }
 
     @Override

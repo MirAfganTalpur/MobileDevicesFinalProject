@@ -109,19 +109,17 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
     }
 
     public void checkButton(int youTubeIndex) {
+
         if (youTubeIndex == 0) {
             backButton.setEnabled(false);
-            if (youTubeIndex == youTubeLinks.size() - 1) {
-                nextButton.setEnabled(false);
-            } else {
-                nextButton.setEnabled(true);
-            }
-        } else if (youTubeIndex < youTubeLinks.size() - 1) {
+        } else if (youTubeLinks.size() >1 ) {
             backButton.setEnabled(true);
+        }
+
+        if (youTubeIndex < youTubeLinks.size() -1 ) {
             nextButton.setEnabled(true);
         } else {
             nextButton.setEnabled(false);
-            backButton.setEnabled(true);
         }
     }
 
@@ -182,7 +180,6 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
 
     }
 
-
     public void editEnabled(View view) {
         Intent intent = new Intent(this, Edit_Location.class);
         intent.putExtra("username", username);
@@ -232,4 +229,10 @@ public class LocationInfo extends YouTubeBaseActivity implements YouTubePlayer.O
         }
     }
 
+    public void viewDetailMap(View view) {
+        Intent intent = new Intent(this, DetailLocationMap.class);
+        intent.putExtra("username", username);
+        intent.putExtra("location", location);
+        startActivity(intent);
+    }
 }

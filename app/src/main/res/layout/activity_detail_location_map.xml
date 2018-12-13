@@ -22,22 +22,25 @@
 
     <Button
         android:id="@+id/back_button_detailed_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        style="@style/customButton_white"
+        android:layout_width="226dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_button_dark"
         android:onClick="onBackButton"
         android:text="@string/map_back_button"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/detail_map_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
         android:layout_marginBottom="29dp"
-        android:text="TITLE (REPLACE)"
+        style="@style/AddHeader"
         app:layout_constraintBottom_toTopOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.107"
