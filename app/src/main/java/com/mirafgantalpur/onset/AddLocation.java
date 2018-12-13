@@ -156,7 +156,7 @@ public class AddLocation extends FragmentActivity implements OnMapReadyCallback,
 
             Address location = address.get(0);
             double latitude = location.getLatitude();
-            double longitude =location.getLongitude();
+            double longitude = location.getLongitude();
 
             findLocation(latitude,longitude);
 

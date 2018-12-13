@@ -58,6 +58,9 @@
     <string name="edit_location_apply_button_text">Apply Changes</string>
     <string name="edit_location_cancel_button_text">Cancel Changes</string>
 
+    <string name="to_map_text">View Map</string>
+
+    <string name="map_back_button">Return to Location Information</string>
 
     <string name="spinner_keyType_label">Key Type:</string>
     <string name="spinner_key_label">Key:</string>
@@ -68,8 +71,8 @@
     <string name="my_locations">My Locations</string>
     <string name="shared_locations">Shared Locations</string>
     <string-array name="keyList">
-        <item>name</item>
-        <item>type</item>
+        <item>Name</item>
+        <item>Type</item>
         <item>Address</item>
         <item>City</item>
         <item>Country</item>
@@ -77,7 +80,6 @@
         <item>Features</item>
         <item>Private or Public</item>
         <item>Only For Me or For Everyone</item>
-        <item>Youtube link</item>
     </string-array>
 
     <string name="Login_header_label">LOGIN</string>
