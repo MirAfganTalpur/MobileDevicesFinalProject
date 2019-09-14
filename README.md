@@ -12,5 +12,3 @@ Created by:
 Mir Afgan Talpur \
 Martin Ridge Reventar \
 Jon Perry 
-
-GitHub Link: https://github.com/MirAfganTalpur/mobile-devices-final.git
