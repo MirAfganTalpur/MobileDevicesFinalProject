@@ -7,6 +7,8 @@ onSet is an Android application that helps filmmakers, YouTubers, Instagrammers,
 # Installation
 Download repository and open as a new project on Android Studio. CompileSdkVersion: 28 MinSdkVersion: 24
 
+Note: API Keys were removed for privacy, so app may not function as described.
+
 # Authors
 Created by:  
 Mir Afgan Talpur \
